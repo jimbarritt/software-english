@@ -36,8 +36,9 @@ not exhaustive.
   - [7.3 No warning or caution blocks](#73-no-warning-or-caution-blocks-inference-based)
   - [7.4 Define before use](#74-define-before-use-inference-based)
   - [7.5 No vacuous classification properties](#75-no-vacuous-classification-properties-inference-based)
-  - [7.6 Document type](#76-document-type-inference-based)
-  - [7.7 Completion marker](#77-completion-marker-deterministic)
+  - [7.6 No process narration](#76-no-process-narration-inference-based)
+  - [7.7 Document type](#77-document-type-inference-based)
+  - [7.8 Completion marker](#78-completion-marker-deterministic)
 - [Appendices](#appendices)
   - [Appendix A. Machine-readable rule catalogue](#appendix-a-machine-readable-rule-catalogue)
   - [Appendix B. Enforcement and fact preservation](#appendix-b-enforcement-and-fact-preservation)
@@ -83,7 +84,7 @@ inference-based by default.
 
 Tier is separate from severity. A deterministic rule can still run at
 `warning` severity (advisory, non-blocking) rather than `error`
-(blocking) — see [`rules/core-rules.yaml`](../rules/core-rules.yaml).
+(blocking) — see [`rules/core-rules.toml`](../rules/core-rules.toml).
 `vocabulary-membership` runs at `warning` while the vocabulary is a seed
 set ([Appendix D](#appendix-d-vocabulary-governance)), so an unlisted but
 valid word does not block a turn.
@@ -298,7 +299,18 @@ its member definitions. State a cardinality or exclusivity constraint
 `collectively exhaustive`, `no overlap`, `one and only one`) only where
 a mechanism reads it, and state it there, not in the prose definition.
 
-### 7.6 Document type (Inference-based)
+### 7.6 No process narration (Inference-based)
+
+A document about a decision states the decision and the reason for it.
+It does not narrate how the decision was reached: who asked, what was
+discussed, how many attempts came before it, or what changed between
+drafts. The discussion is not the fact; the decision and its reason are.
+
+Fault: `The project owner later asked why, and asked for alternatives.`
+Fix: state the constraint and the choice it produced directly, with no
+reference to the discussion that surfaced it.
+
+### 7.7 Document type (Inference-based)
 
 Identify a document's target type before writing it. A type — RFC, ADR,
 Specification, Technical Manual, and similar — governs structure and
@@ -307,7 +319,7 @@ required sections beyond Software English's own sentence-level rules. See
 Software English does not redefine any of these structures, only points to each
 one's canonical source.
 
-### 7.7 Completion marker (Deterministic)
+### 7.8 Completion marker (Deterministic)
 
 Where enforcement rewrites prose to conform, a completed, conforming
 response or document ends with the marker line `swe: checked` — its
@@ -321,7 +333,7 @@ check enforcement must run before adding this marker to a rewrite.
 
 Every deterministic-tier rule has a machine-readable entry under
 [`rules/`](../rules/) (see
-[`rules/core-rules.yaml`](../rules/core-rules.yaml)) naming: a rule ID,
+[`rules/core-rules.toml`](../rules/core-rules.toml)) naming: a rule ID,
 the check type (`vocabulary`, `substitution`, `sentence-length`,
 `tense-pattern`, `anthropomorphism`), its severity, and, for a
 pattern-based rule, the regular expression or lookup it runs against.

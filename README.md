@@ -29,10 +29,11 @@ prose instead — not yet built.
 |---|---|
 | [`spec/SPEC.md`](spec/SPEC.md) | the specification document |
 | [`vocabulary/`](vocabulary/) | the approved word list (closed vocabulary) |
-| [`rules/core-rules.yaml`](rules/core-rules.yaml) | machine-readable rule catalogue for linter consumption |
+| [`rules/core-rules.toml`](rules/core-rules.toml) | machine-readable rule catalogue for linter consumption |
 | [`templates/`](templates/) | cached structure summaries for named document types (RFC, ADR, Specification, Technical Manual, and Diátaxis's four types), each linked to its canonical source |
 | [`LICENSE`](./LICENSE) | Apache-2.0 |
 | [`NOTICE`](./NOTICE) | origin and independence statement |
+| [`COLOPHON.md`](COLOPHON.md) | format and tooling notes |
 
 ## Conformance tiers
 
@@ -54,3 +55,4 @@ usable by any tool.
 ## Licence
 
 Apache-2.0. See [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
+
