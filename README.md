@@ -18,7 +18,7 @@ See [NOTICE](./NOTICE) for more details.
 
 Software English applies to any prose written about software and
 systems: documentation, commit messages, code comments, ADRs, READMEs,
-and an AI agent's own conversational replies.
+and an AI agent's conversational replies.
 
 Primary reader: a human. A future "profile" may target agent-to-agent
 prose instead — not yet built.
