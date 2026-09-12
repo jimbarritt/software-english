@@ -38,3 +38,9 @@ inside the field escaped. A tab does not appear in ordinary English
 prose, so a plain split on tab needs no quoting or escaping. The linter
 parses each row with a single `line.split("\t")` call — no CSV-parsing
 library, no quoting logic.
+
+GitHub's own file preview applies CSV-style quote rules to a `.tsv`
+file: a double quote is legal only wrapping an entire field, never
+mid-field. An in-line quoted word therefore uses a single quote instead
+(`present tense of 'to be', singular`), which is not a special character
+to that parser.
