@@ -8,8 +8,11 @@ human or AI agent. It takes its structural approach (a restricted
 vocabulary, one approved sense per word, simple grammar, short sentences)
 from the general field of
 [controlled natural languages](https://en.wikipedia.org/wiki/Controlled_natural_language).
-It does not copy or derive from ASD-STE100 (Simplified Technical
-English) — see [NOTICE](./NOTICE) for the origin statement.
+
+Note: Software English does not copy or directly derive from ASD-STE100 (Simplified Technical
+English). ASD-STE100 is a copyrighted source and also is specific to the aerospace industry. Software
+English has the same approach but is tailored for the domain of software engineering.
+See [NOTICE](./NOTICE) for more details.
 
 ## Scope
 
