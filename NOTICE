@@ -1,0 +1,32 @@
+Software English
+Copyright 2026 Jim Barritt
+
+This product includes original work developed for this repository.
+
+Origin statement
+-----------------
+Software English is a controlled natural language for software and
+systems engineering prose. Its design is informed by publicly known
+structural mechanisms of controlled-language systems in general (a
+restricted vocabulary, one sense per word, simple grammar, short
+sentences) as described in public secondary sources about the field of
+controlled natural languages.
+
+Software English does not copy, reproduce, adapt, or derive from the
+text, word lists, writing rules, or any other copyrighted material of
+ASD-STE100 (Simplified Technical English), which is the property of ASD
+(AeroSpace and Defence Industries Association of Europe). No ASD-STE100
+text, dictionary, or rule document was consulted or used in building
+Software English's vocabulary or rule catalogue. General, publicly
+available secondary descriptions of the structural shape of controlled
+natural languages as a field — for example an encyclopaedia entry noting
+that Simplified Technical English pairs a grammar-rule component with a
+separate closed dictionary component — were read to understand the
+genre, not to source Software English's content. The name "Simplified
+Technical English" and its abbreviation are not used to describe
+Software English, and Software English claims no relationship to the
+ASD-STE100 specification.
+
+Software English's vocabulary and rule set are built from scratch for
+software and systems engineering prose, and are independently licensed
+as stated in LICENSE.

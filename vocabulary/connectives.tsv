@@ -1,0 +1,75 @@
+word	sense
+a	article
+an	article
+the	article
+and	conjunction — joins two items
+or	conjunction — names an alternative
+but	conjunction — contrasts two clauses
+if	conditional
+then	names the result of a condition
+when	names the time or condition of an event
+because	names a cause
+so	names a result
+not	negation
+no	negation of a noun
+of	possession or relation
+to	direction or purpose
+for	purpose or recipient
+with	accompaniment or means
+without	absence
+in	location or containment
+on	location or dependency
+at	location or point in time
+by	agent or means
+from	origin
+into	direction of change
+as	comparison or role
+than	comparison
+this	demonstrative, singular
+that	demonstrative singular, or a relative pronoun introducing a clause
+these	demonstrative, plural
+those	demonstrative, plural
+it	pronoun for a system, component, or thing already named
+they	pronoun for a person whose pronouns are unknown, or for a plural
+you	pronoun for the reader
+is	present tense of "to be", singular
+are	present tense of "to be", plural
+was	past tense of "to be", singular
+were	past tense of "to be", plural
+has	present tense of "to have", singular
+have	present tense of "to have", plural
+had	past tense of "to have"
+can	states a capability
+cannot	states an absent capability
+must	states a requirement
+should	states a recommendation
+will	states a future fact
+each	distributes over every member of a set
+every	distributes over every member of a set
+all	the whole of a set
+any	an unspecified member of a set
+one	the number 1, or a single unspecified item
+two	the number 2
+first	position 1 in a sequence
+last	the final position in a sequence
+before	earlier in time or sequence
+after	later in time or sequence
+its	possessive form of "it"
+their	possessive form of "they"
+your	possessive form of "you"
+which	introduces a question or a clause identifying one of a set
+what	introduces a question or a clause naming a thing
+where	introduces a question or a clause naming a place
+how	introduces a question or a clause naming a manner
+until	up to the time or condition stated
+while	during the time stated
+between	in the space or range separating two items
+per	for each
+three	the number 3
+four	the number 4
+five	the number 5
+six	the number 6
+seven	the number 7
+eight	the number 8
+nine	the number 9
+ten	the number 10

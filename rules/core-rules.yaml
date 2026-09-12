@@ -1,0 +1,256 @@
+# Software English rule catalogue — machine-readable.
+# Each entry names a tier ("deterministic" or "inference-based") and a severity
+# ("error", blocking, or "warning", advisory-only). See SPEC.md §2.
+#
+# Note: the reference implementation (claude-plugins/software-english-lint/scripts/
+# software_english_lint.py) currently hardcodes these rules in Python rather than
+# parsing this file directly — a known v1 gap. Keep the two in sync by
+# hand until that is fixed.
+
+version: "0.1"
+
+rules:
+  - id: vocabulary-membership
+    tier: deterministic
+    check: vocabulary
+    severity: warning
+    description: >
+      Every word outside a literal token (SPEC §6.3) must appear in the
+      approved vocabulary (operations, structure, qualities, connectives).
+      Runs at warning severity while the vocabulary is a seed set — see
+      §6.1 — so an unlisted but valid word does not block a turn.
+    sources:
+      - vocabulary/operations.tsv
+      - vocabulary/structure.tsv
+      - vocabulary/qualities.tsv
+      - vocabulary/connectives.tsv
+
+  - id: banned-word
+    tier: deterministic
+    check: substitution
+    severity: error
+    description: >
+      A word or phrase in the banned list must be replaced with its
+      approved fix, or cut where the fix is CUT.
+    sources:
+      - vocabulary/banned.tsv
+
+  - id: sentence-length
+    tier: inference-based
+    check: sentence-length
+    severity: warning
+    max_words: 20
+    description: >
+      A sentence must not exceed the configured word limit (SPEC §3,
+      §10). Inference-based because judging whether a long sentence
+      should split, versus is one irreducible fact, needs context; the
+      word count itself is a deterministic-checkable number, but the
+      rule's intent is advisory.
+
+  - id: no-continuous-tense
+    tier: deterministic
+    check: tense-pattern
+    severity: error
+    pattern: '\b(is|are|was|were)\s+([A-Za-z]+ing)\b'
+    stoplist:
+      - during
+      - nothing
+      - something
+      - anything
+      - everything
+      - morning
+      - evening
+      - spring
+      - king
+      - thing
+      - string
+      - ring
+    description: >
+      Do not describe system behaviour in the continuous tense.
+      Example fault: "the consumer is testing the connection". The
+      stoplist excludes matches where the "-ing" word is not a verb.
+
+  - id: no-perfect-tense-for-behaviour
+    tier: inference-based
+    check: tense-pattern
+    severity: warning
+    pattern: '\b(has|have|had)\s+([A-Za-z]+(?:ed|en))\b'
+    stoplist:
+      - ten
+      - seven
+      - often
+      - even
+      - open
+      - golden
+      - chicken
+      - broken
+    description: >
+      Avoid the perfect tense for behaviour, except to state a historical
+      fact simple past cannot (SPEC §4). Inference-based because telling
+      the two apart needs judgement — this runs advisory-only, never
+      blocking.
+
+  - id: anthropomorphism-fixed-list
+    tier: deterministic
+    check: anthropomorphism
+    severity: error
+    lookback_words: 4
+    subject_signal:
+      - a word from vocabulary/structure.tsv
+      - "it"
+      - "this"
+      - "that"
+    word_list:
+      - wants
+      - tries
+      - knows
+      - believes
+      - decides
+      - gives up
+      - waits patiently
+      - gets confused
+      - has patience
+      - is happy
+      - is confused
+      - is smart
+      - understands
+      - thinks
+      - remembers
+      - forgets
+      - hopes
+      - assumes
+      - agrees
+      - refuses
+      - prefers
+      - cares
+      - worries
+      - struggles
+      - learns
+      - notices
+      - realizes
+      - realises
+      - expects
+      - intends
+      - plans
+      - chooses
+      - likes
+      - dislikes
+      - enjoys
+      - hates
+    description: >
+      A system, service, component, or process has no human trait,
+      feeling, or intent (SPEC §5.1). Fires only when a structure noun
+      or a system-referring pronoun appears within lookback_words before
+      the match, to avoid flagging a human subject. `vocabulary/user` is
+      excluded from the subject gate — it names a human referent, not a
+      system one, despite living in structure.tsv for other reasons.
+
+  - id: abstract-location
+    tier: deterministic
+    check: substitution
+    severity: error
+    lookback_words: 4
+    subject_signal:
+      - a word from vocabulary/structure.tsv, excluding human referents (e.g. "user")
+      - "it"
+      - "this"
+      - "that"
+    word_list:
+      - sit
+      - sits
+      - sitting
+      - live
+      - lives
+      - lived
+      - living
+      - reside
+      - resides
+      - resided
+      - dwell
+      - dwells
+      - dwelled
+      - stand
+      - stands
+      - stood
+      - lie
+      - lies
+      - lay
+      - rest
+      - rests
+      - rested
+      - hang
+      - hangs
+      - hung
+      - float
+      - floats
+      - floated
+    description: >
+      A location or motion verb ("sits", "lives", "resides") standing in
+      for a plain classification verb ("is", "belongs to") when the
+      subject is abstract, not physical — the same fault as "reach" or
+      "carry" in banned.tsv, but not blockable as a flat banned word,
+      because each of these verbs is correct English for a physical or
+      human subject ("the operator sits at the console"). Gated the same
+      way as anthropomorphism-fixed-list, and for the same reason: this
+      fault is a default of fluent English, not a vocabulary gap — a
+      writer actively avoiding it can still produce it without
+      noticing (see spec Implementation Notes for the incident that
+      surfaced this rule).
+
+  - id: anthropomorphism-paraphrase
+    tier: inference-based
+    check: model-judgement
+    severity: warning
+    description: >
+      A paraphrase of the anthropomorphism fault not on the fixed list
+      (SPEC §5.1) — needs a model, not a linter.
+
+  - id: vacuous-classification-property
+    tier: inference-based
+    check: model-judgement
+    severity: warning
+    trigger_phrases:
+      - exactly one
+      - at most one
+      - mutually exclusive
+      - collectively exhaustive
+      - no overlap
+      - one and only one
+    description: >
+      A cardinality or exclusivity property (SPEC §7) stated near a
+      taxonomy definition ("defines N tiers/kinds/categories/levels") is a
+      fault when the property already follows from the member
+      definitions and no mechanism reads it. The trigger phrases are
+      deterministically findable; whether a given instance is load-bearing
+      needs judgement, so this stays inference-based.
+
+  - id: document-type-template
+    tier: inference-based
+    check: model-judgement
+    severity: warning
+    description: >
+      Identify a document's target type (RFC, ADR, Specification,
+      Technical Manual, and similar — SPEC §7.6) before writing it. A
+      type governs structure and required sections beyond Software English's own
+      sentence-level rules. See SPEC Appendix F and templates/ for a
+      by-reference cache of each type's canonical structure — Software English does
+      not redefine these structures itself. Recognising which type a
+      document should follow needs judgement, so this stays
+      inference-based.
+
+exemptions:
+  skip_file_marker: "<!-- swe: skip-file -->"
+  skip_line_marker: "<!-- swe: ignore -->"
+  structural_exclusions:
+    - fenced_code_blocks
+    - indented_code_blocks
+    - inline_code_spans
+    - blockquote_lines
+    - link_targets
+    - bare_urls
+    - html_tags
+    - acronyms
+    - snake_case_or_dotted_or_path_tokens
+    - camel_case_tokens
+    - version_numbers
+    - mid_sentence_capitalised_words

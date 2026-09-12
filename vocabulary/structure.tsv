@@ -1,0 +1,96 @@
+word	sense
+system	a set of components working together
+service	a component that responds to requests over a network
+component	a distinct, replaceable part of a system
+process	a running instance of a program
+thread	a unit of execution within a process
+client	a component that sends a request
+server	a component that receives and answers a request
+consumer	a component that reads messages from a queue or topic
+producer	a component that writes messages to a queue or topic
+request	a message asking for an action or data
+response	a message answering a request
+message	a unit of data sent between components
+queue	an ordered list of items awaiting processing
+topic	a named channel messages are published to
+cache	a store holding a copy of data for faster access
+database	a system that stores and retrieves structured data
+table	a structured set of rows in a database
+row	one record in a table
+column	one field in a table
+schema	the structure a database or message must follow
+index	a structure that speeds lookup of records
+transaction	a set of operations treated as one unit
+connection	an open channel between two components
+session	a period of continued interaction between two components
+endpoint	an address a request is sent to
+API	a defined interface a component exposes for use
+payload	the data body of a request, response, or message
+header	metadata attached to a request, response, or message
+token	a value used to prove identity or permission
+key	a value used to identify or encrypt data
+config	settings that control a system's behaviour without a code change
+environment	a distinct deployment target (for example: test, staging, production)
+pipeline	an ordered sequence of automated steps
+build	a compiled, runnable version of source code
+artefact	a file produced by a build
+repository	a store of version-controlled source code
+branch	a separate line of development in a repository
+commit	one recorded set of changes in a repository
+merge	the combination of two branches into one
+dependency	a component or library another component requires to run
+module	a self-contained unit of code
+package	a distributable bundle of code
+library	reusable code included by other code
+interface	a defined set of methods a component exposes
+implementation	the concrete code behind an interface
+error	a condition where an operation did not succeed
+exception	an error raised during execution
+log	a record of events over time
+metric	a measured value tracked over time
+alert	a notification sent when a metric crosses a threshold
+mechanism	the concrete means by which a system produces an effect
+action	a single operation a system or a person performs
+behaviour	what a system does, observed as a fact
+instance	one running or stored occurrence of a thing
+value	a single piece of data
+item	one element of a list or set
+list	an ordered collection of items
+file	a named unit of stored data
+text	written words as data
+word	a single lexical unit
+sentence	a unit of written prose ending in a full stop
+rule	a stated condition a system or a document must meet
+format	the structure data or text is arranged in
+standard	a published, agreed specification
+specification	a document that states a system's required behaviour
+document	a written unit of prose
+step	one action within a sequence
+result	the output produced by an action
+reason	the stated cause behind a fact
+limit	the maximum or minimum a value may reach
+threshold	the value at which a rule's condition becomes true
+function	a named, callable unit of code
+method	a function defined on a type
+class	a definition a type is created from
+type	a category a value belongs to
+variable	a named, changeable storage location
+field	a single named part of a structured value
+parameter	a named input a function declares
+argument	a value passed to a parameter at call time
+user	a person who interacts with a system
+version	an identified state of a system or a file at a point in time
+string	a sequence of characters
+path	the location of a file or resource
+directory	a named container for files
+command	an instruction a program executes
+option	a named, optional setting for a command
+output	the data a process produces
+input	the data a process consumes
+state	the current stored condition of a system or a value
+event	an occurrence a system records or reacts to
+default	the value used when none is given
+second	a unit of time, 1/60 of a minute
+minute	a unit of time, 60 seconds
+tool	a program used to perform a task
+number	a count or a value expressed in digits

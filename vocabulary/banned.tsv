@@ -1,0 +1,175 @@
+reach	name the action: read, write, upload, fetch, call
+reaches	name the action: reads, writes, saves, arrives at
+reachable	read, or available
+gate	need, require, or check
+gates	needs, requires, or checks
+gated	blocked by, or requires
+trap	problem, mistake, or fault
+traps	problems, or mistakes
+surface	show, return, or report
+surfaces	shows, returns, or reports
+land	arrive, or be saved
+lands	arrives, or is saved
+carry	hold, contain, or include
+carries	holds, contains, or includes
+drive	run, call, or start
+drives	runs, calls, or starts
+flow	name the step
+hit	call, reach a limit, or fail
+leverage	use
+leverages	uses
+utilise	use
+utilises	uses
+seamless	CUT
+seamlessly	CUT
+robust	CUT
+powerful	CUT
+elegant	CUT
+simply	CUT
+essentially	CUT
+basically	CUT
+crucially	CUT
+importantly	CUT
+notably	CUT
+significantly	name the size of the effect
+worth noting	CUT
+worth knowing	CUT
+key insight	CUT
+the key	CUT
+under the hood	CUT
+at the end of the day	CUT
+that said	CUT
+it turns out	CUT
+in practice	CUT unless a measured practice follows
+delve	look at, or read
+dive	look at, or read
+unpack	explain
+journey	CUT
+landscape	CUT
+ecosystem	name the tools
+holistic	CUT
+# Intensifiers — the fact carries itself
+genuinely	CUT
+truly	CUT
+really	CUT
+actually	CUT
+obviously	CUT
+clearly	CUT
+of course	CUT
+interestingly	CUT
+surprisingly	CUT
+fundamentally	CUT
+arguably	CUT
+# Telling the reader what to think
+this matters	CUT, or state the consequence
+what matters	CUT, or state the consequence
+the important	CUT
+the interesting	CUT
+the real	CUT
+the crux	CUT
+the takeaway	state it instead
+the upshot	state it instead
+the point is	state the point
+in short	CUT
+in essence	CUT
+put simply	CUT
+to be clear	CUT
+note that	CUT
+bear in mind	CUT
+keep in mind	CUT
+remember that	CUT
+the good news	state the fact
+the bad news	state the fact
+the catch	name the limit
+# Addressing or predicting the reader
+the reader	CUT
+you might	CUT
+you will notice	CUT
+you may find	CUT
+# Meta-commentary on the writing
+read it as	CUT
+in one table	CUT
+the answer, in	CUT
+as noted above	CUT
+as mentioned	CUT
+the short version	CUT
+worth flagging	CUT
+# Praise
+magic	name the mechanism
+magical	name the mechanism
+# Ranking things for the reader
+that matters	CUT
+matters	state the consequence
+the other state that	name the state
+of note	CUT
+critically	CUT
+tellingly	CUT
+strikingly	CUT
+remarkably	CUT
+unsurprisingly	CUT
+naturally	CUT
+indeed	CUT
+ultimately	CUT
+in the end	CUT
+# Announcing the shape of the text
+things are known	state them
+two things	state them
+three things	state them
+what follows	CUT
+as we will see	CUT
+we will see	CUT
+as shown below	CUT
+see below	link to the section
+described below	link to the section
+in this document	CUT
+this document	name it, or CUT
+# Restating instead of stating once
+in other words	say it once
+put another way	say it once
+which is to say	say it once
+that is to say	say it once
+the truth is	CUT
+the reality is	CUT
+the fact is	CUT
+the thing is	CUT
+the trick is	CUT
+# Praise, part two
+the beauty of	CUT
+the nice thing	CUT
+at the heart of	CUT
+the heart of	CUT
+cornerstone	CUT
+it is worth	CUT
+# Headings that promise rather than name
+at a glance	name what the section shows
+in a nutshell	CUT
+in brief	CUT
+the long version	CUT
+tl;dr	CUT
+cheat sheet	CUT
+quick look	CUT
+a quick	CUT
+whistle-stop	CUT
+bird's-eye	CUT
+high level overview	CUT
+the big picture	CUT
+# Personifying the software or the evidence
+the runtime disagrees	state what happened
+disagrees	state what happened
+begs to differ	CUT
+would have you believe	state the discrepancy
+thinks	state what it does
+wants to	state what it does
+is happy to	state what it does
+refuses to play	state the error
+# Systems do not have intent. Applies when the subject is a system and the
+# sentence describes interacting with it. A human who refuses or objects is fine.
+refuses	fails, or state the error
+refused	failed, or state the error
+refusal	failure, or state the error
+refusing	failing, or state the error
+complains	state the error
+objects	state the error
+balks	fails
+is unhappy	state the error
+does not like	state the error

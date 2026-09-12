@@ -1,0 +1,407 @@
+# Software English — Specification
+
+**Status:** Draft v0.1. No versioning or governance process yet — see
+[Appendix D](#appendix-d-vocabulary-governance). Vocabulary is a seed set,
+not exhaustive.
+
+## Contents
+
+<!-- Update Contents when a heading changes -->
+
+- [1. Introduction](#1-introduction)
+- [2. Conformance](#2-conformance)
+- [3. Structure rules](#3-structure-rules)
+  - [3.1 One fact per sentence](#31-one-fact-per-sentence-inference-based)
+  - [3.2 Sentence length](#32-sentence-length-deterministic)
+  - [3.3 One topic per paragraph](#33-one-topic-per-paragraph-inference-based)
+  - [3.4 Lists](#34-lists-inference-based)
+- [4. Grammar rules](#4-grammar-rules)
+  - [4.1 Tense](#41-tense-mixed)
+  - [4.2 Voice](#42-voice-inference-based)
+  - [4.3 Verb forms](#43-verb-forms-inference-based)
+  - [4.4 Person](#44-person-inference-based)
+  - [4.5 Mood](#45-mood-inference-based)
+- [5. Semantic rules](#5-semantic-rules)
+  - [5.1 No anthropomorphism](#51-no-anthropomorphism-mixed)
+  - [5.2 No location or motion verb for an abstract subject](#52-no-location-or-motion-verb-for-an-abstract-subject-deterministic)
+  - [5.3 No unstated commentary](#53-no-unstated-commentary-inference-based)
+  - [5.4 No hedging where a plain statement is true](#54-no-hedging-where-a-plain-statement-is-true-inference-based)
+- [6. Vocabulary rules](#6-vocabulary-rules-deterministic)
+  - [6.1 One sense per word](#61-one-sense-per-word-deterministic)
+  - [6.2 Literal tokens](#62-literal-tokens-deterministic)
+  - [6.3 Quoted material](#63-quoted-material-deterministic)
+- [7. Document rules](#7-document-rules)
+  - [7.1 Summary before detail](#71-summary-before-detail-inference-based)
+  - [7.2 Match structure to purpose](#72-match-structure-to-purpose-inference-based)
+  - [7.3 No warning or caution blocks](#73-no-warning-or-caution-blocks-inference-based)
+  - [7.4 Define before use](#74-define-before-use-inference-based)
+  - [7.5 No vacuous classification properties](#75-no-vacuous-classification-properties-inference-based)
+  - [7.6 Document type](#76-document-type-inference-based)
+  - [7.7 Completion marker](#77-completion-marker-deterministic)
+- [Appendices](#appendices)
+  - [Appendix A. Machine-readable rule catalogue](#appendix-a-machine-readable-rule-catalogue)
+  - [Appendix B. Enforcement and fact preservation](#appendix-b-enforcement-and-fact-preservation)
+  - [Appendix C. Configuration](#appendix-c-configuration)
+  - [Appendix D. Vocabulary governance](#appendix-d-vocabulary-governance)
+  - [Appendix E. Licence and origin](#appendix-e-licence-and-origin)
+  - [Appendix F. Document type templates](#appendix-f-document-type-templates)
+
+## 1. Introduction
+
+Software English is a controlled natural language for
+prose about software and systems engineering: documentation, chat replies
+from an AI agent, commit messages, code comments, ADRs, and READMEs.
+
+The primary reader is a human. Software English does not target machine parsing as a
+first-class goal, but its restricted grammar and closed vocabulary make
+machine checking possible — that is the mechanism, not the purpose.
+
+The same restriction likely benefits an agent reading Software English prose as
+context, not only a human: fewer word senses to disambiguate, and shorter,
+single-fact sentences with less to track. This is a secondary benefit, not
+a design goal — the agent-targeted profile below is where an agent-first
+variant would instead make it one.
+
+A future **profile** may retarget Software English at agent-to-agent prose. This
+specification does not define one yet.
+
+## 2. Conformance
+
+Software English defines two conformance tiers. Each tier holds a set of rules:
+
+- **Deterministic** — checkable by a parser or a word-list lookup alone,
+  with no semantic judgement. A linter enforces a deterministic rule
+  without help.
+- **Inference-based** — needs sense disambiguation or contextual judgement
+  (for example, detecting anthropomorphism in an unlisted paraphrase, or
+  detecting editorial commentary). A model applies an inference-based
+  rule; a linter cannot verify it exhaustively.
+
+A rule is admitted to the deterministic tier only if a lookup or a regular
+grammar can decide it without interpreting meaning. Anything else is
+inference-based by default.
+
+Tier is separate from severity. A deterministic rule can still run at
+`warning` severity (advisory, non-blocking) rather than `error`
+(blocking) — see [`rules/core-rules.yaml`](../rules/core-rules.yaml).
+`vocabulary-membership` runs at `warning` while the vocabulary is a seed
+set ([Appendix D](#appendix-d-vocabulary-governance)), so an unlisted but
+valid word does not block a turn.
+
+## 3. Structure rules
+
+### 3.1 One fact per sentence (Inference-based)
+
+One sentence states one instruction or one fact. Do not use "and" or a
+mid-sentence "then" to join two instructions that read better as two
+sentences. A sentence-initial "then" naming what happens next is not a
+join and is allowed.
+
+### 3.2 Sentence length (Deterministic)
+
+20 words maximum, all sentence types. One limit, not split by
+instruction/description — taken from plain-language guidance (15-20
+words), not from an aerospace-manual procedure/description split.
+Configurable — see [Appendix C](#appendix-c-configuration).
+
+### 3.3 One topic per paragraph (Inference-based)
+
+A paragraph holds one topic. Split a paragraph that starts to cover a
+second topic.
+
+### 3.4 Lists (Inference-based)
+
+Use a list where an instruction has more than one step or a description
+has more than one item. Do not write a list as a single run-on sentence
+with commas.
+
+## 4. Grammar rules
+
+### 4.1 Tense (mixed)
+
+Use simple present, simple past, or simple future —
+`the API will change in v2`. Do not use the continuous (`is testing`) to
+describe what a system or a process does (Deterministic — checkable by
+pattern, and blocking). Avoid the perfect (`has tested`) for the same
+purpose, except where the perfect states a fact about history that
+simple past cannot —
+`the API has changed twice since v1`
+(Inference-based — telling the two apart needs judgement, so this runs
+advisory-only, not blocking).
+
+### 4.2 Voice (Inference-based)
+
+Use active voice. Name the actor. "The consumer times out after 1
+second", not "a timeout occurs".
+
+### 4.3 Verb forms (Inference-based)
+
+Do not use a gerund ("-ing") as the subject or object of a sentence about
+a system's behaviour. "The retry runs a second attempt", not "Retrying
+runs a second attempt".
+
+### 4.4 Person (Inference-based)
+
+Second person for instructions ("Run the migration"), third person for
+description ("The migration script updates the schema"). Configurable —
+see [Appendix C](#appendix-c-configuration).
+
+### 4.5 Mood (Inference-based)
+
+Imperative for instructions. Configurable — see
+[Appendix C](#appendix-c-configuration).
+
+## 5. Semantic rules
+
+### 5.1 No anthropomorphism (mixed)
+
+A system, service, component, or process has no human trait, feeling, or
+intent. State the mechanism.
+
+Deterministic-tier fixed list (verbs/adjectives that fail when a
+structure noun — §6, [`vocabulary/structure.tsv`](../vocabulary/structure.tsv)
+— or a system-referring pronoun (`it`, `this`, `that`) appears within
+four words before the match):
+`wants, tries, knows, believes, decides, gives up, waits patiently, gets confused, has patience, is happy, is confused, is smart, understands, thinks, remembers, forgets, hopes, assumes, agrees, refuses, prefers, cares, worries, struggles, learns, notices, realizes, expects, intends, plans, chooses, likes, dislikes, enjoys, hates`.
+The nearby-subject requirement exists so that a human subject
+(`the reviewer expects a passing test`) does not trigger a false match.
+
+Inference-based tier: a paraphrase of the same fault not on the fixed
+list (for example, `the cache is happy to serve stale data`) needs model
+judgement.
+
+### 5.2 No location or motion verb for an abstract subject (Deterministic)
+
+A location or motion verb (`sits`, `lives`, `resides`, `stands`, `rests`,
+and similar) standing in for a plain classification verb (`is`,
+`belongs to`) is a deterministic-tier failure when its subject is
+abstract, not physical:
+
+> A rule sits in one tier.
+> A rule lives in one tier.
+
+The same verbs are correct English for a physical or human subject:
+
+> The operator sits at the console.
+> The user lives in London.
+
+So this rule applies the same condition as §5.1: a nearby structure noun
+(excluding a human referent such as `user`) or a system-referring pronoun.
+
+This rule exists because the fault is a default of fluent English, not a
+vocabulary gap: a writer actively avoiding it can still produce it
+without noticing. It cannot go in the flat banned-word list (§6) because,
+unlike `reach` or `leverage`, these verbs have a correct use — only the
+subject decides.
+
+### 5.3 No unstated commentary (Inference-based)
+
+State facts. Do not add an editorial judgement, a guess at how someone
+might react, or a remark about the writing itself, unless explicitly
+asked for an opinion.
+
+### 5.4 No hedging where a plain statement is true (Inference-based)
+
+Cut a qualifier that adds no information (`essentially`, `basically`,
+`in general`, `it's worth noting that`).
+
+## 6. Vocabulary rules (Deterministic)
+
+Software English uses a **closed, approved vocabulary**: a word not in the list, and
+not a literal token (§6.2) or inside a quoted block (§6.3), fails the
+deterministic check. This is a genuine departure from mainstream style
+guides, which correct vocabulary rather than close it.
+
+The vocabulary is organised by category, not as one flat list — see
+[`vocabulary/`](../vocabulary/). Categories:
+
+| Category | File | Contents |
+|---|---|---|
+| Operations | [`vocabulary/operations.tsv`](../vocabulary/operations.tsv) | Verbs naming a concrete system action: read, write, create, delete, return, reject, run, call, hold, send, receive |
+| Structure | [`vocabulary/structure.tsv`](../vocabulary/structure.tsv) | Nouns naming a system part or a relationship: service, component, process, request, response, queue, cache, consumer, producer |
+| Qualities | [`vocabulary/qualities.tsv`](../vocabulary/qualities.tsv) | Adjectives describing a measurable or checkable property: valid, empty, full, available, closed, open, synchronous |
+| Connectives | [`vocabulary/connectives.tsv`](../vocabulary/connectives.tsv) | Function words: articles, conjunctions, prepositions, pronouns, common auxiliary verbs |
+| Banned | [`vocabulary/banned.tsv`](../vocabulary/banned.tsv) | Words that are not approved, each with an approved replacement — kept for words a writer uses out of habit, so the linter gives a direct fix |
+
+Word admission and vocabulary growth are governed separately — see
+[Appendix D](#appendix-d-vocabulary-governance).
+
+### 6.1 One sense per word (Deterministic)
+
+A sense is approved per **(word, part of speech)** pair, not per bare
+word — "open" as a verb ("open the connection") and "open" as an
+adjective ("the connection is open") are two separate, both-approved
+entries. Within one part of speech, only the software/systems sense is
+approved: using the word in a different sense for the same part of
+speech is a deterministic-tier failure even though the word itself is
+approved.
+
+### 6.2 Literal tokens (Deterministic)
+
+A proper noun, an identifier, a file path, a command, a flag, a version
+number, a URL, or a code span — a **literal token** — is not checked
+against the vocabulary. The linter detects these structurally, by
+pattern, never by a list:
+
+- inside a code fence, code span, link target, or HTML tag;
+- an acronym (two or more consecutive capitals, e.g. "HTTP", "JSON");
+- `snake_case`, `dotted.name`, or a path-like token containing `_ . / -`
+  with adjoining alphanumerics;
+- `camelCase` (an internal capital not at the start of the token);
+- a version number (`\d+(\.\d+)+`, with an optional leading "v");
+- capitalised, and not at the start of a sentence (a sentence-initial
+  capital is not, by itself, a literal-token signal — only a
+  mid-sentence capital is).
+
+Prefer a code span for an identifier, command, or flag over relying on
+capitalisation alone.
+
+### 6.3 Quoted material (Deterministic)
+
+A Markdown blockquote (a line starting with `>`) is not checked. It holds
+someone else's words, quoted verbatim — including a quoted example of a
+Software English fault, such as this specification's own illustrations of banned or
+anthropomorphic phrasing. Do not edit the wording inside a blockquote to
+satisfy a deterministic-tier rule; edit the surrounding prose instead, or
+use a code span (§6.2) for a short quoted fragment inline within a
+sentence.
+
+## 7. Document rules
+
+### 7.1 Summary before detail (Inference-based)
+
+A document opens with a one-line summary before detail (borrowed from
+Rust's documentation convention).
+
+### 7.2 Match structure to purpose (Inference-based)
+
+A tutorial, a how-to, a reference, and an explanation each answer a
+different question and should not be mixed in one document (the Diátaxis
+split).
+
+### 7.3 No warning or caution blocks (Inference-based)
+
+Do not use a step-numbered warning/caution block convention. State a
+risk as a plain sentence instead.
+
+### 7.4 Define before use (Inference-based)
+
+Define a named term before its first normative use. Introducing a term
+and relying on it in the same sentence, without stating what it means,
+forces a reader to infer the definition from usage instead.
+
+### 7.5 No vacuous classification properties (Inference-based)
+
+Do not state a property of a classification that already follows from
+its member definitions. State a cardinality or exclusivity constraint
+(`exactly one`, `at most one`, `mutually exclusive`,
+`collectively exhaustive`, `no overlap`, `one and only one`) only where
+a mechanism reads it, and state it there, not in the prose definition.
+
+### 7.6 Document type (Inference-based)
+
+Identify a document's target type before writing it. A type — RFC, ADR,
+Specification, Technical Manual, and similar — governs structure and
+required sections beyond Software English's own sentence-level rules. See
+[Appendix F](#appendix-f-document-type-templates) for a by-reference list:
+Software English does not redefine any of these structures, only points to each
+one's canonical source.
+
+### 7.7 Completion marker (Deterministic)
+
+Where enforcement rewrites prose to conform, a completed, conforming
+response or document ends with the marker line `swe: checked` — its
+absence signals the mechanism did not run or did not complete. See
+[Appendix B](#appendix-b-enforcement-and-fact-preservation) for the
+check enforcement must run before adding this marker to a rewrite.
+
+## Appendices
+
+### Appendix A. Machine-readable rule catalogue
+
+Every deterministic-tier rule has a machine-readable entry under
+[`rules/`](../rules/) (see
+[`rules/core-rules.yaml`](../rules/core-rules.yaml)) naming: a rule ID,
+the check type (`vocabulary`, `substitution`, `sentence-length`,
+`tense-pattern`, `anthropomorphism`), its severity, and, for a
+pattern-based rule, the regular expression or lookup it runs against.
+
+### Appendix B. Enforcement and fact preservation
+
+Enforcement checks changed lines only by default (the lines a diff
+against the prior committed state shows as added or modified), not a
+whole file — whole-file checking runs only on explicit request. See the
+[`claude-plugins`](https://github.com/jimbarritt/claude-plugins)
+[`software-english-lint`](https://github.com/jimbarritt/claude-plugins/tree/main/software-english-lint)
+plugin for the reference implementation.
+
+A rewrite must never drop a fact. Before a rewrite is accepted:
+
+1. Extract, from the original text, every number, date, version string,
+   URL, code span, and capitalised proper noun, by exact string match.
+2. Extract the same set from the rewritten text.
+3. Compare the two sets by exact match first. Run a second, fuzzy pass
+   only on items with no exact match on the other side: normalised edit
+   distance (Levenshtein distance divided by the longer string's length)
+   of 0.15 or less counts as the same item (catches a reordered name or
+   a minor formatting change, not a dropped one).
+4. Any item present in the original with no exact or fuzzy match in the
+   rewrite fails the rewrite. Fail closed: do not accept a rewrite that
+   fails this check.
+
+### Appendix C. Configuration
+
+The following are configurable per adopter, with Software English's own defaults
+shown:
+
+| Setting | Default |
+|---|---|
+| Dialect | British English |
+| Person (instructions) | Second person |
+| Mood (instructions) | Imperative |
+| Sentence length | 20 words |
+| Completion marker | `swe: checked` |
+
+### Appendix D. Vocabulary governance
+
+A word enters the approved vocabulary when it names a real, recurring
+concept in software/systems engineering prose and has one dominant sense
+in that context. No formal versioning yet.
+
+The vocabulary is a seed set, not exhaustive; it grows the same way
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv) already worked in an
+earlier prototype: one entry per real correction.
+
+### Appendix E. Licence and origin
+
+Software English is Apache-2.0 licensed. See [LICENSE](../LICENSE) and
+[NOTICE](../NOTICE) for the origin statement distinguishing Software English from
+ASD-STE100.
+
+### Appendix F. Document type templates
+
+By reference only: Software English does not redefine any of these structures. Each
+row links to the canonical source and to a local cached reference file —
+[`templates/`](../templates/) — holding a fuller structure summary than
+this table, so a reader or an agent can use the shape without fetching
+the canonical source first. Verify against the canonical source before
+relying on a detail the cache omits; each cached file states its own
+last-verified date.
+
+| Type | Canonical source | Cached reference |
+|---|---|---|
+| RFC | [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119.txt) (requirement keywords); [RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html) (style guide) | [`templates/rfc.md`](../templates/rfc.md) |
+| ADR | Nygard, ["Documenting Architecture Decisions"](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) (2011); [adr.github.io](https://adr.github.io/) | [`templates/adr.md`](../templates/adr.md) |
+| Specification | [W3C QA Framework: Specification Guidelines](https://www.w3.org/TR/qaframe-spec/); RFC 2119 keywords (above) | [`templates/specification.md`](../templates/specification.md) |
+| Technical Manual | [Google developer documentation style guide](https://developers.google.com/style); [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/); [Diátaxis](https://diataxis.fr/) | [`templates/technical-manual.md`](../templates/technical-manual.md) |
+| Tutorial | [Diátaxis](https://diataxis.fr/tutorials/) | [`templates/tutorial.md`](../templates/tutorial.md) |
+| How-to guide | [Diátaxis](https://diataxis.fr/how-to-guides/) | [`templates/how-to-guide.md`](../templates/how-to-guide.md) |
+| Reference | [Diátaxis](https://diataxis.fr/reference/) | [`templates/reference.md`](../templates/reference.md) |
+| Explanation | [Diátaxis](https://diataxis.fr/explanation/) | [`templates/explanation.md`](../templates/explanation.md) |
+
+The last four rows are [Diátaxis](https://diataxis.fr/)'s own four
+documentation types — a system distinct from RFC, ADR, and Specification,
+distinguishing document purpose (why a document exists) rather than
+document format (what sections it has). A Technical Manual, per its own
+cached reference above, maps onto Reference and Explanation content, not
+Tutorial or How-to guide content.

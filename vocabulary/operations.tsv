@@ -1,0 +1,78 @@
+word	sense
+read	retrieve data from a source
+write	persist data to a destination
+create	bring a new record or resource into existence
+delete	remove a record or resource permanently
+update	change an existing record or resource
+return	send a value back to a caller
+reject	refuse a request or input
+accept	agree to process a request or input
+send	transmit data to a destination
+receive	obtain data from a source
+call	invoke a function, method, or service
+run	execute a process or command
+start	begin execution of a process
+stop	end execution of a process
+retry	attempt an operation again after a failure
+fail	not complete an operation successfully
+succeed	complete an operation successfully
+open	establish a connection or resource for use
+close	end use of a connection or resource
+lock	restrict access to a resource to one caller
+unlock	remove a restriction on access to a resource
+queue	place an item in an ordered waiting list
+dequeue	remove an item from an ordered waiting list
+push	add an item to a stack or queue
+pop	remove an item from a stack or queue
+publish	send a message to a topic or channel
+subscribe	register to receive messages from a topic or channel
+route	direct a request to a destination based on a rule
+validate	check input against a rule before use
+parse	convert text into a structured form
+serialise	convert a structured form into text or bytes
+deserialise	convert text or bytes into a structured form
+encrypt	convert data into a form unreadable without a key
+decrypt	convert encrypted data back into its original form
+authenticate	confirm the identity of a caller
+authorise	confirm a caller's permission to perform an action
+log	record an event for later reading
+build	compile source code into a runnable form
+deploy	install a build onto a target environment
+rollback	revert a deployment to a previous version
+merge	combine two sets of changes into one
+commit	record a set of changes to version control
+branch	create a separate line of development
+test	run code against expected results
+mock	replace a real dependency with a controlled substitute
+cache	store a copy of data for faster later access
+evict	remove an entry from a cache
+timeout	stop waiting for a response after a fixed period
+fetch	retrieve data from a remote source
+upload	send a file to a remote destination
+save	persist data so it survives the current process
+arrive	be received at a destination
+need	require in order to proceed
+require	need in order to proceed
+check	confirm a value or condition before use
+show	display a value to the reader
+report	send a summary of a result
+contain	hold as a part
+include	contain as one part among others
+explain	state the reason for a fact
+link	connect one document or resource to another
+use	apply a tool, method, or resource
+change	replace a value with a new one
+match	be equal to, or satisfy a pattern
+add	place a new item into a set
+remove	take an item out of a set
+get	obtain a value
+set	assign a value
+do	perform an action
+does	performs an action
+did	performed an action
+be	exist, or hold a stated property
+may	is permitted to
+find	locate an item in a set
+sort	arrange items by a stated order
+compare	check two values against each other
+count	state the number of items in a set

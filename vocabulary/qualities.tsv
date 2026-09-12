@@ -1,0 +1,35 @@
+word	sense
+valid	meets a stated rule or schema
+invalid	does not meet a stated rule or schema
+empty	holds no items
+full	holds the maximum number of items
+available	ready to accept a request
+unavailable	not ready to accept a request
+open	able to be used
+closed	not able to be used
+synchronous	completing before the caller continues
+asynchronous	completing without the caller waiting
+idempotent	producing the same result when repeated
+atomic	completing fully or not at all
+consistent	matching a stated rule across all copies
+stale	holding a value older than the current source
+fresh	holding a value matching the current source
+persistent	stored beyond the life of one process
+transient	stored only for the life of one process
+public	accessible without restriction
+private	accessible only within a defined scope
+required	must be present for an operation to proceed
+optional	may be absent without stopping an operation
+deprecated	marked for removal in a future version
+stable	not expected to change its interface
+mutable	able to be changed after creation
+immutable	not able to be changed after creation
+concurrent	running at the same time as another process
+sequential	running one after another, in order
+only	no more than the stated one
+also	in addition to a fact already stated
+more	a greater amount than a stated one
+most	the greatest amount in a set
+other	not the one already named
+some	an unspecified part of a set
+none	no member of a set
