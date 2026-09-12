@@ -26,3 +26,15 @@ JSON also has a standard-library parser (`json`) but does not support
 comments, and a multi-line rule description would need an escaped `\n`
 sequence instead of a natural line break. Both properties make a diff or
 a direct read of the file harder to follow than the same change in TOML.
+
+## Vocabulary format: TSV, not CSV
+
+The vocabulary files ([`vocabulary/*.tsv`](vocabulary/)) are
+tab-separated, not comma-separated. Every sense and fix column holds
+ordinary English prose, and a comma appears in that prose constantly
+(`name the action: read, write, upload, fetch, call`). A comma-separated
+format would need every such field quoted, and any quote character
+inside the field escaped. A tab does not appear in ordinary English
+prose, so a plain split on tab needs no quoting or escaping. The linter
+parses each row with a single `line.split("\t")` call — no CSV-parsing
+library, no quoting logic.

@@ -48,7 +48,7 @@ journey	CUT
 landscape	CUT
 ecosystem	name the tools
 holistic	CUT
-# Intensifiers — the fact carries itself
+# Intensifiers — the fact carries itself	
 genuinely	CUT
 truly	CUT
 really	CUT
@@ -60,7 +60,7 @@ interestingly	CUT
 surprisingly	CUT
 fundamentally	CUT
 arguably	CUT
-# Telling the reader what to think
+# Telling the reader what to think	
 this matters	CUT, or state the consequence
 what matters	CUT, or state the consequence
 the important	CUT
@@ -81,12 +81,12 @@ remember that	CUT
 the good news	state the fact
 the bad news	state the fact
 the catch	name the limit
-# Addressing or predicting the reader
+# Addressing or predicting the reader	
 the reader	CUT
 you might	CUT
 you will notice	CUT
 you may find	CUT
-# Meta-commentary on the writing
+# Meta-commentary on the writing	
 read it as	CUT
 in one table	CUT
 the answer, in	CUT
@@ -94,10 +94,10 @@ as noted above	CUT
 as mentioned	CUT
 the short version	CUT
 worth flagging	CUT
-# Praise
+# Praise	
 magic	name the mechanism
 magical	name the mechanism
-# Ranking things for the reader
+# Ranking things for the reader	
 that matters	CUT
 matters	state the consequence
 the other state that	name the state
@@ -111,7 +111,7 @@ naturally	CUT
 indeed	CUT
 ultimately	CUT
 in the end	CUT
-# Announcing the shape of the text
+# Announcing the shape of the text	
 things are known	state them
 two things	state them
 three things	state them
@@ -123,7 +123,7 @@ see below	link to the section
 described below	link to the section
 in this document	CUT
 this document	name it, or CUT
-# Restating instead of stating once
+# Restating instead of stating once	
 in other words	say it once
 put another way	say it once
 which is to say	say it once
@@ -133,14 +133,14 @@ the reality is	CUT
 the fact is	CUT
 the thing is	CUT
 the trick is	CUT
-# Praise, part two
+# Praise, part two	
 the beauty of	CUT
 the nice thing	CUT
 at the heart of	CUT
 the heart of	CUT
 cornerstone	CUT
 it is worth	CUT
-# Headings that promise rather than name
+# Headings that promise rather than name	
 at a glance	name what the section shows
 in a nutshell	CUT
 in brief	CUT
@@ -153,7 +153,7 @@ whistle-stop	CUT
 bird's-eye	CUT
 high level overview	CUT
 the big picture	CUT
-# Personifying the software or the evidence
+# Personifying the software or the evidence	
 the runtime disagrees	state what happened
 disagrees	state what happened
 begs to differ	CUT
@@ -162,8 +162,8 @@ thinks	state what it does
 wants to	state what it does
 is happy to	state what it does
 refuses to play	state the error
-# Systems do not have intent. Applies when the subject is a system and the
-# sentence describes interacting with it. A human who refuses or objects is fine.
+# Systems do not have intent. Applies when the subject is a system and the	
+# sentence describes interacting with it. A human who refuses or objects is fine.	
 refuses	fails, or state the error
 refused	failed, or state the error
 refusal	failure, or state the error
