@@ -43,7 +43,10 @@ not exhaustive.
   - [7.7 No process narration](#77-no-process-narration-inference-based)
   - [7.8 Document type](#78-document-type-inference-based)
   - [7.9 No planning content in a reference document](#79-no-planning-content-in-a-reference-document-inference-based)
-  - [7.10 Completion marker](#710-completion-marker-deterministic)
+  - [7.10 No out-of-scope comparand](#710-no-out-of-scope-comparand-inference-based)
+  - [7.11 Completion marker](#711-completion-marker-deterministic)
+  - [7.12 No entailed restatement](#712-no-entailed-restatement-inference-based)
+  - [7.13 No mechanism for outcome](#713-no-mechanism-for-outcome-inference-based)
 - [Appendices](#appendices)
   - [Appendix A. Machine-readable rule catalogue](#appendix-a-machine-readable-rule-catalogue)
   - [Appendix B. Enforcement and fact preservation](#appendix-b-enforcement-and-fact-preservation)
@@ -462,13 +465,100 @@ Diátaxis's guidance for reference material, "describe, and only
 describe," implies it but names no concrete category for planning
 content. See [`templates/reference.md`](../templates/reference.md).
 
-### 7.10 Completion marker (Deterministic)
+### 7.10 No out-of-scope comparand (Inference-based)
+
+A reader-facing document names only what the reader's task needs. A
+comparison to another artefact outside that task, even one stated
+plainly with no contrastive framing (§5.7), is a fault when the reader
+has no reason to know the other artefact or resolve it against
+anything they are doing:
+
+> claude-plugins is a plugin marketplace. ag-harness-library instead
+> ships a flat zip, unpacked once into an empty project folder.
+
+`ag-harness-library` is a fact about the author's other work, not
+about installing or using a plugin from this marketplace. Cut it, or
+move it to an agent-facing file (a `CLAUDE.md`, a design note) whose
+reader already holds that context:
+
+> claude-plugins is a plugin marketplace. It hosts plugins that
+> install into Claude Code and stay live across projects.
+
+Test: remove the sentence. If the reader can still complete the task
+the document serves, the sentence was out of scope.
+
+This differs from §7.5's no-unanchored-reference: that rule fails a
+reference with no antecedent to resolve. Here the reference resolves
+fine (a working link); the fault is that the reader's task never
+needed it. Recognising what a reader's task needs, as against what the
+writer's own working context happened to include, needs judgement, so
+this stays inference-based.
+
+### 7.11 Completion marker (Deterministic)
 
 Where enforcement rewrites prose to conform, a completed, conforming
 response or document ends with the marker line `swe: checked`. Its
 absence signals the mechanism did not run or did not complete. See
 [Appendix B](#appendix-b-enforcement-and-fact-preservation) for the
 check enforcement must run before adding this marker to a rewrite.
+
+### 7.12 No entailed restatement (Inference-based)
+
+A clause that follows from a fact the document already states, given
+what the intended reader knows, adds nothing. Cut the clause; keep the
+fact it derives from:
+
+> claude-plugins hosts plugins that install into Claude Code
+> (`~/.claude/`) and stay live across projects.
+
+A reader who knows `~/.claude/` is the global, not per-project,
+configuration directory already has "stays live across projects" once
+they read where a plugin installs:
+
+> claude-plugins hosts plugins that install into Claude Code
+> (`~/.claude/`).
+
+Test: delete the clause. If the intended reader can still derive it
+from the remaining text, with no new fact, the clause was entailed and
+the cut was correct.
+
+Sibling of §7.6, which covers the same fault inside a taxonomy
+definition specifically. This rule is the general case: any clause
+derivable from a fact stated in the same sentence or the one before it.
+
+Two exceptions:
+
+- A clause naming a distinct consequence, not a rephrase (a mechanism,
+  a scope, a limit the reader could not derive alone), is not this
+  fault, even when it follows closely from what came before.
+- A document whose type (§7.8) is a Tutorial does not carry this rule:
+  restating a fact for a learner is the genre's own purpose, not a
+  fault.
+
+High false-positive risk, since the test rests on a model of what the
+reader already knows: runs at `warning` severity, never `error`.
+
+### 7.13 No mechanism for outcome (Inference-based)
+
+A reader-facing sentence states an outcome at the level the reader
+acts on. It names an implementation unit (a hook, a handler, a count
+of components) only where the reader's task acts on that unit:
+
+> Enforces Software English on agent prose via five hooks.
+
+State the outcome, not the mechanism that produces it:
+
+> Lints Claude Code output against Software English.
+
+Test: change the mechanism and keep the outcome (one hook instead of
+five, a different internal name for the input). If the sentence's use
+to the reader does not change, the mechanism was at the wrong level
+for this reader.
+
+Distinct from §7.4's define-before-use: an undefined term like `hooks`
+is a symptom here, not the fault. Defining it would make the sentence
+longer without fixing what is wrong: the mechanism does not belong in
+this reader's sentence at all, defined or not.
 
 ## Appendices
 
