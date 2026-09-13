@@ -67,7 +67,7 @@ Diátaxis names four documentation types, distinguished by the need each
 serves: [Tutorial](../templates/tutorial.md) (learning),
 [How-to guide](../templates/how-to-guide.md) (goal),
 [Reference](../templates/reference.md) (information), and
-[Explanation](../templates/explanation.md) (understanding) — see each
+[Explanation](../templates/explanation.md) (understanding). See each
 file for its full cached definition.
 
 A technical manual that describes how a system works is reference and

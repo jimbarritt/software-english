@@ -1,6 +1,6 @@
-# Software English — Specification
+# Software English: Specification
 
-**Status:** Draft v0.1. No versioning or governance process yet — see
+**Status:** Draft v0.1. No versioning or governance process yet: see
 [Appendix D](#appendix-d-vocabulary-governance). Vocabulary is a seed set,
 not exhaustive.
 
@@ -26,6 +26,9 @@ not exhaustive.
   - [5.2 No location or motion verb for an abstract subject](#52-no-location-or-motion-verb-for-an-abstract-subject-deterministic)
   - [5.3 No unstated commentary](#53-no-unstated-commentary-inference-based)
   - [5.4 No hedging where a plain statement is true](#54-no-hedging-where-a-plain-statement-is-true-inference-based)
+  - [5.5 No metaphor or analogy](#55-no-metaphor-or-analogy-inference-based)
+  - [5.6 No self-qualifying "honest"](#56-no-self-qualifying-honest-mixed)
+  - [5.7 No contrastive framing](#57-no-contrastive-framing-inference-based)
 - [6. Vocabulary rules](#6-vocabulary-rules-deterministic)
   - [6.1 One sense per word](#61-one-sense-per-word-deterministic)
   - [6.2 Literal tokens](#62-literal-tokens-deterministic)
@@ -35,10 +38,12 @@ not exhaustive.
   - [7.2 Match structure to purpose](#72-match-structure-to-purpose-inference-based)
   - [7.3 No warning or caution blocks](#73-no-warning-or-caution-blocks-inference-based)
   - [7.4 Define before use](#74-define-before-use-inference-based)
-  - [7.5 No vacuous classification properties](#75-no-vacuous-classification-properties-inference-based)
-  - [7.6 No process narration](#76-no-process-narration-inference-based)
-  - [7.7 Document type](#77-document-type-inference-based)
-  - [7.8 Completion marker](#78-completion-marker-deterministic)
+  - [7.5 No unanchored reference](#75-no-unanchored-reference-inference-based)
+  - [7.6 No vacuous classification properties](#76-no-vacuous-classification-properties-inference-based)
+  - [7.7 No process narration](#77-no-process-narration-inference-based)
+  - [7.8 Document type](#78-document-type-inference-based)
+  - [7.9 No planning content in a reference document](#79-no-planning-content-in-a-reference-document-inference-based)
+  - [7.10 Completion marker](#710-completion-marker-deterministic)
 - [Appendices](#appendices)
   - [Appendix A. Machine-readable rule catalogue](#appendix-a-machine-readable-rule-catalogue)
   - [Appendix B. Enforcement and fact preservation](#appendix-b-enforcement-and-fact-preservation)
@@ -55,12 +60,12 @@ from an AI agent, commit messages, code comments, ADRs, and READMEs.
 
 The primary reader is a human. Software English does not target machine parsing as a
 first-class goal, but its restricted grammar and closed vocabulary make
-machine checking possible — that is the mechanism, not the purpose.
+machine checking possible. That is the mechanism, not the purpose.
 
 The same restriction likely benefits an agent reading Software English prose as
 context, not only a human: fewer word senses to disambiguate, and shorter,
 single-fact sentences with less to track. This is a secondary benefit, not
-a design goal — the agent-targeted profile below is where an agent-first
+a design goal. The agent-targeted profile below is where an agent-first
 variant would instead make it one.
 
 A future **profile** may retarget Software English at agent-to-agent prose. This
@@ -70,10 +75,10 @@ specification does not define one yet.
 
 Software English defines two conformance tiers. Each tier holds a set of rules:
 
-- **Deterministic** — checkable by a parser or a word-list lookup alone,
+- **Deterministic**: checkable by a parser or a word-list lookup alone,
   with no semantic judgement. A linter enforces a deterministic rule
   without help.
-- **Inference-based** — needs sense disambiguation or contextual judgement
+- **Inference-based**: needs sense disambiguation or contextual judgement
   (for example, detecting anthropomorphism in an unlisted paraphrase, or
   detecting editorial commentary). A model applies an inference-based
   rule; a linter cannot verify it exhaustively.
@@ -84,7 +89,7 @@ inference-based by default.
 
 Tier is separate from severity. A deterministic rule can still run at
 `warning` severity (advisory, non-blocking) rather than `error`
-(blocking) — see [`rules/core-rules.toml`](../rules/core-rules.toml).
+(blocking): see [`rules/core-rules.toml`](../rules/core-rules.toml).
 `vocabulary-membership` runs at `warning` while the vocabulary is a seed
 set ([Appendix D](#appendix-d-vocabulary-governance)), so an unlisted but
 valid word does not block a turn.
@@ -101,9 +106,9 @@ join and is allowed.
 ### 3.2 Sentence length (Deterministic)
 
 20 words maximum, all sentence types. One limit, not split by
-instruction/description — taken from plain-language guidance (15-20
+instruction/description: taken from plain-language guidance (15-20
 words), not from an aerospace-manual procedure/description split.
-Configurable — see [Appendix C](#appendix-c-configuration).
+Configurable: see [Appendix C](#appendix-c-configuration).
 
 ### 3.3 One topic per paragraph (Inference-based)
 
@@ -116,18 +121,42 @@ Use a list where an instruction has more than one step or a description
 has more than one item. Do not write a list as a single run-on sentence
 with commas.
 
+### 3.5 No em dash (Deterministic)
+
+Do not use an em dash (`—`), in a sentence or in a list item. It most
+often splices two clauses together without stating how they relate,
+the opposite of §3.1's one-fact-per-sentence rule:
+
+> The prose is dense — read it twice.
+
+Split into two sentences, or state the relation directly:
+
+> The prose is dense. Read it twice.
+> Because the prose is dense, read it twice.
+
+A list item that labels with an em dash uses a colon instead:
+
+> Type — meaning
+> Type: meaning
+
+This rule is unconditional, with no exception for a use that reads
+correctly, the same precedent as a flat entry in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv). Quoted material
+(§6.3) is already exempt, for the case a fix would otherwise misquote
+someone else's exact words.
+
 ## 4. Grammar rules
 
 ### 4.1 Tense (mixed)
 
-Use simple present, simple past, or simple future —
+Use simple present, simple past, or simple future:
 `the API will change in v2`. Do not use the continuous (`is testing`) to
-describe what a system or a process does (Deterministic — checkable by
+describe what a system or a process does (Deterministic: checkable by
 pattern, and blocking). Avoid the perfect (`has tested`) for the same
 purpose, except where the perfect states a fact about history that
-simple past cannot —
+simple past cannot:
 `the API has changed twice since v1`
-(Inference-based — telling the two apart needs judgement, so this runs
+(Inference-based: telling the two apart needs judgement, so this runs
 advisory-only, not blocking).
 
 ### 4.2 Voice (Inference-based)
@@ -144,12 +173,12 @@ runs a second attempt".
 ### 4.4 Person (Inference-based)
 
 Second person for instructions ("Run the migration"), third person for
-description ("The migration script updates the schema"). Configurable —
+description ("The migration script updates the schema"). Configurable:
 see [Appendix C](#appendix-c-configuration).
 
 ### 4.5 Mood (Inference-based)
 
-Imperative for instructions. Configurable — see
+Imperative for instructions. Configurable: see
 [Appendix C](#appendix-c-configuration).
 
 ## 5. Semantic rules
@@ -160,8 +189,8 @@ A system, service, component, or process has no human trait, feeling, or
 intent. State the mechanism.
 
 Deterministic-tier fixed list (verbs/adjectives that fail when a
-structure noun — §6, [`vocabulary/structure.tsv`](../vocabulary/structure.tsv)
-— or a system-referring pronoun (`it`, `this`, `that`) appears within
+structure noun (§6, [`vocabulary/structure.tsv`](../vocabulary/structure.tsv))
+or a system-referring pronoun (`it`, `this`, `that`) appears within
 four words before the match):
 `wants, tries, knows, believes, decides, gives up, waits patiently, gets confused, has patience, is happy, is confused, is smart, understands, thinks, remembers, forgets, hopes, assumes, agrees, refuses, prefers, cares, worries, struggles, learns, notices, realizes, expects, intends, plans, chooses, likes, dislikes, enjoys, hates`.
 The nearby-subject requirement exists so that a human subject
@@ -192,7 +221,7 @@ So this rule applies the same condition as §5.1: a nearby structure noun
 This rule exists because the fault is a default of fluent English, not a
 vocabulary gap: a writer actively avoiding it can still produce it
 without noticing. It cannot go in the flat banned-word list (§6) because,
-unlike `reach` or `leverage`, these verbs have a correct use — only the
+unlike `reach` or `leverage`, these verbs have a correct use: only the
 subject decides.
 
 ### 5.3 No unstated commentary (Inference-based)
@@ -206,6 +235,68 @@ asked for an opinion.
 Cut a qualifier that adds no information (`essentially`, `basically`,
 `in general`, `it's worth noting that`).
 
+### 5.5 No metaphor or analogy (Inference-based)
+
+State a fact or a mechanism directly. Do not explain it through a
+comparison to something else:
+
+> The retry queue is the system's safety net.
+> Think of the cache as a waiting room for data.
+
+State the mechanism instead:
+
+> The retry queue holds a failed request for a later attempt.
+> The cache holds a copy of data for a later request.
+
+Recognising a metaphor or an analogy needs judgement; no fixed word
+list applies.
+
+### 5.6 No self-qualifying "honest" (mixed)
+
+"Honest" and its forms name a real, checkable property: an honest
+mistake, an honest broker, an honest error. That use stays approved.
+
+A separate use marks a statement as the writer's own frank opinion,
+where the word adds no information over stating the opinion plainly:
+
+> My honest take is that this approach is too complex.
+> The honest framing is that we are behind schedule.
+
+State the opinion without the qualifier instead:
+
+> My take is that this approach is too complex.
+> The framing is that we are behind schedule.
+
+Deterministic-tier fixed list (in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv)):
+`honest take, honest opinion, honest assessment, honest feedback, to be honest, honestly speaking`.
+
+Inference-based tier: a paraphrase of the same fault not on the fixed
+list (for example, `if I'm honest, the design needs a rethink`) needs
+model judgement to tell it apart from a literal use of "honest".
+
+### 5.7 No contrastive framing (Inference-based)
+
+A sentence states what happens. It does not state what does not
+happen, what a component cannot do, or how a case differs from an
+unasked question. That shape answers an objection instead of stating
+the fact:
+
+> A file write is the one exception: Claude Code cannot undo a write
+> already on disk. Claude still sees the report and fixes the file.
+
+State the trigger and the outcome directly:
+
+> When a file write breaks a rule, Claude reads the printed report and
+> fixes the file.
+
+Marker words: `the one exception`, `cannot`, `still`, `the difference
+is`, `not that`, `unlike`. None of these is a fault by itself: `cannot`
+states a real, load-bearing limit in a reference document as plainly
+as any other fact. The fault is the sentence's shape, framed against an
+unstated contrast, not the presence of any one word. Recognising the
+shape needs judgement, so this stays inference-based.
+
 ## 6. Vocabulary rules (Deterministic)
 
 Software English uses a **closed, approved vocabulary**: a word not in the list, and
@@ -213,7 +304,7 @@ not a literal token (§6.2) or inside a quoted block (§6.3), fails the
 deterministic check. This is a genuine departure from mainstream style
 guides, which correct vocabulary rather than close it.
 
-The vocabulary is organised by category, not as one flat list — see
+The vocabulary is organised by category, not as one flat list: see
 [`vocabulary/`](../vocabulary/). Categories:
 
 | Category | File | Contents |
@@ -222,15 +313,15 @@ The vocabulary is organised by category, not as one flat list — see
 | Structure | [`vocabulary/structure.tsv`](../vocabulary/structure.tsv) | Nouns naming a system part or a relationship: service, component, process, request, response, queue, cache, consumer, producer |
 | Qualities | [`vocabulary/qualities.tsv`](../vocabulary/qualities.tsv) | Adjectives describing a measurable or checkable property: valid, empty, full, available, closed, open, synchronous |
 | Connectives | [`vocabulary/connectives.tsv`](../vocabulary/connectives.tsv) | Function words: articles, conjunctions, prepositions, pronouns, common auxiliary verbs |
-| Banned | [`vocabulary/banned.tsv`](../vocabulary/banned.tsv) | Words that are not approved, each with an approved replacement — kept for words a writer uses out of habit, so the linter gives a direct fix |
+| Banned | [`vocabulary/banned.tsv`](../vocabulary/banned.tsv) | Words that are not approved, each with an approved replacement: kept for words a writer uses out of habit, so the linter gives a direct fix |
 
-Word admission and vocabulary growth are governed separately — see
+Word admission and vocabulary growth are governed separately: see
 [Appendix D](#appendix-d-vocabulary-governance).
 
 ### 6.1 One sense per word (Deterministic)
 
 A sense is approved per **(word, part of speech)** pair, not per bare
-word — "open" as a verb ("open the connection") and "open" as an
+word: "open" as a verb ("open the connection") and "open" as an
 adjective ("the connection is open") are two separate, both-approved
 entries. Within one part of speech, only the software/systems sense is
 approved: using the word in a different sense for the same part of
@@ -240,7 +331,7 @@ approved.
 ### 6.2 Literal tokens (Deterministic)
 
 A proper noun, an identifier, a file path, a command, a flag, a version
-number, a URL, or a code span — a **literal token** — is not checked
+number, a URL, or a code span (a **literal token**) is not checked
 against the vocabulary. The linter detects these structurally, by
 pattern, never by a list:
 
@@ -251,7 +342,7 @@ pattern, never by a list:
 - `camelCase` (an internal capital not at the start of the token);
 - a version number (`\d+(\.\d+)+`, with an optional leading "v");
 - capitalised, and not at the start of a sentence (a sentence-initial
-  capital is not, by itself, a literal-token signal — only a
+  capital is not, by itself, a literal-token signal: only a
   mid-sentence capital is).
 
 Prefer a code span for an identifier, command, or flag over relying on
@@ -260,7 +351,7 @@ capitalisation alone.
 ### 6.3 Quoted material (Deterministic)
 
 A Markdown blockquote (a line starting with `>`) is not checked. It holds
-someone else's words, quoted verbatim — including a quoted example of a
+someone else's words, quoted verbatim, including a quoted example of a
 Software English fault, such as this specification's own illustrations of banned or
 anthropomorphic phrasing. Do not edit the wording inside a blockquote to
 satisfy a deterministic-tier rule; edit the surrounding prose instead, or
@@ -291,7 +382,29 @@ Define a named term before its first normative use. Introducing a term
 and relying on it in the same sentence, without stating what it means,
 forces a reader to infer the definition from usage instead.
 
-### 7.5 No vacuous classification properties (Inference-based)
+### 7.5 No unanchored reference (Inference-based)
+
+A definite reference (`the design`, `the decision`, `the plan`,
+`this change`, and similar) needs an antecedent inside the document.
+A reader without the writer's context cannot resolve a reference the
+document does not anchor. The fault can appear in a heading or in body
+prose.
+
+A reference is anchored when the document names its referent before the
+reference, or when the reference points to where the document defines it
+(`the approach in §3`). The same phrases are correct when anchored: a
+document that defines a design can call it `the design`.
+
+Fault: the heading `Facts that shape the design` in a document that
+defines no design.
+Fix: name the referent (`Facts that shape the retry policy`), or define
+it before the reference.
+
+This rule exists because the phrasing survives a move from a
+conversation, where the referent is shared, into a standalone document,
+where it is not.
+
+### 7.6 No vacuous classification properties (Inference-based)
 
 Do not state a property of a classification that already follows from
 its member definitions. State a cardinality or exclusivity constraint
@@ -299,7 +412,7 @@ its member definitions. State a cardinality or exclusivity constraint
 `collectively exhaustive`, `no overlap`, `one and only one`) only where
 a mechanism reads it, and state it there, not in the prose definition.
 
-### 7.6 No process narration (Inference-based)
+### 7.7 No process narration (Inference-based)
 
 A document about a decision states the decision and the reason for it.
 It does not narrate how the decision was reached: who asked, what was
@@ -310,19 +423,49 @@ Fault: `The project owner later asked why, and asked for alternatives.`
 Fix: state the constraint and the choice it produced directly, with no
 reference to the discussion that surfaced it.
 
-### 7.7 Document type (Inference-based)
+### 7.8 Document type (Inference-based)
 
-Identify a document's target type before writing it. A type — RFC, ADR,
-Specification, Technical Manual, and similar — governs structure and
+Identify a document's target type before writing it. A type (RFC, ADR,
+Specification, Technical Manual, and similar) governs structure and
 required sections beyond Software English's own sentence-level rules. See
 [Appendix F](#appendix-f-document-type-templates) for a by-reference list:
 Software English does not redefine any of these structures, only points to each
 one's canonical source.
 
-### 7.8 Completion marker (Deterministic)
+### 7.9 No planning content in a reference document (Inference-based)
+
+This rule is conditional on document type. It applies only to a document
+whose type under §7.8 is Reference, the Diátaxis type listed in
+[Appendix F](#appendix-f-document-type-templates). The other rules in §7
+apply to every document.
+
+A reference document describes. It holds no planning or task-oriented
+content:
+
+- no open question;
+- no next step;
+- no statement of who does work, or when;
+- no pointer to a plan document or a task list;
+- no statement of the document's own purpose relative to a task or a
+  decision in progress.
+
+A sentence that states where planning content belongs is itself planning
+content, even when it points away from the document.
+
+Fault: a closing paragraph in a reference document:
+`Implementation planning belongs in the plan at doc/planning/plan.md, not in this document.`
+Fix: delete the paragraph. Put the pointer in the plan document or in the
+document that assigns the task.
+
+This rule is Software English's own addition, not Diátaxis's wording.
+Diátaxis's guidance for reference material, "describe, and only
+describe," implies it but names no concrete category for planning
+content. See [`templates/reference.md`](../templates/reference.md).
+
+### 7.10 Completion marker (Deterministic)
 
 Where enforcement rewrites prose to conform, a completed, conforming
-response or document ends with the marker line `swe: checked` — its
+response or document ends with the marker line `swe: checked`. Its
 absence signals the mechanism did not run or did not complete. See
 [Appendix B](#appendix-b-enforcement-and-fact-preservation) for the
 check enforcement must run before adding this marker to a rewrite.
@@ -342,7 +485,7 @@ pattern-based rule, the regular expression or lookup it runs against.
 
 Enforcement checks changed lines only by default (the lines a diff
 against the prior committed state shows as added or modified), not a
-whole file — whole-file checking runs only on explicit request. See the
+whole file. Whole-file checking runs only on explicit request. See the
 [`claude-plugins`](https://github.com/jimbarritt/claude-plugins)
 [`software-english-lint`](https://github.com/jimbarritt/claude-plugins/tree/main/software-english-lint)
 plugin for the reference implementation.
@@ -393,8 +536,8 @@ ASD-STE100.
 ### Appendix F. Document type templates
 
 By reference only: Software English does not redefine any of these structures. Each
-row links to the canonical source and to a local cached reference file —
-[`templates/`](../templates/) — holding a fuller structure summary than
+row links to the canonical source and to a local cached reference file,
+[`templates/`](../templates/), holding a fuller structure summary than
 this table, so a reader or an agent can use the shape without fetching
 the canonical source first. Verify against the canonical source before
 relying on a detail the cache omits; each cached file states its own
@@ -410,10 +553,22 @@ last-verified date.
 | How-to guide | [Diátaxis](https://diataxis.fr/how-to-guides/) | [`templates/how-to-guide.md`](../templates/how-to-guide.md) |
 | Reference | [Diátaxis](https://diataxis.fr/reference/) | [`templates/reference.md`](../templates/reference.md) |
 | Explanation | [Diátaxis](https://diataxis.fr/explanation/) | [`templates/explanation.md`](../templates/explanation.md) |
+| Lab Notebook | Purrington, ["Maintaining a laboratory notebook"](https://colinpurrington.com/tips/lab-notebooks/); [Rice University lab notebook guidelines](http://www.owlnet.rice.edu/~bios311/bios311/nbguidelines.html) | [`templates/lab-notebook.md`](../templates/lab-notebook.md) |
+| Portfolio Journal | Janz (1982), ["Initial comparisons of patterned behavior-based interviews versus unstructured interviews"](https://psycnet.apa.org/record/1989-98087-011); Evans, ["Get your work recognized: write a brag document"](https://jvns.ca/blog/brag-documents/) (2019) | [`templates/portfolio-journal.md`](../templates/portfolio-journal.md) |
+| Research Note | Umit, [survey of political science journals' research-note policies](https://resulumit.com/blog/polisci-research-notes/) | [`templates/research-note.md`](../templates/research-note.md) |
+| Evidence List | [Cochrane Handbook, Chapter 14](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-14) | [`templates/evidence-list.md`](../templates/evidence-list.md) |
 
-The last four rows are [Diátaxis](https://diataxis.fr/)'s own four
-documentation types — a system distinct from RFC, ADR, and Specification,
-distinguishing document purpose (why a document exists) rather than
-document format (what sections it has). A Technical Manual, per its own
-cached reference above, maps onto Reference and Explanation content, not
-Tutorial or How-to guide content.
+The last four rows above the Lab Notebook row are
+[Diátaxis](https://diataxis.fr/)'s own four documentation types, a
+system distinct from RFC, ADR, and Specification, distinguishing document
+purpose (why a document exists) rather than document format (what
+sections it has). A Technical Manual, per its own cached reference above,
+maps onto Reference and Explanation content, not Tutorial or How-to guide
+content.
+
+Lab Notebook, Portfolio Journal, and Research Note are each a
+convergent convention: independent sources describe the same practice,
+with local variation, rather than one body defining a single formal
+standard. Evidence List is one joint standard, set by Cochrane and
+GRADE together. Each cached reference states this distinction for its own
+type.

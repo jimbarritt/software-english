@@ -1,4 +1,4 @@
-# Reference (Diátaxis documentation type) — cached reference for Software English
+# Reference (Diátaxis documentation type): cached reference for Software English
 
 ## Canonical sources
 
@@ -24,6 +24,20 @@ Diátaxis gives concrete writing guidance for reference material:
 - State facts directly, for example: "You must use a. You must not apply b unless c."
 - List commands, options, features, and limitations in full.
 - Use examples only to illustrate a stated fact, not to explain or instruct.
+
+## Software English addition: no planning or task-oriented content
+
+This section is Software English's own rule ([SPEC §7.9](../spec/SPEC.md)), not Diátaxis's wording. It follows from the "describe, and only describe" guidance above, but names a concrete category that guidance does not.
+
+A reference document holds no planning or task-oriented content. This excludes:
+
+- an open question;
+- a "next steps" section or sentence;
+- a statement of who will do work, or when;
+- a pointer to a plan document or a task list;
+- a statement of the document's own purpose relative to a task or a decision in progress.
+
+A sentence that states where planning content belongs is itself planning content, even when it points away from the document. Put such content in the plan document, or delete it.
 
 ## How this differs from explanation
 

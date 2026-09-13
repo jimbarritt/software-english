@@ -28,6 +28,14 @@ description = "A word or phrase in the banned list must be replaced with its app
 sources = ["vocabulary/banned.tsv"]
 
 [[rules]]
+id = "no-em-dash"
+tier = "deterministic"
+check = "character-ban"
+severity = "error"
+character = "—"
+description = "Do not use an em dash (SPEC §3.5), in a sentence or in a list item. Unconditional: no exception for a use that reads correctly, the same precedent as a flat vocabulary/banned.tsv entry."
+
+[[rules]]
 id = "sentence-length"
 tier = "inference-based"
 check = "sentence-length"
@@ -108,21 +116,56 @@ trigger_phrases = [
 description = 'A cardinality or exclusivity property (SPEC §7) stated near a taxonomy definition ("defines N tiers/kinds/categories/levels") is a fault when the property already follows from the member definitions and no mechanism reads it. The trigger phrases are deterministically findable; whether a given instance is load-bearing needs judgement, so this stays inference-based.'
 
 [[rules]]
+id = "no-unanchored-reference"
+tier = "inference-based"
+check = "model-judgement"
+severity = "warning"
+description = 'A definite reference ("the design", "the decision", "the plan", "this change", and similar) with no antecedent inside the document (SPEC §7.5) — a reader without the context the writer had cannot resolve it. Not a banned-word entry, because each phrase is correct when the document defines its referent. Whether an antecedent exists needs the whole document, not a lookup, so this stays inference-based.'
+
+[[rules]]
 id = "no-process-narration"
 tier = "inference-based"
 check = "model-judgement"
 severity = "warning"
-description = "A document about a decision states the decision and the reason for it (SPEC §7.6). It does not narrate how the decision was reached: who asked, what was discussed, how many attempts came before it, or what changed between drafts. Recognising process narration versus a stated fact needs judgement, so this stays inference-based."
+description = "A document about a decision states the decision and the reason for it (SPEC §7.7). It does not narrate how the decision was reached: who asked, what was discussed, how many attempts came before it, or what changed between drafts. Recognising process narration versus a stated fact needs judgement, so this stays inference-based."
 
 [[rules]]
 id = "document-type-template"
 tier = "inference-based"
 check = "model-judgement"
 severity = "warning"
-description = "Identify a document's target type (RFC, ADR, Specification, Technical Manual, and similar — SPEC §7.7) before writing it. A type governs structure and required sections beyond Software English's own sentence-level rules. See SPEC Appendix F and templates/ for a by-reference cache of each type's canonical structure — Software English does not redefine these structures itself. Recognising which type a document should follow needs judgement, so this stays inference-based."
+description = "Identify a document's target type (RFC, ADR, Specification, Technical Manual, and similar — SPEC §7.8) before writing it. A type governs structure and required sections beyond Software English's own sentence-level rules. See SPEC Appendix F and templates/ for a by-reference cache of each type's canonical structure — Software English does not redefine these structures itself. Recognising which type a document should follow needs judgement, so this stays inference-based."
+
+[[rules]]
+id = "no-planning-content-in-reference"
+tier = "inference-based"
+check = "model-judgement"
+severity = "warning"
+applies_to_document_type = "reference"
+description = "A document of Diátaxis type Reference (SPEC §7.9) holds no planning or task-oriented content: no open question, no next step, no statement of who does work or when, no pointer to a plan document, and no statement of the document's own purpose relative to a task in progress. A sentence that states where planning content belongs is itself planning content. Conditional on document type: it fires only after document-type-template assigns the type Reference, because the same content is correct in a plan, an RFC, or an ADR. Software English's own addition, reasoned from Diátaxis's 'describe, and only describe' guidance, which names no such category. Recognising planning content needs judgement, so this stays inference-based."
+
+[[rules]]
+id = "no-metaphor-or-analogy"
+tier = "inference-based"
+check = "model-judgement"
+severity = "warning"
+description = "State a fact or a mechanism directly (SPEC §5.5). Do not explain it through a comparison to something else (a metaphor or an analogy, e.g. 'the retry queue is the system's safety net'). No fixed word list applies; recognising a metaphor or an analogy needs judgement, so this stays inference-based."
+
+[[rules]]
+id = "honest-self-qualifier-paraphrase"
+tier = "inference-based"
+check = "model-judgement"
+severity = "warning"
+description = "A paraphrase of the self-qualifying 'honest' fault (SPEC §5.6) not on the fixed list (vocabulary/banned.tsv), for example 'if I'm honest, the design needs a rethink'. 'Honest' also names a real, checkable property (an honest mistake, an honest broker) — telling that use apart from the self-qualifier use needs judgement, so this stays inference-based."
+
+[[rules]]
+id = "no-contrastive-framing"
+tier = "inference-based"
+check = "model-judgement"
+severity = "warning"
+description = "A sentence states what happens (SPEC §5.7). It does not state what does not happen, what a component cannot do, or how a case differs from one the reader has not asked about, since that answers an objection instead of the question. Marker words (\"the one exception\", \"cannot\", \"still\", \"the difference is\", \"not that\", \"unlike\") are not faults by themselves: \"cannot\" states a real, load-bearing limit as plainly as any other fact in a reference document. The fault is the sentence's shape, not any one word, so telling a defensive frame apart from a plain stated limit needs judgement."
 
 [exemptions]
-skip_file_marker = "<!-- swe: skip-file -->"
 skip_line_marker = "<!-- swe: ignore -->"
 structural_exclusions = [
   "fenced_code_blocks", "indented_code_blocks", "inline_code_spans",

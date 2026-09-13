@@ -2,8 +2,8 @@
 
 ## Canonical sources
 
-- W3C QA Framework: Specification Guidelines — https://www.w3.org/TR/qaframe-spec/
-- RFC 2119, Key words for use in RFCs to Indicate Requirement Levels — https://www.rfc-editor.org/rfc/rfc2119.txt
+- W3C QA Framework: Specification Guidelines: https://www.w3.org/TR/qaframe-spec/
+- RFC 2119, Key words for use in RFCs to Indicate Requirement Levels: https://www.rfc-editor.org/rfc/rfc2119.txt
 
 ## Conformance structure
 
@@ -23,11 +23,11 @@ The fetched summary of the W3C document did not return exact clause numbers (for
 
 From RFC 2119. Many non-RFC specifications, including W3C specifications, reuse these keywords by reference rather than redefining them. A specification that does this must cite RFC 2119 in its conformance clause.
 
-- **MUST**, **REQUIRED**, **SHALL** — mean that the definition is an absolute requirement of the specification.
-- **MUST NOT**, **SHALL NOT** — mean that the definition is an absolute prohibition of the specification.
-- **SHOULD**, **RECOMMENDED** — mean that valid reasons may exist, in particular circumstances, to ignore a particular item, but the full implications must be understood and weighed before choosing a different course.
-- **SHOULD NOT**, **NOT RECOMMENDED** — mean that valid reasons may exist, in particular circumstances, when the particular behaviour is acceptable or even useful, but the full implications should be understood and the case weighed before implementing any behaviour described with this label.
-- **MAY**, **OPTIONAL** — mean that an item is optional. One implementer may include the item because a market requires it, or because the implementer judges that it improves the product. Another implementer may omit the same item.
+- **MUST**, **REQUIRED**, **SHALL**: mean that the definition is an absolute requirement of the specification.
+- **MUST NOT**, **SHALL NOT**: mean that the definition is an absolute prohibition of the specification.
+- **SHOULD**, **RECOMMENDED**: mean that valid reasons may exist, in particular circumstances, to ignore a particular item, but the full implications must be understood and weighed before choosing a different course.
+- **SHOULD NOT**, **NOT RECOMMENDED**: mean that valid reasons may exist, in particular circumstances, when the particular behaviour is acceptable or even useful, but the full implications should be understood and the case weighed before implementing any behaviour described with this label.
+- **MAY**, **OPTIONAL**: mean that an item is optional. One implementer may include the item because a market requires it, or because the implementer judges that it improves the product. Another implementer may omit the same item.
 
 RFC 2119 also notes that these terms hold weight only when capitalised, and that overuse of the terms hides the critical requirements in a specification.
 

@@ -3,7 +3,7 @@
 A controlled natural language for software and systems engineering prose.
 
 Software English restricts vocabulary and grammar so that prose about
-systems, code, and engineering work reads the same way from any writer —
+systems, code, and engineering work reads the same way from any writer,
 human or AI agent. It takes its structural approach (a restricted
 vocabulary, one approved sense per word, simple grammar, short sentences)
 from the general field of
@@ -21,7 +21,7 @@ systems: documentation, commit messages, code comments, ADRs, READMEs,
 and an AI agent's conversational replies.
 
 Primary reader: a human. A future "profile" may target agent-to-agent
-prose instead — not yet built.
+prose instead. Not yet built.
 
 ## Structure
 
@@ -37,9 +37,9 @@ prose instead — not yet built.
 
 ## Conformance tiers
 
-- **Deterministic** — checkable by a parser or a word-list lookup alone
+- **Deterministic**: checkable by a parser or a word-list lookup alone
   (vocabulary membership, sentence length, banned grammatical forms).
-- **Inference-based** — needs model judgement (anthropomorphism in
+- **Inference-based**: needs model judgement (anthropomorphism in
   paraphrase, commentary, hedging) that a script cannot check
   exhaustively.
 
