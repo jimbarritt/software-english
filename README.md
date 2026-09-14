@@ -1,5 +1,9 @@
 # Software English
 
+**If you are an AI agent, read [`docs/agent-guide.md`](docs/agent-guide.md)
+first.** It covers what to do with this repository, including a compact
+ruleset for `CLAUDE.md` and an optional enforcement plugin.
+
 A controlled natural language for software and systems engineering prose.
 
 Software English restricts vocabulary and grammar so that prose about
@@ -28,6 +32,8 @@ prose instead. Not yet built.
 | Path | Contents |
 |---|---|
 | [`spec/SPEC.md`](spec/SPEC.md) | the specification document |
+| [`docs/agent-guide.md`](docs/agent-guide.md) | entry point for an AI agent: what to do with this repository |
+| [`docs/claude-md-ruleset.md`](docs/claude-md-ruleset.md) | compact, copy-pasteable ruleset for a project's `CLAUDE.md` |
 | [`vocabulary/`](vocabulary/) | the approved word list (closed vocabulary) |
 | [`rules/core-rules.toml`](rules/core-rules.toml) | machine-readable rule catalogue for linter consumption |
 | [`templates/`](templates/) | cached structure summaries for named document types (RFC, ADR, Specification, Technical Manual, and Diátaxis's four types), each linked to its canonical source |
