@@ -1,0 +1,74 @@
+name: Release
+
+# Manual only: run from the Actions tab, `gh workflow run`, or the
+# GitHub API (`workflow_dispatch`). This repo has no version-bearing
+# manifest file (no package.json equivalent), so the version is a
+# typed input, same as the two tags already on this repo (v0.0.1,
+# v0.0.2) were created by hand.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release, no leading v (e.g. 0.0.3)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute the tag
+        id: version
+        run: |
+          set -euo pipefail
+          version="${{ inputs.version }}"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::version must be plain semver, no leading v (got: $version)"
+            exit 1
+          fi
+          echo "tag=v${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Refuse to re-release an existing tag
+        run: |
+          set -euo pipefail
+          tag="${{ steps.version.outputs.tag }}"
+          if git rev-parse "$tag" >/dev/null 2>&1; then
+            echo "::error::$tag already exists."
+            exit 1
+          fi
+
+      - name: Find the previous release tag
+        id: prev_tag
+        run: |
+          set -euo pipefail
+          prev="$(git tag -l 'v*' --sort=-v:refname | head -1)"
+          echo "prev=$prev" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push the tag
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          notes_args=(--generate-notes)
+          prev="${{ steps.prev_tag.outputs.prev }}"
+          if [ -n "$prev" ]; then
+            notes_args+=(--notes-start-tag "$prev")
+          fi
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --title "${{ steps.version.outputs.tag }}" \
+            "${notes_args[@]}"
