@@ -465,6 +465,18 @@ Diátaxis's guidance for reference material, "describe, and only
 describe," implies it but names no concrete category for planning
 content. See [`templates/reference.md`](../templates/reference.md).
 
+A Design document is not a Reference document, and this rule does not
+apply to it. A design document states a design that is chosen and not
+yet built, so it holds what exists, what is decided, and what is still
+open, all at once. It may hold an open-questions section and a
+future-extension section, and both are correct content there. Every
+other rule in §7 applies to it unchanged, §7.7 included: a design
+document states each decision and the reason for it, and does not
+narrate how the decision was reached. Assigning the type Reference to a
+design document produces a finding against every entry in either
+section, so assign the type first. See
+[`templates/design.md`](../templates/design.md).
+
 ### 7.10 No out-of-scope comparand (Inference-based)
 
 A reader-facing document names only what the reader's task needs. A
@@ -637,6 +649,7 @@ last-verified date.
 |---|---|---|
 | RFC | [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119.txt) (requirement keywords); [RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html) (style guide) | [`templates/rfc.md`](../templates/rfc.md) |
 | ADR | Nygard, ["Documenting Architecture Decisions"](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) (2011); [adr.github.io](https://adr.github.io/) | [`templates/adr.md`](../templates/adr.md) |
+| Design | [IEEE Std 1016-2009](https://ieeexplore.ieee.org/document/5167255/) (software design descriptions); Ubl, ["Design Docs at Google"](https://www.industrialempathy.com/posts/design-docs-at-google/) (2020) | [`templates/design.md`](../templates/design.md) |
 | Specification | [W3C QA Framework: Specification Guidelines](https://www.w3.org/TR/qaframe-spec/); RFC 2119 keywords (above) | [`templates/specification.md`](../templates/specification.md) |
 | Technical Manual | [Google developer documentation style guide](https://developers.google.com/style); [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/); [Diátaxis](https://diataxis.fr/) | [`templates/technical-manual.md`](../templates/technical-manual.md) |
 | Tutorial | [Diátaxis](https://diataxis.fr/tutorials/) | [`templates/tutorial.md`](../templates/tutorial.md) |
@@ -655,6 +668,19 @@ purpose (why a document exists) rather than document format (what
 sections it has). A Technical Manual, per its own cached reference above,
 maps onto Reference and Explanation content, not Tutorial or How-to guide
 content.
+
+Design cites two sources describing one type at two levels of
+formality. IEEE 1016 sets what a software design description must
+contain to conform, organised by stakeholder, concern, view, and
+viewpoint. The Google convention describes what a working team writes
+and reviews before it builds, organised as context and scope, goals and
+non-goals, the design, alternatives considered, and cross-cutting
+concerns. A design document may follow either.
+
+Design is also the one type in this table that §7.9 names directly. A
+design document holds an open question and a future extension as
+correct content, where a Reference document holds neither, so the two
+types must be told apart before §7.9 runs.
 
 Lab Notebook, Portfolio Journal, and Research Note are each a
 convergent convention: independent sources describe the same practice,
