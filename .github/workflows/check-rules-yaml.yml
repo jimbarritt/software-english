@@ -1,0 +1,23 @@
+name: Check the generated rule catalogue
+
+# rules/core-rules.yaml is generated from rules/core-rules.toml. The two
+# were kept in step by hand before 2026-09-21 and drifted: the YAML held
+# half the rules and cited a section number the TOML had moved. This
+# runs the generator's own --check mode, so a TOML edit committed
+# without regenerating fails here rather than leaving a catalogue that
+# disagrees with itself.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check core-rules.yaml matches core-rules.toml
+        run: scripts/generate-rules-yaml.py --check

@@ -1,190 +1,173 @@
-# Software English rule catalogue — machine-readable.
-# Each entry names a tier ("deterministic" or "inference-based") and a severity
-# ("error", blocking, or "warning", advisory-only). See SPEC.md §2.
+# Software English rule catalogue, in YAML.
 #
-# Note: the reference implementation (claude-plugins/software-english-lint/scripts/
-# software_english_lint.py) currently hardcodes these rules in Python rather than
-# parsing this file directly — a known v1 gap. Keep the two in sync by
-# hand until that is fixed.
+# GENERATED FILE. Do not edit by hand. Edit rules/core-rules.toml, then
+# run scripts/generate-rules-yaml.py. CI checks that this file matches
+# what that script produces.
+#
+# rules/core-rules.toml is the catalogue itself: SPEC Appendix A names
+# it, and the swe plugin parses it directly. This file holds the same
+# rules for a reader or a tool that reads YAML.
+#
+# Each entry names a tier ("deterministic" or "inference-based") and a
+# severity ("error", blocking, or "warning", advisory-only). See
+# SPEC.md §2.
 
 version: "0.1"
 
 rules:
-  - id: vocabulary-membership
-    tier: deterministic
-    check: vocabulary
-    severity: warning
-    description: >
+  - id: "vocabulary-membership"
+    tier: "deterministic"
+    check: "vocabulary"
+    severity: "warning"
+    description: >-
       Every word outside a literal token (SPEC §6.3) must appear in the
-      approved vocabulary (operations, structure, qualities, connectives).
-      Runs at warning severity while the vocabulary is a seed set — see
-      §6.1 — so an unlisted but valid word does not block a turn.
+      approved vocabulary (operations, structure, qualities,
+      connectives). Runs at warning severity while the vocabulary is a
+      seed set — see §6.1 — so an unlisted but valid word does not block
+      a turn.
     sources:
-      - vocabulary/operations.tsv
-      - vocabulary/structure.tsv
-      - vocabulary/qualities.tsv
-      - vocabulary/connectives.tsv
+      - "vocabulary/operations.tsv"
+      - "vocabulary/structure.tsv"
+      - "vocabulary/qualities.tsv"
+      - "vocabulary/connectives.tsv"
 
-  - id: banned-word
-    tier: deterministic
-    check: substitution
-    severity: error
-    description: >
+  - id: "banned-word"
+    tier: "deterministic"
+    check: "substitution"
+    severity: "error"
+    description: >-
       A word or phrase in the banned list must be replaced with its
       approved fix, or cut where the fix is CUT.
     sources:
-      - vocabulary/banned.tsv
+      - "vocabulary/banned.tsv"
 
-  - id: sentence-length
-    tier: inference-based
-    check: sentence-length
-    severity: warning
-    max_words: 20
-    description: >
+  - id: "no-em-dash"
+    tier: "deterministic"
+    check: "character-ban"
+    severity: "error"
+    description: >-
+      Do not use an em dash (SPEC §3.5), in a sentence or in a list
+      item. Unconditional: no exception for a use that reads correctly,
+      the same precedent as a flat vocabulary/banned.tsv entry.
+    character: "—"
+
+  - id: "sentence-length"
+    tier: "inference-based"
+    check: "sentence-length"
+    severity: "warning"
+    description: >-
       A sentence must not exceed the configured word limit (SPEC §3,
       §10). Inference-based because judging whether a long sentence
       should split, versus is one irreducible fact, needs context; the
       word count itself is a deterministic-checkable number, but the
       rule's intent is advisory.
+    max_words: 20
 
-  - id: no-continuous-tense
-    tier: deterministic
-    check: tense-pattern
-    severity: error
-    pattern: '\b(is|are|was|were)\s+([A-Za-z]+ing)\b'
+  - id: "no-continuous-tense"
+    tier: "deterministic"
+    check: "tense-pattern"
+    severity: "error"
+    description: >-
+      Do not describe system behaviour in the continuous tense. Example
+      fault: "the consumer is testing the connection". The stoplist
+      excludes matches where the "-ing" word is not a verb, and a
+      following hyphen excludes a compound adjective
+      ("learning-oriented").
+    pattern: "\\b(is|are|was|were)\\s+([A-Za-z]+ing)\\b(?!-)"
     stoplist:
-      - during
-      - nothing
-      - something
-      - anything
-      - everything
-      - morning
-      - evening
-      - spring
-      - king
-      - thing
-      - string
-      - ring
-    description: >
-      Do not describe system behaviour in the continuous tense.
-      Example fault: "the consumer is testing the connection". The
-      stoplist excludes matches where the "-ing" word is not a verb.
+      - "during"
+      - "nothing"
+      - "something"
+      - "anything"
+      - "everything"
+      - "morning"
+      - "evening"
+      - "spring"
+      - "king"
+      - "thing"
+      - "string"
+      - "ring"
 
-  - id: no-perfect-tense-for-behaviour
-    tier: inference-based
-    check: tense-pattern
-    severity: warning
-    pattern: '\b(has|have|had)\s+([A-Za-z]+(?:ed|en))\b'
+  - id: "no-perfect-tense-for-behaviour"
+    tier: "inference-based"
+    check: "tense-pattern"
+    severity: "warning"
+    description: >-
+      Avoid the perfect tense for behaviour, except to state a
+      historical fact simple past cannot (SPEC §4). Inference-based
+      because telling the two apart needs judgement — this runs
+      advisory-only, never blocking.
+    pattern: "\\b(has|have|had)\\s+([A-Za-z]+(?:ed|en))\\b"
     stoplist:
-      - ten
-      - seven
-      - often
-      - even
-      - open
-      - golden
-      - chicken
-      - broken
-    description: >
-      Avoid the perfect tense for behaviour, except to state a historical
-      fact simple past cannot (SPEC §4). Inference-based because telling
-      the two apart needs judgement — this runs advisory-only, never
-      blocking.
+      - "ten"
+      - "seven"
+      - "often"
+      - "even"
+      - "open"
+      - "golden"
+      - "chicken"
+      - "broken"
 
-  - id: anthropomorphism-fixed-list
-    tier: deterministic
-    check: anthropomorphism
-    severity: error
-    lookback_words: 4
-    subject_signal:
-      - a word from vocabulary/structure.tsv
-      - "it"
-      - "this"
-      - "that"
-    word_list:
-      - wants
-      - tries
-      - knows
-      - believes
-      - decides
-      - gives up
-      - waits patiently
-      - gets confused
-      - has patience
-      - is happy
-      - is confused
-      - is smart
-      - understands
-      - thinks
-      - remembers
-      - forgets
-      - hopes
-      - assumes
-      - agrees
-      - refuses
-      - prefers
-      - cares
-      - worries
-      - struggles
-      - learns
-      - notices
-      - realizes
-      - realises
-      - expects
-      - intends
-      - plans
-      - chooses
-      - likes
-      - dislikes
-      - enjoys
-      - hates
-    description: >
+  - id: "anthropomorphism-fixed-list"
+    tier: "deterministic"
+    check: "anthropomorphism"
+    severity: "error"
+    description: >-
       A system, service, component, or process has no human trait,
       feeling, or intent (SPEC §5.1). Fires only when a structure noun
       or a system-referring pronoun appears within lookback_words before
-      the match, to avoid flagging a human subject. `vocabulary/user` is
-      excluded from the subject gate — it names a human referent, not a
-      system one, despite living in structure.tsv for other reasons.
-
-  - id: abstract-location
-    tier: deterministic
-    check: substitution
-    severity: error
+      the match, to avoid flagging a human subject. "user" is excluded
+      from the subject gate — it names a human referent, not a system
+      one, despite living in structure.tsv for other reasons.
     lookback_words: 4
     subject_signal:
-      - a word from vocabulary/structure.tsv, excluding human referents (e.g. "user")
+      - "a word from vocabulary/structure.tsv"
       - "it"
       - "this"
       - "that"
     word_list:
-      - sit
-      - sits
-      - sitting
-      - live
-      - lives
-      - lived
-      - living
-      - reside
-      - resides
-      - resided
-      - dwell
-      - dwells
-      - dwelled
-      - stand
-      - stands
-      - stood
-      - lie
-      - lies
-      - lay
-      - rest
-      - rests
-      - rested
-      - hang
-      - hangs
-      - hung
-      - float
-      - floats
-      - floated
-    description: >
+      - "wants"
+      - "tries"
+      - "knows"
+      - "believes"
+      - "decides"
+      - "gives up"
+      - "waits patiently"
+      - "gets confused"
+      - "has patience"
+      - "is happy"
+      - "is confused"
+      - "is smart"
+      - "understands"
+      - "thinks"
+      - "remembers"
+      - "forgets"
+      - "hopes"
+      - "assumes"
+      - "agrees"
+      - "refuses"
+      - "prefers"
+      - "cares"
+      - "worries"
+      - "struggles"
+      - "learns"
+      - "notices"
+      - "realizes"
+      - "realises"
+      - "expects"
+      - "intends"
+      - "plans"
+      - "chooses"
+      - "likes"
+      - "dislikes"
+      - "enjoys"
+      - "hates"
+
+  - id: "abstract-location"
+    tier: "deterministic"
+    check: "substitution"
+    severity: "error"
+    description: >-
       A location or motion verb ("sits", "lives", "resides") standing in
       for a plain classification verb ("is", "belongs to") when the
       subject is abstract, not physical — the same fault as "reach" or
@@ -193,64 +176,236 @@ rules:
       human subject ("the operator sits at the console"). Gated the same
       way as anthropomorphism-fixed-list, and for the same reason: this
       fault is a default of fluent English, not a vocabulary gap — a
-      writer actively avoiding it can still produce it without
-      noticing (see spec Implementation Notes for the incident that
-      surfaced this rule).
+      writer actively avoiding it can still produce it without noticing.
+    lookback_words: 4
+    subject_signal:
+      - "a word from vocabulary/structure.tsv, excluding human referents (e.g. \"user\")"
+      - "it"
+      - "this"
+      - "that"
+    word_list:
+      - "sit"
+      - "sits"
+      - "sitting"
+      - "live"
+      - "lives"
+      - "lived"
+      - "living"
+      - "reside"
+      - "resides"
+      - "resided"
+      - "dwell"
+      - "dwells"
+      - "dwelled"
+      - "stand"
+      - "stands"
+      - "stood"
+      - "lie"
+      - "lies"
+      - "lay"
+      - "rest"
+      - "rests"
+      - "rested"
+      - "hang"
+      - "hangs"
+      - "hung"
+      - "float"
+      - "floats"
+      - "floated"
 
-  - id: anthropomorphism-paraphrase
-    tier: inference-based
-    check: model-judgement
-    severity: warning
-    description: >
+  - id: "anthropomorphism-paraphrase"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
       A paraphrase of the anthropomorphism fault not on the fixed list
       (SPEC §5.1) — needs a model, not a linter.
 
-  - id: vacuous-classification-property
-    tier: inference-based
-    check: model-judgement
-    severity: warning
-    trigger_phrases:
-      - exactly one
-      - at most one
-      - mutually exclusive
-      - collectively exhaustive
-      - no overlap
-      - one and only one
-    description: >
+  - id: "vacuous-classification-property"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
       A cardinality or exclusivity property (SPEC §7) stated near a
-      taxonomy definition ("defines N tiers/kinds/categories/levels") is a
-      fault when the property already follows from the member
+      taxonomy definition ("defines N tiers/kinds/categories/levels") is
+      a fault when the property already follows from the member
       definitions and no mechanism reads it. The trigger phrases are
-      deterministically findable; whether a given instance is load-bearing
-      needs judgement, so this stays inference-based.
+      deterministically findable; whether a given instance is
+      load-bearing needs judgement, so this stays inference-based.
+    trigger_phrases:
+      - "exactly one"
+      - "at most one"
+      - "mutually exclusive"
+      - "collectively exhaustive"
+      - "no overlap"
+      - "one and only one"
 
-  - id: document-type-template
-    tier: inference-based
-    check: model-judgement
-    severity: warning
-    description: >
-      Identify a document's target type (RFC, ADR, Specification,
-      Technical Manual, and similar — SPEC §7.6) before writing it. A
-      type governs structure and required sections beyond Software English's own
-      sentence-level rules. See SPEC Appendix F and templates/ for a
-      by-reference cache of each type's canonical structure — Software English does
-      not redefine these structures itself. Recognising which type a
-      document should follow needs judgement, so this stays
+  - id: "no-unanchored-reference"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      A definite reference ("the design", "the decision", "the plan",
+      "this change", and similar) with no antecedent inside the document
+      (SPEC §7.5) — a reader without the context the writer had cannot
+      resolve it. Not a banned-word entry, because each phrase is
+      correct when the document defines its referent. Whether an
+      antecedent exists needs the whole document, not a lookup, so this
+      stays inference-based.
+
+  - id: "no-process-narration"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      A document about a decision states the decision and the reason for
+      it (SPEC §7.7). It does not narrate how the decision was reached:
+      who asked, what was discussed, how many attempts came before it,
+      or what changed between drafts. Recognising process narration
+      versus a stated fact needs judgement, so this stays
       inference-based.
 
+  - id: "document-type-template"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      Identify a document's target type (RFC, ADR, Design,
+      Specification, Technical Manual, and similar — SPEC §7.8) before
+      writing it. A type governs structure and required sections beyond
+      Software English's own sentence-level rules. See SPEC Appendix F
+      and templates/ for a by-reference cache of each type's canonical
+      structure — Software English does not redefine these structures
+      itself. Tell Design and Reference apart before judging either: a
+      Design document states a design that is chosen and not yet built,
+      so it holds what exists, what is decided, and what is still open,
+      all at once, while a Reference document describes a system that
+      already exists. Decision state separates the neighbouring types:
+      an ADR records one decision already taken, an RFC proposes one for
+      an answer, a Design document holds many, some still open.
+      Recognising which type a document should follow needs judgement,
+      so this stays inference-based.
+
+  - id: "no-planning-content-in-reference"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      A document of Diátaxis type Reference (SPEC §7.9) holds no
+      planning or task-oriented content: no open question, no next step,
+      no statement of who does work or when, no pointer to a plan
+      document, and no statement of the document's own purpose relative
+      to a task in progress. A sentence that states where planning
+      content belongs is itself planning content. Conditional on
+      document type: it fires only after document-type-template assigns
+      the type Reference, because the same content is correct in a plan,
+      an RFC, or an ADR. It never fires on a Design document (SPEC
+      Appendix F, templates/design.md), which holds an open-questions
+      section and a future-extension section as correct content; check
+      the type before reporting any finding under this rule, because a
+      design document typed as Reference by mistake reports one against
+      every entry in both sections. Software English's own addition,
+      reasoned from Diátaxis's 'describe, and only describe' guidance,
+      which names no such category. Recognising planning content needs
+      judgement, so this stays inference-based.
+    applies_to_document_type: "reference"
+
+  - id: "no-metaphor-or-analogy"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      State a fact or a mechanism directly (SPEC §5.5). Do not explain
+      it through a comparison to something else (a metaphor or an
+      analogy, e.g. 'the retry queue is the system's safety net'). No
+      fixed word list applies; recognising a metaphor or an analogy
+      needs judgement, so this stays inference-based.
+
+  - id: "honest-self-qualifier-paraphrase"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      A paraphrase of the self-qualifying 'honest' fault (SPEC §5.6) not
+      on the fixed list (vocabulary/banned.tsv), for example 'if I'm
+      honest, the design needs a rethink'. 'Honest' also names a real,
+      checkable property (an honest mistake, an honest broker) — telling
+      that use apart from the self-qualifier use needs judgement, so
+      this stays inference-based.
+
+  - id: "no-contrastive-framing"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      A sentence states what happens (SPEC §5.7). It does not state what
+      does not happen, what a component cannot do, or how a case differs
+      from one the reader has not asked about, since that answers an
+      objection instead of the question. Marker words ("the one
+      exception", "cannot", "still", "the difference is", "not that",
+      "unlike") are not faults by themselves: "cannot" states a real,
+      load-bearing limit as plainly as any other fact in a reference
+      document. The fault is the sentence's shape, not any one word, so
+      telling a defensive frame apart from a plain stated limit needs
+      judgement.
+
+  - id: "no-out-of-scope-comparand"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      A reader-facing document names only what the reader's task needs
+      (SPEC §7.10). A comparison to another artefact outside that task
+      is a fault even when stated plainly, with no contrastive framing
+      (§5.7), when the reader has no reason to know the other artefact.
+      Distinct from §7.5's no-unanchored-reference: the reference can
+      resolve fine (a working link); the fault is that the reader's task
+      never needed it. Recognising what a reader's task needs, as
+      against what the writer's own working context happened to include,
+      needs judgement, so this stays inference-based.
+
+  - id: "no-entailed-restatement"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      A clause that follows from a fact stated in the same sentence or
+      the one before it, given what the intended reader already knows,
+      adds nothing (SPEC §7.12). Cut it; keep the fact it derives from.
+      Sibling of §7.6, which covers the same fault inside a taxonomy
+      definition specifically; this is the general case. Not this fault:
+      a clause naming a distinct consequence, not a rephrase; a
+      Tutorial-type document (§7.8), where restating a fact for a
+      learner is the genre's purpose. High false-positive risk, since
+      the test rests on a model of reader knowledge: runs at warning
+      severity, never error.
+
+  - id: "no-mechanism-for-outcome"
+    tier: "inference-based"
+    check: "model-judgement"
+    severity: "warning"
+    description: >-
+      A reader-facing sentence states an outcome at the level the reader
+      acts on (SPEC §7.13). It names an implementation unit (a hook, a
+      handler, a count of components) only where the reader's task acts
+      on that unit. Test: change the mechanism and keep the outcome; if
+      the sentence's use to the reader does not change, the mechanism
+      was at the wrong level. Distinct from §7.4's define-before-use: an
+      undefined term is a symptom here, not the fault, and defining it
+      would not fix the sentence.
+
 exemptions:
-  skip_file_marker: "<!-- swe: skip-file -->"
   skip_line_marker: "<!-- swe: ignore -->"
   structural_exclusions:
-    - fenced_code_blocks
-    - indented_code_blocks
-    - inline_code_spans
-    - blockquote_lines
-    - link_targets
-    - bare_urls
-    - html_tags
-    - acronyms
-    - snake_case_or_dotted_or_path_tokens
-    - camel_case_tokens
-    - version_numbers
-    - mid_sentence_capitalised_words
+    - "fenced_code_blocks"
+    - "indented_code_blocks"
+    - "inline_code_spans"
+    - "blockquote_lines"
+    - "link_targets"
+    - "bare_urls"
+    - "html_tags"
+    - "acronyms"
+    - "snake_case_or_dotted_or_path_tokens"
+    - "camel_case_tokens"
+    - "version_numbers"
+    - "mid_sentence_capitalised_words"
