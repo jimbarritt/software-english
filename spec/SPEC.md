@@ -582,12 +582,8 @@ Every deterministic-tier rule has a machine-readable entry under
 the check type (`vocabulary`, `substitution`, `sentence-length`,
 `tense-pattern`, `anthropomorphism`), its severity, and, for a
 pattern-based rule, the regular expression or lookup it runs against.
-
-[`rules/core-rules.toml`](../rules/core-rules.toml) is the catalogue.
-[`rules/core-rules.yaml`](../rules/core-rules.yaml) holds the same rules
-in YAML, written from the TOML by
-[`scripts/generate-rules-yaml.py`](../scripts/generate-rules-yaml.py).
-Edit the TOML, then run that script. CI checks that the two agree.
+[`rules/core-rules.toml`](../rules/core-rules.toml) is the catalogue,
+in the singular: no other file duplicates it.
 
 ### Appendix B. Enforcement and fact preservation
 
