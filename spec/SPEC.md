@@ -652,6 +652,7 @@ last-verified date.
 | RFC | [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119.txt) (requirement keywords); [RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html) (style guide) | [`templates/rfc.md`](../templates/rfc.md) |
 | ADR | Nygard, ["Documenting Architecture Decisions"](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) (2011); [adr.github.io](https://adr.github.io/) | [`templates/adr.md`](../templates/adr.md) |
 | Design | [IEEE Std 1016-2009](https://ieeexplore.ieee.org/document/5167255/) (software design descriptions); Ubl, ["Design Docs at Google"](https://www.industrialempathy.com/posts/design-docs-at-google/) (2020) | [`templates/design.md`](../templates/design.md) |
+| API Design | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) and [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP); [Apache Avro](https://avro.apache.org/docs/current/specification/) and [JSON Schema](https://json-schema.org/specification) (schema notation); [CloudEvents 1.0.2](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md) (event envelope) | [`templates/api-design.md`](../templates/api-design.md) |
 | Specification | [W3C QA Framework: Specification Guidelines](https://www.w3.org/TR/qaframe-spec/); RFC 2119 keywords (above) | [`templates/specification.md`](../templates/specification.md) |
 | Technical Manual | [Google developer documentation style guide](https://developers.google.com/style); [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/); [Diátaxis](https://diataxis.fr/) | [`templates/technical-manual.md`](../templates/technical-manual.md) |
 | Tutorial | [Diátaxis](https://diataxis.fr/tutorials/) | [`templates/tutorial.md`](../templates/tutorial.md) |
@@ -683,6 +684,12 @@ Design is also the one type in this table that §7.9 names directly. A
 design document holds an open question and a future extension as
 correct content, where a Reference document holds neither, so the two
 types must be told apart before §7.9 runs.
+
+API Design is a specialisation of Design: it keeps Design's seven
+sections and adds API-specific content inside "The design." §7.9's
+exemption for Design applies to it unchanged. OpenAPI and AsyncAPI are
+cross-references in its cached reference, a generation target, not the
+document's own structure.
 
 Lab Notebook, Portfolio Journal, and Research Note are each a
 convergent convention: independent sources describe the same practice,
