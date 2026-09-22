@@ -33,4 +33,4 @@ RFC 2119 also notes that these terms hold weight only when capitalised, and that
 
 ## Verify against the source
 
-This file is a cache, current as of 2026-09-12. Check the canonical sources above directly for anything not covered here, and for exact section numbering in the W3C document.
+Check the canonical sources above directly for anything not covered here, and for exact section numbering in the W3C document.

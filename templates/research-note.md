@@ -9,7 +9,7 @@ a short-form report of one finding or one method. No single canonical
 structure or length applies across journals: word limits range from
 1,000-1,500 words at one journal to 10,000 words at another, with
 3,000-6,000 words a common range. Check the target venue's own author
-guidelines before applying this cache.
+guidelines before applying this structure.
 
 ## Required structure
 
@@ -29,6 +29,6 @@ Some journals use a different name for the same function:
 
 ## Verify against the source
 
-This cache reflects the source page as fetched on 2026-09-13. For
-anything not covered here, check the canonical source directly, and
-check the specific target journal or venue's own author guidelines.
+For anything not covered here, check the canonical source directly,
+and check the specific target journal or venue's own author
+guidelines.

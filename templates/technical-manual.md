@@ -78,4 +78,4 @@ out.
 
 ## Verify against the source
 
-This cache is current as of 2026-09-12. For anything not covered here, check the canonical sources directly.
+For anything not covered here, check the canonical sources directly.

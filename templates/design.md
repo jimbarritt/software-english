@@ -63,4 +63,4 @@ An ADR records a single decision after the fact, and a design document holds man
 
 ## Verify against the source
 
-This file is a cache, current as of 2026-09-20. IEEE Std 1016-2009 is a paid standard: the summary above reflects its published scope and abstract, not its full text. Check the canonical sources directly for anything not covered here.
+IEEE Std 1016-2009 is a paid standard: the summary above reflects its published scope and abstract, not its full text. Check the canonical sources directly for anything not covered here.

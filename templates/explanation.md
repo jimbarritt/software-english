@@ -31,4 +31,4 @@ Reference material is information-oriented: it describes the machinery of a syst
 
 ## Verify against the source
 
-This file is a cache, current as of 2026-09-12. Check the canonical sources directly (https://diataxis.fr/explanation/ and https://diataxis.fr/) for anything not covered here, and for any update to the framework's wording.
+Check the canonical sources directly (https://diataxis.fr/explanation/ and https://diataxis.fr/) for anything not covered here, and for any update to the framework's wording.

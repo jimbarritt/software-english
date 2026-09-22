@@ -77,5 +77,5 @@ Source: RFC 2119.
 
 ## Verify against the source
 
-This cache is current as of 2026-09-12. Check the canonical sources directly
-for anything not covered here, or if a detail appears outdated.
+Check the canonical sources directly for anything not covered here, or
+if a detail appears outdated.

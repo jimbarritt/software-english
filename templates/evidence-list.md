@@ -34,5 +34,4 @@ Per outcome, the table states:
 
 ## Verify against the source
 
-This cache reflects the source page as fetched on 2026-09-13. For
-anything not covered here, check the canonical source directly.
+For anything not covered here, check the canonical source directly.

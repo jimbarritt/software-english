@@ -45,4 +45,4 @@ A reference document is information-oriented: it describes what something is, st
 
 ## Verify against the source
 
-This file is a cache, current as of 2026-09-12. Check the canonical sources directly (https://diataxis.fr/reference/ and https://diataxis.fr/) for anything not covered here, and for any update to the framework's wording.
+Check the canonical sources directly (https://diataxis.fr/reference/ and https://diataxis.fr/) for anything not covered here, and for any update to the framework's wording.

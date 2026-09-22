@@ -32,4 +32,4 @@ Other ADR templates exist beyond Nygard's original. One example is MADR (Markdow
 
 ## Verify against the source
 
-This cache reflects the source pages as fetched on 2026-09-12. For anything not covered here, check the canonical sources directly.
+For anything not covered here, check the canonical sources directly.

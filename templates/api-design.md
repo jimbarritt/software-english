@@ -171,7 +171,6 @@ one example request and response, or one example message value.
 
 ## Verify against the source
 
-This file is a cache, current as of 2026-09-22. Check the canonical
-sources directly for anything not covered here, RFC 9110 and RFC 9112
-in particular: both define more header and status semantics than this
-cache states.
+Check the canonical sources directly for anything not covered here,
+RFC 9110 and RFC 9112 in particular: both define more header and
+status semantics than this file states.

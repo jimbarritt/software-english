@@ -642,10 +642,9 @@ ASD-STE100.
 By reference only: Software English does not redefine any of these structures. Each
 row links to the canonical source and to a local cached reference file,
 [`templates/`](../templates/), holding a fuller structure summary than
-this table, so a reader or an agent can use the shape without fetching
+this table, so a reader or an agent can use the shape without reading
 the canonical source first. Verify against the canonical source before
-relying on a detail the cache omits; each cached file states its own
-last-verified date.
+relying on a detail the cache omits.
 
 | Type | Canonical source | Cached reference |
 |---|---|---|

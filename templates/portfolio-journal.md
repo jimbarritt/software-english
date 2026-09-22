@@ -36,5 +36,4 @@ Each entry records one accomplishment in four parts, in this order:
 
 ## Verify against the source
 
-This cache reflects the source pages as fetched on 2026-09-13. For
-anything not covered here, check the canonical sources directly.
+For anything not covered here, check the canonical sources directly.
