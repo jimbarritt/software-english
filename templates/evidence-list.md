@@ -2,8 +2,6 @@
 
 ## Canonical sources
 
-This file is a cache. It does not replace the canonical source.
-
 - Cochrane Handbook, Chapter 14, "Completing 'Summary of findings' tables and grading the certainty of the evidence": https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-14
 
 Cochrane and GRADE jointly define one table structure for evidence

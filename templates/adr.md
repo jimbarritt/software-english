@@ -2,8 +2,6 @@
 
 ## Canonical sources
 
-This file is a cache. It does not replace the canonical sources.
-
 - Original format: Michael Nygard, "Documenting Architecture Decisions" (2011): https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 - Community reference and template catalogue: https://adr.github.io/
 

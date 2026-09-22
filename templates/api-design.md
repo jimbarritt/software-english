@@ -2,8 +2,6 @@
 
 ## Canonical sources
 
-This file is a cache. It does not replace the canonical sources.
-
 - Parent type: [Design](design.md), by IEEE Std 1016-2009 and Ubl,
   "Design Docs at Google" (2020).
 - HTTP semantics: RFC 9110, `HTTP Semantics` (IETF, June 2022, STD 97):

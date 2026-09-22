@@ -2,8 +2,6 @@
 
 ## Canonical sources
 
-This file is a cache. It does not replace the canonical sources.
-
 - Janz, T. (1982), "Initial comparisons of patterned behavior-based interviews versus unstructured interviews," Journal of Applied Psychology, 67(5), 577-580: https://psycnet.apa.org/record/1989-98087-011
 - Julia Evans, "Get your work recognized: write a brag document" (2019): https://jvns.ca/blog/brag-documents/
 

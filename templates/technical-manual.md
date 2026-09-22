@@ -8,8 +8,6 @@ A technical manual describes how a system works, for a human or agent audience. 
 - Microsoft Writing Style Guide: https://learn.microsoft.com/en-us/style-guide/
 - Diátaxis framework: https://diataxis.fr/
 
-This file is a cache. It does not replace these sources.
-
 ## Structural conventions
 
 ### Headings: task-based vs conceptual

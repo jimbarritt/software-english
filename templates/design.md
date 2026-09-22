@@ -2,8 +2,6 @@
 
 ## Canonical sources
 
-This file is a cache. It does not replace the canonical sources.
-
 - Formal standard: IEEE Std 1016-2009, `IEEE Standard for Information Technology—Systems Design—Software Design Descriptions`: https://ieeexplore.ieee.org/document/5167255/
 - Industry convention: Malte Ubl, "Design Docs at Google" (2020): https://www.industrialempathy.com/posts/design-docs-at-google/
 

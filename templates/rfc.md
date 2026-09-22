@@ -5,9 +5,6 @@
 - Requirement keyword definitions: https://www.rfc-editor.org/rfc/rfc2119.txt
 - Structural and editorial conventions: https://www.rfc-editor.org/rfc/rfc7322.html
 
-This file is a cache. It does not replace the canonical sources. Check the
-canonical source directly for anything not covered here.
-
 ## Required structure
 
 Source: RFC 7322, the RFC Style Guide.

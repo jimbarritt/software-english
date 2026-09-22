@@ -2,8 +2,6 @@
 
 ## Canonical sources
 
-This file is a cache. It does not replace the canonical sources.
-
 - Colin Purrington, "Maintaining a laboratory notebook": https://colinpurrington.com/tips/lab-notebooks/
 - Rice University lab notebook guidelines: http://www.owlnet.rice.edu/~bios311/bios311/nbguidelines.html
 - Bellevue College Lab Notebook Guidelines (PDF): https://www.bellevuecollege.edu/wp-content/uploads/sites/140/2014/06/Lab-Notebook-Guidelines.pdf

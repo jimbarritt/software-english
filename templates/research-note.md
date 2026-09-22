@@ -2,8 +2,6 @@
 
 ## Canonical sources
 
-This file is a cache. It does not replace the canonical sources.
-
 - Resul Umit, survey of political science journals' research-note policies: https://resulumit.com/blog/polisci-research-notes/
 
 A research note is a real, named genre, used across many journals for
