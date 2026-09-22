@@ -35,6 +35,7 @@ prose instead. Not yet built.
 | [`docs/agent-guide.md`](docs/agent-guide.md) | entry point for an AI agent: what to do with this repository |
 | [`docs/claude-md-ruleset.md`](docs/claude-md-ruleset.md) | compact, copy-pasteable ruleset for a project's `CLAUDE.md` |
 | [`docs/adr/`](docs/adr/) | architecture decision records for the specification itself |
+| [`docs/kb/`](docs/kb/) | research notes backing a spec or template decision |
 | [`vocabulary/`](vocabulary/) | the approved word list (closed vocabulary) |
 | [`rules/core-rules.toml`](rules/core-rules.toml) | machine-readable rule catalogue for linter consumption |
 | [`templates/`](templates/) | cached structure summaries for named document types (RFC, ADR, Specification, Technical Manual, and Diátaxis's four types), each linked to its canonical source |
