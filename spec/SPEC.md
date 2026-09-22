@@ -640,13 +640,13 @@ ASD-STE100.
 ### Appendix F. Document type templates
 
 By reference only: Software English does not redefine any of these structures. Each
-row links to the canonical source and to a local cached reference file,
+row links to the canonical source and to a local reference file,
 [`templates/`](../templates/), holding a fuller structure summary than
 this table, so a reader or an agent can use the shape without reading
 the canonical source first. Verify against the canonical source before
-relying on a detail the cache omits.
+relying on a detail the local reference omits.
 
-| Type | Canonical source | Cached reference |
+| Type | Canonical source | Local reference |
 |---|---|---|
 | RFC | [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119.txt) (requirement keywords); [RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html) (style guide) | [`templates/rfc.md`](../templates/rfc.md) |
 | ADR | Nygard, ["Documenting Architecture Decisions"](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) (2011); [adr.github.io](https://adr.github.io/) | [`templates/adr.md`](../templates/adr.md) |
@@ -667,7 +667,7 @@ The last four rows above the Lab Notebook row are
 [Diátaxis](https://diataxis.fr/)'s own four documentation types, a
 system distinct from RFC, ADR, and Specification, distinguishing document
 purpose (why a document exists) rather than document format (what
-sections it has). A Technical Manual, per its own cached reference above,
+sections it has). A Technical Manual, per its own local reference above,
 maps onto Reference and Explanation content, not Tutorial or How-to guide
 content.
 
@@ -687,12 +687,12 @@ types must be told apart before §7.9 runs.
 API Design is a specialisation of Design: it keeps Design's seven
 sections and adds API-specific content inside "The design." §7.9's
 exemption for Design applies to it unchanged. OpenAPI and AsyncAPI are
-cross-references in its cached reference, a generation target, not the
+cross-references in its local reference, a generation target, not the
 document's own structure.
 
 Lab Notebook, Portfolio Journal, and Research Note are each a
 convergent convention: independent sources describe the same practice,
 with local variation, rather than one body defining a single formal
 standard. Evidence List is one joint standard, set by Cochrane and
-GRADE together. Each cached reference states this distinction for its own
+GRADE together. Each local reference states this distinction for its own
 type.

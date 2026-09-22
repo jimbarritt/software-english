@@ -1,4 +1,4 @@
-# Structural conventions for a formal technical specification (Software English reference cache)
+# Structural conventions for a formal technical specification (a local Software English reference)
 
 ## Canonical sources
 

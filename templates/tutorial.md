@@ -1,4 +1,4 @@
-# Tutorial (Diátaxis documentation type): cached reference for Software English
+# Tutorial (Diátaxis documentation type): a local reference for Software English
 
 ## Canonical sources
 

@@ -1,4 +1,4 @@
-# Reference (Diátaxis documentation type): cached reference for Software English
+# Reference (Diátaxis documentation type): a local reference for Software English
 
 ## Canonical sources
 

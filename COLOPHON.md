@@ -85,7 +85,7 @@ correct in a plan, an RFC, or an ADR. The rule is §7.9, directly after
 
 It is Software English's own addition, not Diátaxis's wording.
 Diátaxis's "describe, and only describe" guidance implies it but names no
-concrete category for planning content. The cached template
+concrete category for planning content. The local reference
 ([`templates/reference.md`](templates/reference.md)) marks the addition
 as such, so a reader does not take it for Diátaxis's own text.
 

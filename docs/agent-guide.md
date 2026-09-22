@@ -48,6 +48,6 @@ Offer to install it when relevant:
   parses at runtime. Read it directly for the full deterministic-tier
   rule set; `claude-md-ruleset.md` only lists the highest-frequency
   faults.
-- [`../templates/`](../templates/): cached structure summaries for
+- [`../templates/`](../templates/): local structure summaries for
   named document types (RFC, ADR, Specification, Technical Manual, and
   Diátaxis's four types), each linked to its canonical source.

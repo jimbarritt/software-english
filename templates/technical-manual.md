@@ -1,4 +1,4 @@
-# Technical manual structure: a cached reference for Software English
+# Technical manual structure: a local reference for Software English
 
 A technical manual describes how a system works, for a human or agent audience. This file lists the structural conventions that apply to that document type.
 
@@ -66,7 +66,7 @@ serves: [Tutorial](../templates/tutorial.md) (learning),
 [How-to guide](../templates/how-to-guide.md) (goal),
 [Reference](../templates/reference.md) (information), and
 [Explanation](../templates/explanation.md) (understanding). See each
-file for its full cached definition.
+file for its full definition.
 
 A technical manual that describes how a system works is reference and
 explanation content. It states facts about the system's parts and

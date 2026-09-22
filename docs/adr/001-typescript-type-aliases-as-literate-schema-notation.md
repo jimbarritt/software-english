@@ -93,6 +93,6 @@ schema in the appendix is where a constraint is enforced.
 
 The rules here (the `type` keyword only, a trailing comment for a
 constraint) are Software English's own convention, not a rule of any
-external standard. They belong in the API Design type's cached
+external standard. They belong in the API Design type's local
 reference file when that type is added to Appendix F of the
 specification.

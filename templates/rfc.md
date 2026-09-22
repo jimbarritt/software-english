@@ -1,4 +1,4 @@
-# RFC structure reference (cache for Software English)
+# RFC structure reference (for Software English)
 
 ## Canonical sources
 

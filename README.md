@@ -38,7 +38,7 @@ prose instead. Not yet built.
 | [`docs/kb/`](docs/kb/) | research notes backing a spec or template decision |
 | [`vocabulary/`](vocabulary/) | the approved word list (closed vocabulary) |
 | [`rules/core-rules.toml`](rules/core-rules.toml) | machine-readable rule catalogue for linter consumption |
-| [`templates/`](templates/) | cached structure summaries for named document types (RFC, ADR, Specification, Technical Manual, and Diátaxis's four types), each linked to its canonical source |
+| [`templates/`](templates/) | local structure summaries for named document types (RFC, ADR, Specification, Technical Manual, and Diátaxis's four types), each linked to its canonical source |
 | [`LICENSE`](./LICENSE) | Apache-2.0 |
 | [`NOTICE`](./NOTICE) | origin and independence statement |
 | [`COLOPHON.md`](COLOPHON.md) | format and tooling notes |

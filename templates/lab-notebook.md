@@ -1,4 +1,4 @@
-# Lab Notebook structure: a local reference cache for Software English
+# Lab Notebook structure: a local reference for Software English
 
 ## Canonical sources
 

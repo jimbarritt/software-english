@@ -1,4 +1,4 @@
-# How-to guide (Diátaxis documentation type): cached reference for Software English
+# How-to guide (Diátaxis documentation type): a local reference for Software English
 
 ## Canonical sources
 

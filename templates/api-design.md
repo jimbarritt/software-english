@@ -1,4 +1,4 @@
-# API Design document structure: a local reference cache for Software English
+# API Design document structure: a local reference for Software English
 
 ## Canonical sources
 

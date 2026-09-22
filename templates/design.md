@@ -1,4 +1,4 @@
-# Design document structure: a local reference cache for Software English
+# Design document structure: a local reference for Software English
 
 ## Canonical sources
 

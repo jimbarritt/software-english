@@ -1,4 +1,4 @@
-# Evidence List structure: a local reference cache for Software English
+# Evidence List structure: a local reference for Software English
 
 ## Canonical sources
 
