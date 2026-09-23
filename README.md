@@ -27,6 +27,26 @@ and an AI agent's conversational replies.
 Primary reader: a human. A future "profile" may target agent-to-agent
 prose instead. Not yet built.
 
+## Document types
+
+Software English also defines document types, on top of its
+sentence-level rules. A type governs a document's required structure.
+A Design document, for example, may hold an open-questions section
+and a future-extension section. A Reference document may not.
+
+Fourteen types exist today:
+
+- RFC, ADR, Design, API Design, Specification, Technical Manual
+- Diátaxis's four types: Tutorial, How-to guide, Reference, Explanation
+- Lab Notebook, Portfolio Journal, Research Note, Evidence List
+
+Software English draws on and references canonical examples of these
+document types. `templates/` holds a local summary of each type's
+structure.
+
+See [`spec/SPEC.md`](spec/SPEC.md) Appendix F for the full list, each
+type's canonical source, and its local reference file.
+
 ## Structure
 
 | Path | Contents |
