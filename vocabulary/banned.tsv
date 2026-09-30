@@ -206,3 +206,10 @@ ferry	send, or copy
 ferries	sends, or copies
 ferried	sent, or copied
 ferrying	sending, or copying
+# Motion idiom: the subject is inside the fixed phrase, so no subject check is needed. State the effect.
+where this leaves	name the effect: what this means for
+where that leaves	name the effect: what that means for
+where does this leave	name the effect: what does this mean for
+where does that leave	name the effect: what does that mean for
+as they come	as they arrive, or name the trigger: when one is added
+as it comes	as it arrives, or name the trigger: when it is added

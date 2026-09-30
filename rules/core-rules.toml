@@ -95,7 +95,7 @@ word_list = [
   "stand", "stands", "stood", "lie", "lies", "lay", "rest", "rests",
   "rested", "hang", "hangs", "hung", "float", "floats", "floated",
 ]
-description = 'A location or motion verb ("sits", "lives", "resides") standing in for a plain classification verb ("is", "belongs to") when the subject is abstract, not physical — the same fault as "reach" or "carry" in banned.tsv, but not blockable as a flat banned word, because each of these verbs is correct English for a physical or human subject ("the operator sits at the console"). Gated the same way as anthropomorphism-fixed-list, and for the same reason: this fault is a default of fluent English, not a vocabulary gap — a writer actively avoiding it can still produce it without noticing.'
+description = 'A location or motion verb ("sits", "lives", "resides") standing in for a plain classification verb ("is", "belongs to") when the subject is abstract, not physical — the same fault as "reach" or "carry" in banned.tsv, but not blockable as a flat banned word, because each of these verbs is correct English for a physical or human subject ("the operator sits at the console"). Gated the same way as anthropomorphism-fixed-list, and for the same reason: this fault is a default of fluent English, not a vocabulary gap — a writer actively avoiding it can still produce it without noticing. A motion verb with the same fault that also names a literal operation on a structure noun ("does not move", "pass over", "goes past") is not on this list, because the subject gate cannot tell "the schema does not move" from "the file does not move". no-metaphor-or-analogy covers it at the inference tier.'
 
 [[rules]]
 id = "anthropomorphism-paraphrase"
@@ -149,7 +149,7 @@ id = "no-metaphor-or-analogy"
 tier = "inference-based"
 check = "model-judgement"
 severity = "warning"
-description = "State a fact or a mechanism directly (SPEC §5.5). Do not explain it through a comparison to something else (a metaphor or an analogy, e.g. 'the retry queue is the system's safety net'). A formulaic transport metaphor on the fixed list (vocabulary/banned.tsv, for example 'rides on', 'piggyback', 'travels') is caught by banned-word. A metaphor or an analogy not on that list needs judgement to recognise, so this stays inference-based."
+description = "State a fact or a mechanism directly (SPEC §5.5). Do not explain it through a comparison to something else (a metaphor or an analogy, e.g. 'the retry queue is the system's safety net'). A formulaic transport metaphor or motion idiom on the fixed list (vocabulary/banned.tsv, for example 'rides on', 'piggyback', 'travels', 'where this leaves', 'as they come') is caught by banned-word. Also watch for an abstract subject (a decision, a contract, a schema, a design, a reader's attention) given a verb of physical motion or position: 'the published schema does not move' (does not change), 'the notice should not go past a reader' (a reader should not miss the notice), 'reject the option rather than pass over it' (omit it), 'renamed behind the serialiser' (renamed without changing the response), 'the design comes from the reference implementation' (is specified in). Each of these verbs is also correct for a literal operation on a structure noun ('the file does not move', 'a second pass over the input', 'the service runs behind the proxy'), so only judgement can tell the two apart. A metaphor or an analogy not on the fixed list needs judgement to recognise, so this stays inference-based."
 
 [[rules]]
 id = "honest-self-qualifier-paraphrase"

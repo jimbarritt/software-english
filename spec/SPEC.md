@@ -227,6 +227,12 @@ without noticing. It cannot go in the flat banned-word list (§6) because,
 unlike `reach` or `leverage`, these verbs have a correct use: only the
 subject decides.
 
+A motion verb with the same fault that also names a literal operation
+on a structure noun (`does not move`, `pass over`, `goes past`) is not
+on this rule's list: the subject check cannot tell `the schema does
+not move` from `the file does not move`. §5.5 covers it at the
+inference tier, and lists the motion idioms that need no subject check.
+
 ### 5.3 No unstated commentary (Inference-based)
 
 State facts. Do not add an editorial judgement, a guess at how someone
@@ -259,9 +265,23 @@ by itself:
 State the mechanism instead: the event includes it, the topic
 publishes it, the service sends it.
 
+Deterministic-tier fixed list (in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv)): a formulaic
+motion idiom, where the subject is inside the fixed phrase, so no
+subject check is needed:
+`where this leaves, where that leaves, where does this leave, where does that leave, as they come, as it comes`.
+State the effect instead: what this means for the retry policy, add
+more here, handle each event when it arrives.
+
 Inference-based tier: a metaphor or an analogy not on the fixed list
 (for example, `the retry queue is the system's safety net`) needs
-model judgement to recognise.
+model judgement to recognise. This includes a verb of physical motion
+or position given an abstract subject: `the published schema does not
+move` (does not change), `the field can be renamed behind the
+serialiser` (renamed without changing the response). These verbs are
+not on a fixed list, because each also names a literal operation on a
+structure noun: `the file does not move`, `a second pass over the
+input`, `the service runs behind the proxy`.
 
 ### 5.6 No self-qualifying "honest" (mixed)
 
