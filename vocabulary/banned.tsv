@@ -10,11 +10,15 @@ surface	show, return, or report
 surfaces	shows, returns, or reports
 land	arrive, or be saved
 lands	arrives, or is saved
+landed	arrived, or was saved
 carry	hold, contain, or include
 carries	holds, contains, or includes
+carried across	sent, copied, or included
 drive	run, call, or start
 drives	runs, calls, or starts
 flow	name the step
+flows through	name the step
+flowed through	name the step
 hit	call, reach a limit, or fail
 leverage	use
 leverages	uses
@@ -182,3 +186,23 @@ honestly speaking	CUT
 # Structural metaphor
 load bearing	name what depends on it
 load-bearing	name what depends on it
+# Transport metaphor: data, a message, or an event does not travel. Name the mechanism.
+ride on	name the mechanism: the event includes it, the topic publishes it, the service sends it
+rides on	name the mechanism: the event includes it, the topic publishes it, the service sends it
+riding on	name the mechanism: the event includes it, the topic publishes it, the service sends it
+rode on	name the mechanism: the event includes it, the topic publishes it, the service sends it
+travels	name the action: is sent, is published, is received
+travelled	name the action: was sent, was published, was received
+travelling	name the action: sent, published, received
+piggyback	name the mechanism: included in, sent with
+piggybacks	name the mechanism: included in, sent with
+piggybacked	name the mechanism: included in, sent with
+piggybacking	name the mechanism: included in, sent with
+hitch a ride	name the mechanism: included in, sent with
+hitches a ride	name the mechanism: included in, sent with
+hitching a ride	name the mechanism: included in, sent with
+along for the ride	name the mechanism: included in, sent with
+ferry	send, or copy
+ferries	sends, or copies
+ferried	sent, or copied
+ferrying	sending, or copying

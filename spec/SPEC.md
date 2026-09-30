@@ -26,7 +26,7 @@ not exhaustive.
   - [5.2 No location or motion verb for an abstract subject](#52-no-location-or-motion-verb-for-an-abstract-subject-deterministic)
   - [5.3 No unstated commentary](#53-no-unstated-commentary-inference-based)
   - [5.4 No hedging where a plain statement is true](#54-no-hedging-where-a-plain-statement-is-true-inference-based)
-  - [5.5 No metaphor or analogy](#55-no-metaphor-or-analogy-inference-based)
+  - [5.5 No metaphor or analogy](#55-no-metaphor-or-analogy-mixed)
   - [5.6 No self-qualifying "honest"](#56-no-self-qualifying-honest-mixed)
   - [5.7 No contrastive framing](#57-no-contrastive-framing-inference-based)
 - [6. Vocabulary rules](#6-vocabulary-rules-deterministic)
@@ -238,7 +238,7 @@ asked for an opinion.
 Cut a qualifier that adds no information (`essentially`, `basically`,
 `in general`, `it's worth noting that`).
 
-### 5.5 No metaphor or analogy (Inference-based)
+### 5.5 No metaphor or analogy (mixed)
 
 State a fact or a mechanism directly. Do not explain it through a
 comparison to something else:
@@ -251,8 +251,17 @@ State the mechanism instead:
 > The retry queue holds a failed request for a later attempt.
 > The cache holds a copy of data for a later request.
 
-Recognising a metaphor or an analogy needs judgement; no fixed word
-list applies.
+Deterministic-tier fixed list (in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv)): a formulaic
+transport metaphor, where data, a message, or an event is said to move
+by itself:
+`ride on, rides on, riding on, rode on, travels, travelled, travelling, piggyback, hitch a ride, along for the ride, ferry, carried across, flows through, landed`.
+State the mechanism instead: the event includes it, the topic
+publishes it, the service sends it.
+
+Inference-based tier: a metaphor or an analogy not on the fixed list
+(for example, `the retry queue is the system's safety net`) needs
+model judgement to recognise.
 
 ### 5.6 No self-qualifying "honest" (mixed)
 

@@ -149,7 +149,7 @@ id = "no-metaphor-or-analogy"
 tier = "inference-based"
 check = "model-judgement"
 severity = "warning"
-description = "State a fact or a mechanism directly (SPEC §5.5). Do not explain it through a comparison to something else (a metaphor or an analogy, e.g. 'the retry queue is the system's safety net'). No fixed word list applies; recognising a metaphor or an analogy needs judgement, so this stays inference-based."
+description = "State a fact or a mechanism directly (SPEC §5.5). Do not explain it through a comparison to something else (a metaphor or an analogy, e.g. 'the retry queue is the system's safety net'). A formulaic transport metaphor on the fixed list (vocabulary/banned.tsv, for example 'rides on', 'piggyback', 'travels') is caught by banned-word. A metaphor or an analogy not on that list needs judgement to recognise, so this stays inference-based."
 
 [[rules]]
 id = "honest-self-qualifier-paraphrase"
