@@ -283,6 +283,20 @@ not on a fixed list, because each also names a literal operation on a
 structure noun: `the file does not move`, `a second pass over the
 input`, `the service runs behind the proxy`.
 
+The inference-based tier also includes a container-and-form noun
+(`shape`, `layer`, `space`) applied to a schema, a type, an API, or a
+contract in place of the fields, values, or operations it defines: `a
+version fixed now would name a shape the schema does not hold` (would
+refer to fields the schema does not contain), `the contract is a thin
+layer over the table` (has the same fields as the table), `the type
+leaves no space for a null` (does not accept a null). The noun
+`surface` (`the API surface`) is on the fixed list with the verb, so
+banned-word catches it. These nouns are not on a fixed list, because
+each also has a literal use: `the schema holds a version field`, `the
+error shape as a type` where the type lists the fields, `the network
+layer`, `disk space`. A schema that holds a field is literal; the fault
+is the form noun standing in for the fields, not the verb `hold`.
+
 ### 5.6 No self-qualifying "honest" (mixed)
 
 "Honest" and its forms name a real, checkable property: an honest
