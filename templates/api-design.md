@@ -163,8 +163,10 @@ own syntax.
 Every rule that applies to a Design document applies to an API Design
 document unchanged, including the rules stated in
 [`templates/design.md`](design.md): the open-questions and
-future-extension sections are correct content, and §7.7 still forbids
-narrating how a decision was reached.
+future-extension sections are correct content, §7.7 still forbids
+narrating how a decision was reached, and §7.14 still forbids a
+work-breakdown sentence and an issue-tracker id used as the pointer to
+later work.
 
 Section 3's style rule: every endpoint and every topic shows at least
 one example request and response, or one example message value.

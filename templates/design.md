@@ -43,12 +43,12 @@ This section is Software English's own rule, not IEEE 1016's wording and not the
 
 A design document may hold:
 
-- **An open-questions section.** Each entry names one unresolved question the design does not settle. §7.9 excludes such content from a Reference document. A design document holds it, because a reader needs to know what is unsettled before relying on the rest.
-- **A future-extension section.** A capability the design permits and the current work does not build. Its purpose is forward-looking, so a reader can tell a deliberate extension point from an omission.
+- **An open-questions section.** Each entry names one unresolved question the design does not settle. §7.9 excludes such content from a Reference document. A design document contains it, because a reader needs to know what is unsettled before relying on the rest.
+- **A future-extension section.** A capability the design permits and does not build. Its purpose is forward-looking, so a reader can tell a deliberate extension point from an omission. It names no later piece of work and no issue-tracker id ([§7.14](../spec/SPEC.md)).
 
 Every other rule that applies to a reference document applies to a design document unchanged. The sentence-level rules in SPEC §3 to §6 apply in full. [§7.7](../spec/SPEC.md) still forbids narrating how a decision was reached. A design document states each decision and the reason for it. It does not record who argued for what, or how many drafts came before.
 
-[§7.9](../spec/SPEC.md), which forbids planning content, applies to a document whose type is Reference. It does not apply to a design document. Assigning the type Reference to a design document produces a finding against every entry in both sections above, which is why the type exists in its own right.
+[§7.9](../spec/SPEC.md) forbids planning content in a document whose type is Reference. Its design exemption covers the two sections above only. Assigning the type Reference to a design document produces a finding against every entry in both. That is why the type exists in its own right. [§7.14](../spec/SPEC.md) still applies to a design document. It forbids dividing the design into units of work, and pointing to later work by an issue-tracker id.
 
 ## How this differs from the neighbouring types
 

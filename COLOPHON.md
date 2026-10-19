@@ -100,3 +100,33 @@ history; an unanchored reference is a missing antecedent. Planning
 content can be fully anchored and narrate nothing (a pointer to a plan
 at a stated path) and still fail this rule, because a reference
 document describes and does nothing else.
+
+## Work breakdown and tracker pointers: an unconditional sibling of §7.9
+
+The rule `no-work-breakdown-or-tracker-pointer` (SPEC §7.14) covers two
+of the faults §7.9 names for a Reference document: a sentence that
+divides the subject into units of work, and an issue-tracker id used as
+the pointer to later work. It extends both to every document type,
+Design and API Design included.
+
+`no-planning-content-in-reference` is conditional on document type,
+because most of what it forbids is correct content in a plan, an RFC,
+or an ADR. The two narrower faults §7.14 covers are not: a work
+breakdown is a scheduling choice, not a fact about the subject, in any
+document type, and a tracker id stops resolving for a later reader
+wherever it appears. §7.14 therefore has no `applies_to_document_type`
+key and takes precedence over §7.9 where both would otherwise match the
+same sentence in a Reference document.
+
+§7.14 sits at the end of SPEC §7, after §7.13, rather than beside
+§7.9. Every rule in §7 before it is cross-referenced from the TOML
+catalogue and from `SPEC.md`'s own Contents list by number; inserting
+it as "§7.9a" or renumbering §7.10 onward would break both, for a rule
+that is a sibling of §7.9 in concern only, not in its conditioning.
+
+A design document's open-questions and future-extension sections stay
+exempt from §7.14, for the same reason §7.9 exempts them: a design
+document names what is still unsettled or what a future capability
+would add, with no unit of work and no tracker id attached. An entry
+that does name one is a §7.14 finding regardless of the section it
+sits in.

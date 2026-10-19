@@ -39,6 +39,8 @@ A reference document holds no planning or task-oriented content. This excludes:
 
 A sentence that states where planning content belongs is itself planning content, even when it points away from the document. Put such content in the plan document, or delete it.
 
+A work-breakdown sentence and an issue-tracker id as the pointer to later work have their own rule too. [SPEC §7.14](../spec/SPEC.md) applies it to every document type.
+
 ## How this differs from explanation
 
 A reference document is information-oriented: it describes what something is, states the facts of a system accurately and completely, and serves a user who needs to check a detail while working. An explanation is understanding-oriented: it addresses why something is the way it is, giving background, context, and reasoning, and serves a reader seeking deeper understanding of a topic, not one looking up a fact or completing a task. Reference states; explanation clarifies.

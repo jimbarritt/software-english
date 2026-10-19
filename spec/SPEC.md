@@ -51,6 +51,7 @@ not exhaustive.
   - [7.11 Completion marker](#711-completion-marker-deterministic)
   - [7.12 No entailed restatement](#712-no-entailed-restatement-inference-based)
   - [7.13 No mechanism for outcome](#713-no-mechanism-for-outcome-inference-based)
+  - [7.14 No work breakdown or issue-tracker pointer](#714-no-work-breakdown-or-issue-tracker-pointer-inference-based)
 - [Appendices](#appendices)
   - [Appendix A. Machine-readable rule catalogue](#appendix-a-machine-readable-rule-catalogue)
   - [Appendix B. Enforcement and fact preservation](#appendix-b-enforcement-and-fact-preservation)
@@ -643,9 +644,10 @@ one's canonical source.
 This rule is conditional on document type. It applies only to a document
 whose type under §7.8 is Reference, the Diátaxis type listed in
 [Appendix F](#appendix-f-document-type-templates). The other rules in §7
-apply to every document.
+apply to every document, §7.14 included. Where §7.14 and this rule both
+match one sentence in a Reference document, report it under §7.14 only.
 
-A reference document describes. It holds no planning or task-oriented
+A reference document describes. It contains no planning or task-oriented
 content:
 
 - no open question;
@@ -670,14 +672,17 @@ content. See [`templates/reference.md`](../templates/reference.md).
 
 A Design document is not a Reference document, and this rule does not
 apply to it. A design document states a design that is chosen and not
-yet built, so it holds what exists, what is decided, and what is still
-open, all at once. It may hold an open-questions section and a
-future-extension section, and both are correct content there. Every
-other rule in §7 applies to it unchanged, §7.7 included: a design
-document states each decision and the reason for it, and does not
-narrate how the decision was reached. Assigning the type Reference to a
-design document produces a finding against every entry in either
-section, so assign the type first. See
+yet built, so it contains what exists, what is decided, and what is still
+open, all at once. It may contain an open-questions section and a
+future-extension section, and both are correct content there. The
+exemption covers those two sections' content only: §7.14 still applies
+to a design document, and a design document does not divide its
+subject into units of work, or point to later work by an
+issue-tracker id. Every other rule in §7 applies to it unchanged,
+§7.7 and §7.14 included: a design document states each decision and the
+reason for it, and does not narrate how the decision was reached.
+Assigning the type Reference to a design document produces a finding
+against every entry in either section, so assign the type first. See
 [`templates/design.md`](../templates/design.md).
 
 ### 7.10 No out-of-scope comparand (Inference-based)
@@ -774,6 +779,52 @@ Distinct from §7.4's define-before-use: an undefined term like `hooks`
 is a symptom here, not the fault. Defining it would make the sentence
 longer without fixing what is wrong: the mechanism does not belong in
 this reader's sentence at all, defined or not.
+
+### 7.14 No work breakdown or issue-tracker pointer (Inference-based)
+
+This rule applies to every document type, Design and API Design
+included. It names two faults.
+
+A work-breakdown sentence divides the subject into units of work:
+what this piece of work covers, and what a later piece covers. A unit
+of work is a change, a phase, a ticket, a milestone, or a follow-up.
+The division is a scheduling choice. It states no fact about the
+subject.
+
+An issue-tracker pointer is an issue or pull-request id (`PROJ-142`,
+`#42`, `repo#slug`) used as the pointer to work the document does not
+itself state. The id names no fact inside the document, and it stops
+resolving once the tracker is migrated, renamed, or closed.
+
+Fault: a paragraph in a design document:
+`This piece of work covers the read path. The write path follows in a later piece of work, tracked in PROJ-142.`
+Fix: state the boundary as a fact of the design. List `The write path`
+under non-goals, or state it under future extensions as a capability
+the design permits:
+`A write path: the order store accepts writes through the same schema.`
+
+Test: remove the unit of work and the id. Keep any fact about the
+subject that remains. Delete the sentence if none remains.
+
+Two exceptions:
+
+- An entry in a section headed References, Normative References,
+  Informative References, or Bibliography may cite an issue or a pull
+  request by its id and its title, as a source.
+- A Lab Notebook entry names the task it belongs to, and a Portfolio
+  Journal entry records work already done. Neither points to later
+  work, so neither is this fault.
+
+§7.9 forbids all planning content, in a Reference document only. It
+exempts a design document's open questions and future extensions.
+This rule names fewer faults and applies to every type: an open
+question or a future extension that names no unit of work and no id
+is not this fault.
+
+This rule is Software English's own addition. Distinct from §7.5's
+no-unanchored-reference: the id can resolve and still be this fault.
+Telling a unit of work apart from a part of the subject needs
+judgement, so this stays inference-based.
 
 ## Appendices
 
@@ -885,13 +936,15 @@ concerns. A design document may follow either.
 Design is also the one type in this table that §7.9 names directly. A
 design document holds an open question and a future extension as
 correct content, where a Reference document holds neither, so the two
-types must be told apart before §7.9 runs.
+types must be told apart before §7.9 runs. §7.9's exemption covers open
+questions and future extensions only; §7.14 applies to Design as to
+every type.
 
 API Design is a specialisation of Design: it keeps Design's seven
 sections and adds API-specific content inside "The design." §7.9's
-exemption for Design applies to it unchanged. OpenAPI and AsyncAPI are
-cross-references in its local reference, a generation target, not the
-document's own structure.
+exemption for Design applies to it unchanged, and so does §7.14.
+OpenAPI and AsyncAPI are cross-references in its local reference, a
+generation target, not the document's own structure.
 
 Lab Notebook, Portfolio Journal, and Research Note are each a
 convergent convention: independent sources describe the same practice,
