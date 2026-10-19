@@ -11,8 +11,6 @@ surfaces	shows, returns, or reports
 land	arrive, or be saved
 lands	arrives, or is saved
 landed	arrived, or was saved
-carry	hold, contain, or include
-carries	holds, contains, or includes
 carried across	sent, copied, or included
 drive	run, call, or start
 drives	runs, calls, or starts
@@ -206,6 +204,13 @@ ferry	send, or copy
 ferries	sends, or copies
 ferried	sent, or copied
 ferrying	sending, or copying
+# Possession metaphor: a system, a structure, or an abstract concept has no hands. Name the relation.
+carry	have, contain, or include
+carries	has, contains, or includes
+hold	have, contain, or include
+holds	has, contains, or includes
+holding	with, containing, or including
+held	had, contained, or included
 # Motion idiom: the subject is inside the fixed phrase, so no subject check is needed. State the effect.
 where this leaves	name the effect: what this means for
 where that leaves	name the effect: what that means for

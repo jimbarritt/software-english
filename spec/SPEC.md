@@ -254,8 +254,8 @@ comparison to something else:
 
 State the mechanism instead:
 
-> The retry queue holds a failed request for a later attempt.
-> The cache holds a copy of data for a later request.
+> The retry queue saves a failed request for a later attempt.
+> The cache saves a copy of data for a later request.
 
 Deterministic-tier fixed list (in
 [`vocabulary/banned.tsv`](../vocabulary/banned.tsv)): a formulaic
@@ -264,6 +264,15 @@ by itself:
 `ride on, rides on, riding on, rode on, travels, travelled, travelling, piggyback, hitch a ride, along for the ride, ferry, carried across, flows through, landed`.
 State the mechanism instead: the event includes it, the topic
 publishes it, the service sends it.
+
+Deterministic-tier fixed list (in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv)): a verb of
+physical possession (`carry`, `hold`), where a system, a structure, or
+an abstract concept is said to have hands:
+`carry, carries, hold, holds, holding, held`.
+State the relation instead: the response contains the order list, the
+cache has an entry for each user id. The request includes a
+correlation id.
 
 Deterministic-tier fixed list (in
 [`vocabulary/banned.tsv`](../vocabulary/banned.tsv)): a formulaic
@@ -286,16 +295,17 @@ input`, `the service runs behind the proxy`.
 The inference-based tier also includes a container-and-form noun
 (`shape`, `layer`, `space`) applied to a schema, a type, an API, or a
 contract in place of the fields, values, or operations it defines: `a
-version fixed now would name a shape the schema does not hold` (would
+version fixed now would name a shape the schema does not have` (would
 refer to fields the schema does not contain), `the contract is a thin
 layer over the table` (has the same fields as the table), `the type
 leaves no space for a null` (does not accept a null). The noun
 `surface` (`the API surface`) is on the fixed list with the verb, so
 banned-word catches it. These nouns are not on a fixed list, because
-each also has a literal use: `the schema holds a version field`, `the
-error shape as a type` where the type lists the fields, `the network
-layer`, `disk space`. A schema that holds a field is literal; the fault
-is the form noun standing in for the fields, not the verb `hold`.
+each also has a literal use: `the schema contains a version field`,
+`the error shape as a type` where the type lists the fields, `the
+network layer`, `disk space`. A schema that contains a field is
+literal; the fault is the form noun standing in for the fields, not
+the verb `contain`.
 
 ### 5.6 No self-qualifying "honest" (mixed)
 
@@ -355,7 +365,7 @@ The vocabulary is organised by category, not as one flat list: see
 
 | Category | File | Contents |
 |---|---|---|
-| Operations | [`vocabulary/operations.tsv`](../vocabulary/operations.tsv) | Verbs naming a concrete system action: read, write, create, delete, return, reject, run, call, hold, send, receive |
+| Operations | [`vocabulary/operations.tsv`](../vocabulary/operations.tsv) | Verbs naming a concrete system action: read, write, create, delete, return, reject, run, call, send, receive |
 | Structure | [`vocabulary/structure.tsv`](../vocabulary/structure.tsv) | Nouns naming a system part or a relationship: service, component, process, request, response, queue, cache, consumer, producer |
 | Qualities | [`vocabulary/qualities.tsv`](../vocabulary/qualities.tsv) | Adjectives describing a measurable or checkable property: valid, empty, full, available, closed, open, synchronous |
 | Connectives | [`vocabulary/connectives.tsv`](../vocabulary/connectives.tsv) | Function words: articles, conjunctions, prepositions, pronouns, common auxiliary verbs |

@@ -13,7 +13,7 @@ response	a message answering a request
 message	a unit of data sent between components
 queue	an ordered list of items awaiting processing
 topic	a named channel messages are published to
-cache	a store holding a copy of data for faster access
+cache	a store that contains a copy of data for faster access
 database	a system that stores and retrieves structured data
 table	a structured set of rows in a database
 row	one record in a table

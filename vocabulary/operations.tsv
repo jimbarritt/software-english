@@ -56,7 +56,7 @@ require	need in order to proceed
 check	confirm a value or condition before use
 show	display a value to the reader
 report	send a summary of a result
-contain	hold as a part
+contain	have as a part
 include	contain as one part among others
 explain	state the reason for a fact
 link	connect one document or resource to another
@@ -70,7 +70,7 @@ set	assign a value
 do	perform an action
 does	performs an action
 did	performed an action
-be	exist, or hold a stated property
+be	exist, or have a stated property
 may	is permitted to
 find	locate an item in a set
 sort	arrange items by a stated order

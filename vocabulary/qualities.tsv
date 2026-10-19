@@ -1,8 +1,8 @@
 word	sense
 valid	meets a stated rule or schema
 invalid	does not meet a stated rule or schema
-empty	holds no items
-full	holds the maximum number of items
+empty	contains no items
+full	contains the maximum number of items
 available	ready to accept a request
 unavailable	not ready to accept a request
 open	able to be used
@@ -12,8 +12,8 @@ asynchronous	completing without the caller waiting
 idempotent	producing the same result when repeated
 atomic	completing fully or not at all
 consistent	matching a stated rule across all copies
-stale	holding a value older than the current source
-fresh	holding a value matching the current source
+stale	containing a value older than the current source
+fresh	containing a value matching the current source
 persistent	stored beyond the life of one process
 transient	stored only for the life of one process
 public	accessible without restriction
