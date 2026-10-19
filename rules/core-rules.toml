@@ -166,6 +166,13 @@ severity = "warning"
 description = "A sentence states what happens (SPEC §5.7). It does not state what does not happen, what a component cannot do, or how a case differs from one the reader has not asked about, since that answers an objection instead of the question. Marker words (\"the one exception\", \"cannot\", \"still\", \"the difference is\", \"not that\", \"unlike\") are not faults by themselves: \"cannot\" states a real, load-bearing limit as plainly as any other fact in a reference document. The fault is the sentence's shape, not any one word, so telling a defensive frame apart from a plain stated limit needs judgement."
 
 [[rules]]
+id = "no-undeclared-state-verb"
+tier = "inference-based"
+check = "model-judgement"
+severity = "warning"
+description = "Where a document declares an explicit status set for an entity (an enum, a union type, a table of states, or a list of status values), a sentence about a state change of that entity names a declared value (SPEC §5.8). A verb that names no declared status is a fault. Example: 'when a sync settles', where the document declares the sync status set as pending, in_progress, failed, completed, and completed_with_errors, and no status is settled. Fix: name the declared status ('when the sync status changes to completed'), or list each status the verb covers. Judge in two steps: first find every declared status set in the document and the entity it belongs to; then check each verb whose subject is that entity, or one of its instances, and that describes a change of its state. Not this fault: a verb form of a declared value ('the sync fails' for failed, 'the sync completes' for completed); a verb about an entity with no declared status set; a verb that names an action, not a state change ('the sync reads the ledger'). Distinct from anthropomorphism-paraphrase: the verb gives the system no human trait. Distinct from no-metaphor-or-analogy: the verb need not be a metaphor; a plain verb such as 'finishes' or 'ends' has the same fault when it covers more than one declared status and names none. Distinct from SPEC §7.4's define-before-use: defining the verb would add a second name for states the document already names, which is the fault itself. Finding the status set needs comprehension of the document, not a lookup, and linking a verb to the entity whose status it changes needs judgement, so this stays inference-based."
+
+[[rules]]
 id = "no-out-of-scope-comparand"
 tier = "inference-based"
 check = "model-judgement"

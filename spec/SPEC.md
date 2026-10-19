@@ -29,6 +29,7 @@ not exhaustive.
   - [5.5 No metaphor or analogy](#55-no-metaphor-or-analogy-mixed)
   - [5.6 No self-qualifying "honest"](#56-no-self-qualifying-honest-mixed)
   - [5.7 No contrastive framing](#57-no-contrastive-framing-inference-based)
+  - [5.8 No undeclared state verb](#58-no-undeclared-state-verb-inference-based)
 - [6. Vocabulary rules](#6-vocabulary-rules-deterministic)
   - [6.1 One sense per word](#61-one-sense-per-word-deterministic)
   - [6.2 Literal tokens](#62-literal-tokens-deterministic)
@@ -352,6 +353,54 @@ states a real, load-bearing limit in a reference document as plainly
 as any other fact. The fault is the sentence's shape, framed against an
 unstated contrast, not the presence of any one word. Recognising the
 shape needs judgement, so this stays inference-based.
+
+### 5.8 No undeclared state verb (Inference-based)
+
+Where a document declares an explicit status set for an entity (an
+enum, a union type, a table of states, or a list of status values), a
+sentence about a state change of that entity names a declared value. A
+verb that names no declared status is a fault:
+
+> The design of the two events `erp-sync` publishes when a journal
+> entry sync settles: one per item, one per sync.
+
+The document declares the sync status set as `pending`,
+`in_progress`, `failed`, `completed`, and `completed_with_errors`. No
+status is named `settled`. The verb also names two separate events at
+once: the export of one journal entry, and the last status change of
+the whole sync. A reader cannot tell which event the sentence means.
+
+Name the declared status, or list each status the verb covers:
+
+> `erp-sync` publishes two events. It publishes one per journal entry,
+> after the export of that entry. It publishes one per sync, when the
+> sync status changes to `completed`, `completed_with_errors`, or
+> `failed`.
+
+These are not this fault:
+
+- a verb form of a declared value: `the sync completes` for
+  `completed`, `the sync fails` for `failed`;
+- a verb about an entity with no declared status set (§5.5 and §7.4
+  still apply to it);
+- a verb that names an action, not a state change: `the sync reads
+  the ledger`.
+
+The document supplies the status set, so the rule needs no access to
+the codebase it describes. Finding the set needs comprehension, not a
+lookup: it can be a TypeScript union, an Avro enum, a table, or a list
+in prose. Linking a verb to the entity whose status it changes also
+needs judgement. So this stays inference-based.
+
+Three other rules have a nearby claim, and each misses this fault:
+
+- §5.1: the verb gives the system no human trait.
+- §5.5: the verb need not be a metaphor. A plain verb such as
+  `finishes` or `ends` has the same fault when it covers more than one
+  declared status and names none.
+- §7.4: the verb is not an undefined term. Defining `settle` would add
+  a second name for states the document already names, which is the
+  fault itself.
 
 ## 6. Vocabulary rules (Deterministic)
 
