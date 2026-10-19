@@ -15,6 +15,8 @@ not exhaustive.
   - [3.2 Sentence length](#32-sentence-length-deterministic)
   - [3.3 One topic per paragraph](#33-one-topic-per-paragraph-inference-based)
   - [3.4 Lists](#34-lists-inference-based)
+  - [3.5 No em dash](#35-no-em-dash-deterministic)
+  - [3.6 No clipped sentence run](#36-no-clipped-sentence-run-inference-based)
 - [4. Grammar rules](#4-grammar-rules)
   - [4.1 Tense](#41-tense-mixed)
   - [4.2 Voice](#42-voice-inference-based)
@@ -30,6 +32,7 @@ not exhaustive.
   - [5.6 No self-qualifying "honest"](#56-no-self-qualifying-honest-mixed)
   - [5.7 No contrastive framing](#57-no-contrastive-framing-inference-based)
   - [5.8 No undeclared state verb](#58-no-undeclared-state-verb-inference-based)
+  - [5.9 No catch-all verb](#59-no-catch-all-verb-inference-based)
 - [6. Vocabulary rules](#6-vocabulary-rules-deterministic)
   - [6.1 One sense per word](#61-one-sense-per-word-deterministic)
   - [6.2 Literal tokens](#62-literal-tokens-deterministic)
@@ -107,12 +110,19 @@ mid-sentence "then" to join two instructions that read better as two
 sentences. A sentence-initial "then" naming what happens next is not a
 join and is allowed.
 
+The rule also applies in reverse: do not split one fact across
+several sentences (§3.6).
+
 ### 3.2 Sentence length (Deterministic)
 
 20 words maximum, all sentence types. One limit, not split by
 instruction/description: taken from plain-language guidance (15-20
 words), not from an aerospace-manual procedure/description split.
 Configurable: see [Appendix C](#appendix-c-configuration).
+
+The limit is a ceiling, not a target. Writing toward it produces a run
+of short, clipped sentences stitched together with pronouns; that
+shape is its own fault (§3.6).
 
 ### 3.3 One topic per paragraph (Inference-based)
 
@@ -148,6 +158,53 @@ correctly, the same precedent as a flat entry in
 [`vocabulary/banned.tsv`](../vocabulary/banned.tsv). Quoted material
 (§6.3) is already exempt, for the case a fix would otherwise misquote
 someone else's exact words.
+
+### 3.6 No clipped sentence run (Inference-based)
+
+Vary sentence length. Keep one fact in one sentence where it fits
+(§3.1). A run of three or more consecutive short sentences in one
+paragraph is a fault when the run splits one fact into clipped pieces
+and a chain of pronouns ("it", "its", "their", "this") joins the
+pieces back together:
+
+> That design defines two events on two topics. Its Processing section
+> states them. Their contract is below. It states the payload of
+> each, the topic and message key of each, and the AVRO schema of
+> each. It also states where each is registered.
+
+Four of the five sentences are under ten words, and together they
+state one fact: what the design defines, and where. "Their contract
+is below" states no fact of its own. "Its", "Their", "It", "It" refer
+in turn to the design, the events, and the contract, so the referent
+changes between consecutive sentences. The rhythm is staccato, and a
+pronoun whose referent changes from one sentence to the next makes a
+reader resolve each one again.
+
+Merge the pieces of one fact into sentences of different lengths, and
+name the noun wherever a pronoun's referent would change:
+
+> The design defines two events in its Processing section, each on
+> its own topic. For each event, the contract below specifies the
+> payload, the topic, the message key, and the AVRO schema. The
+> contract also records where each schema is registered.
+
+These are not this fault:
+
+- a run of short sentences that each state a separate, complete fact
+  with a named subject;
+- a list item (§3.4), which is short by design;
+- a numbered sequence of steps in a document of the Tutorial or
+  How-to type (§7.8).
+
+The 20-word limit (§3.2) is a ceiling, not a target, and pushes
+writing toward this shape: do not meet the limit by splitting one
+fact into several clipped sentences. Fix by merging, not by padding:
+a merged sentence adds no word that states no fact (§5.4, §7.12),
+and still obeys sentence length and one fact per sentence (§3.1),
+since the fields of one contract are one fact.
+
+Telling one fact split across sentences apart from several facts
+stated in turn needs judgement, so this stays inference-based.
 
 ## 4. Grammar rules
 
@@ -401,6 +458,50 @@ Three other rules have a nearby claim, and each misses this fault:
 - §7.4: the verb is not an undefined term. Defining `settle` would add
   a second name for states the document already names, which is the
   fault itself.
+
+### 5.9 No catch-all verb (Inference-based)
+
+One verb names one relation within a paragraph. A content verb used
+more than once in one paragraph is a fault when its occurrences name
+different relations: one general verb stands in for several precise
+ones, and a reader cannot tell the relations apart:
+
+> That design defines two events on two topics. Its Processing section
+> states them. Their contract is below. It states the payload of
+> each, the topic and message key of each, and the AVRO schema of
+> each. It also states where each is registered.
+
+"States" names three relations here: a section that lists the events,
+a contract that specifies each field, and a contract that records
+where each schema is registered.
+
+Name each relation, and use a distinct verb for each:
+
+> The design defines two events in its Processing section, each on
+> its own topic. For each event, the contract below specifies the
+> payload, the topic, the message key, and the AVRO schema. The
+> contract also records where each schema is registered.
+
+These are not this fault:
+
+- a verb repeated with the same relation each time (`each handler
+  returns an error`, or a list where each entry `contains` its
+  fields): there the same verb is correct, and a synonym would
+  suggest a second relation that does not exist;
+- a term the document defines, which keeps its one name (§6.1);
+- a repetition inside a code span or a blockquote (§6.2, §6.3).
+
+Fix by naming the relation, not by cycling through synonyms for its
+own sake.
+
+Two other rules have a nearby claim, and each misses this fault:
+
+- §5.8: the verb need not describe a state change, and the document
+  need not declare a status set.
+- §5.5: the verb is literal, not a metaphor; it is only too general.
+
+Naming the relation each occurrence states needs comprehension, so
+this stays inference-based.
 
 ## 6. Vocabulary rules (Deterministic)
 
