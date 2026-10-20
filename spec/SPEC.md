@@ -607,6 +607,24 @@ defines no design.
 Fix: name the referent (`Facts that shape the retry policy`), or define
 it before the reference.
 
+A question-shaped heading, `What this <verb>` or `Which <noun> <verb>`,
+is the same fault when no noun follows `this`, or when the noun is a
+part of a whole the document does not name.
+
+Fault: the heading `What this costs`, where no noun follows `this`.
+Fault: the heading `Which process owns the cache`, in a document that
+defines no cache.
+Fault: the heading `What an entry contains`, in a document that names
+no store the entries are part of.
+Fix: name the referent in the heading (`What the retry policy costs`,
+`What a session-store entry contains`). For a definite noun such as
+`the cache`, defining the referent before the heading also fixes it.
+
+A bare `this`, `that`, or `it` in a heading is a fault even under a
+parent heading that names a subject. A heading is also read alone: in a
+contents list, in a link, or in a search result. The question shape is
+not the fault; the missing referent is.
+
 This rule exists because the phrasing survives a move from a
 conversation, where the referent is shared, into a standalone document,
 where it is not.
