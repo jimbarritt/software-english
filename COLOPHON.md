@@ -130,3 +130,19 @@ document names what is still unsettled or what a future capability
 would add, with no unit of work and no tracker id attached. An entry
 that does name one is a §7.14 finding regardless of the section it
 sits in.
+
+## Register: a new section, inference-based only
+
+SPEC §8 contains rules on register: rhythm, emphasis, and formatting
+patterns that add no fact. These rules sit in a section of their own,
+after §7. They judge patterns across sentences and across a whole
+document, and that fits neither §3's sentence structure nor §7's
+document structure.
+
+Both rules are inference-based. A verbless sentence is detectable only
+with part-of-speech tagging, and the linter uses the Python standard
+library alone. A repeated bullet or sentence shape is countable with
+a pattern. Neither check decides whether the flagged text adds a
+fact. Each can flag a candidate for the model pass, but neither meets
+§2's test for the deterministic tier. The catalogue therefore has no
+deterministic register check.
