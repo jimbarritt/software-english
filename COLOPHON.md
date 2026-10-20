@@ -131,19 +131,32 @@ would add, with no unit of work and no tracker id attached. An entry
 that does name one is a §7.14 finding regardless of the section it
 sits in.
 
-## PR Description: a type with two conditioned rules
+## PR Description: a type with one conditioned rule
 
-The PR Description type (SPEC Appendix F) has two rules,
-`no-abstract-stand-in-for-artefact` (SPEC §7.15) and
-`no-check-without-result` (SPEC §7.16). Both are conditional on
+The PR Description type (SPEC Appendix F) has one rule of its own,
+`no-check-without-result` (SPEC §7.16). It is conditional on
 document type, the way `no-planning-content-in-reference` (§7.9) is,
-because each fault depends on the document a sentence is in:
-`Context` is correct as an ADR section heading, and a bare command
-is correct as a How-to guide step.
+because the fault depends on the document a sentence is in: a bare
+command is correct as a How-to guide step.
+
+`no-abstract-stand-in-for-artefact` (SPEC §7.15) was first written
+against PR Description, and is now unconditional. An abstract noun
+in place of a named artefact is the same fault in a Reference or a
+Design document: `the adapter maps all four shapes to this record`
+names neither the payload structures nor the schema. Only its scope
+stays conditional. On a PR description it covers the problem
+statement and the change statement, the sections a reviewer checks
+against the diff. A Reference or a Design document has no such pair
+of sections, so the whole document is in scope.
+
+Where §7.15 and `no-metaphor-or-analogy` (§5.5) both match a
+structural noun such as `shape`: a form noun standing in for the
+fields of a named schema is a §5.5 finding, and a noun standing in
+for an artefact the sentence does not name is a §7.15 finding.
 
 Neither rule is a banned-word entry. Each substitute noun has a
 correct abstract use (`line coverage rose to 84%`), and a word-list
-lookup reads one token, not the section the token is in.
+lookup reads one token, not the document the token is in.
 
 Both rules sit at the end of SPEC §7, after §7.14, for the reason
 §7.14 itself sits there: a rule inserted beside §7.9 would renumber

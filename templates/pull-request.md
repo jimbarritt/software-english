@@ -73,17 +73,19 @@ each, with no headings.
 ## Software English addition: two rules for this type
 
 This section is Software English's own rule, not the wording of
-either guide. Two rules apply to a PR description and to no other
-type.
+either guide. Two rules govern this type's content. §7.16 applies to
+a PR description and to no other type. §7.15 applies to every type,
+and on a PR description it covers the problem statement and the
+change statement.
 
 - **No abstract stand-in for an artefact ([SPEC §7.15](../spec/SPEC.md)).**
   The problem statement and the change statement name the artefact
   concerned. `The report gave the operator no visibility` names no
-  artefact. `The report listed no failed orders` names one. The
-  nouns `evidence`, `context`, `visibility`, `coverage`, and
-  `insight` are the common stand-ins. Each is correct where the
-  thing named is itself abstract, so the rule needs judgement and is
-  not a banned-word entry.
+  artefact. `The report listed no failed orders` names one. In a PR
+  description, the nouns `evidence`, `context`, `visibility`,
+  `coverage`, and `insight` are the common stand-ins. Each is
+  correct where the thing named is itself abstract, so the rule
+  needs judgement and is not a banned-word entry.
 - **No check without its result ([SPEC §7.16](../spec/SPEC.md)).**
   Each verification entry pairs a check with its result. A bare
   `` `make test` `` reads as evidence and states none. A Not
@@ -135,8 +137,8 @@ repository as a record. A design document states a design before it
 is built. A PR description states one change after it is made, and
 the checks that show it works. A PR description may link to the ADR
 or the design document the change implements, and does not restate
-it. A commit message is not this type, and SPEC §7.15 and §7.16 do
-not apply to it.
+it. A commit message is not this type, and SPEC §7.16 does not apply
+to it.
 
 ## Verify against the source
 

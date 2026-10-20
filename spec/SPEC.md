@@ -898,17 +898,21 @@ judgement, so this stays inference-based.
 
 ### 7.15 No abstract stand-in for an artefact (Inference-based)
 
-This rule is conditional on document type. It applies only to a
-document whose type under §7.8 is PR Description, listed in
-[Appendix F](#appendix-f-document-type-templates).
+This rule applies to every document type. On a PR Description,
+listed in [Appendix F](#appendix-f-document-type-templates), its
+scope is narrower: see the scope paragraph below.
 
-A PR description names the artefact that was wrong or missing, and
-the artefact the change alters: a file, a field, a record, a
-request, a response, or a message. An abstract noun used in place
-of that artefact is a fault. A reviewer cannot check a change
-against a noun that names nothing in the system. The common
-stand-ins are `evidence`, `context`, `visibility`, `coverage`, and
-`insight`.
+A sentence about an artefact names it: a file, a type, a schema, a
+field, a record, a table, an endpoint, a request, a response, a
+message, or a topic. An abstract noun used in place of that artefact
+is a fault. A reader cannot check a sentence against a noun that
+names nothing in the system.
+
+In a PR description, the common stand-ins are `evidence`, `context`,
+`visibility`, `coverage`, and `insight`. In a reference or a design
+document, the common substitutes are structural nouns: `shape`,
+`form`, and `flavour`. The noun `surface` is on the fixed list, so
+banned-word catches it (§5.5).
 
 Fault: `The record written to the downstream system contained no
 evidence.` The missing thing was a receipt file attached to the
@@ -919,34 +923,52 @@ file attached.`
 Fault: `The report gave the operator no visibility.`
 Fix: `The report listed no failed orders.`
 
+Fault: `The adapter maps all four shapes to this record.` `Shapes`
+stands for four vendor payload structures, and `this record` for the
+schema they are converted to. `Record` is on the artefact list, and
+is still a stand-in here: the sentence refers to a schema, not to
+one stored record.
+Fix: `The adapter converts all four vendor payload structures to
+this schema.`
+
 A count of items the sentence never names is the same fault: `It
 reports four counts` names none of the four.
 Fix: `The summary reports the number of orders read, written,
 skipped, and failed.`
 
-The rule covers the problem statement and the statement of what the
-change does: the sections headed Summary, Problem, or Change, or, in
-a description with no headings, the sentences that state what was
-wrong before the change and what the change does.
+On a PR description, the rule covers the problem statement and the
+statement of what the change does: the sections headed Summary,
+Problem, or Change, or, in a description with no headings, the
+sentences that state what was wrong before the change and what the
+change does. On every other document type, the rule covers the
+whole document.
 
-Test: ask which file, field, record, request, or item the noun
-refers to. Replace the noun with it when the answer names one.
+Test: ask which file, type, schema, field, record, request, or item
+the noun refers to. Replace the noun with it when the answer names
+one.
 
-Three exceptions:
+Four exceptions:
 
 - A noun where the thing named is itself abstract, such as a
   measured quantity a tool reports (`Line coverage of the parser
   rose from 71% to 84%.`), is not this fault.
+- A structural noun in its literal sense (`an HTML form`) is not
+  this fault.
 - A heading or a section name (`Context`), a document type name
   (`Evidence List`), or a literal token (§6.2), is not this fault.
-- A sentence outside the problem statement and the change statement
-  is not this fault.
+- On a PR description, a sentence outside the problem statement and
+  the change statement is not this fault.
+
+Distinct from §5.5: where a sentence names the schema, type, API, or
+contract, and a form noun stands in for its fields, values, or
+operations, report it under §5.5 only. Where the sentence names no
+artefact for the noun to belong to, report it under this rule only.
 
 Not a banned-word entry: each noun has a correct abstract use, and a
-word-list lookup reads one token, not the section the token is in.
+word-list lookup reads one token, not the document the token is in.
 Distinct from §7.13: that rule cuts an implementation unit a
 reader's task does not act on. This rule asks for the artefact a
-reviewer checks the change against, which a reviewer's task does act
+reader checks a sentence against, which a reader's task does act
 on. Telling an abstract stand-in apart from a correct abstract noun
 needs judgement, so this stays inference-based. See
 [`templates/pull-request.md`](../templates/pull-request.md).
@@ -1359,9 +1381,10 @@ change already made, not a decision or a built system. A PR
 description states the change and the evidence that it works. §7.9
 does not apply to it: it is not a Reference document. §7.14 applies
 to it as to every type, with its own exception for a closing-keyword
-line. Two rules apply to a PR description and to no other type:
-§7.15 requires it to name each artefact a sentence refers to, and
-§7.16 requires each check it lists to state its result.
+line. §7.15 also applies to every type, and on a PR description its
+scope is the problem statement and the change statement. One rule
+applies to a PR description and to no other type: §7.16 requires
+each check it lists to state its result.
 
 Lab Notebook, Portfolio Journal, Research Note, and PR Description
 are each a convergent convention: independent sources describe the
