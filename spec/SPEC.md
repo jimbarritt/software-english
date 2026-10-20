@@ -33,6 +33,7 @@ not exhaustive.
   - [5.7 No contrastive framing](#57-no-contrastive-framing-inference-based)
   - [5.8 No undeclared state verb](#58-no-undeclared-state-verb-inference-based)
   - [5.9 No catch-all verb](#59-no-catch-all-verb-inference-based)
+  - [5.10 No framing device](#510-no-framing-device-inference-based)
 - [6. Vocabulary rules](#6-vocabulary-rules-deterministic)
   - [6.1 One sense per word](#61-one-sense-per-word-deterministic)
   - [6.2 Literal tokens](#62-literal-tokens-deterministic)
@@ -510,6 +511,87 @@ Two other rules have a nearby claim, and each misses this fault:
 
 Naming the relation each occurrence states needs comprehension, so
 this stays inference-based.
+
+### 5.10 No framing device (Inference-based)
+
+A declarative sentence states its fact as a plain clause. A framing
+device wraps the fact in a frame that states nothing the plain clause
+does not. Three shapes are this fault, and they often occur together:
+
+> The gateway asks one question of all four: can this order ship on
+> this date, and what reference does the carrier call need. A dispatch
+> slot is named for that question rather than for the structure it was
+> imported from, and the import is what reconciles the four structures
+> down to it.
+
+State each fact as a plain clause:
+
+> The gateway needs two facts from each of the four structures:
+> whether the order may ship on the date, and the reference the
+> carrier call takes. A dispatch slot is a date range, a status, and a
+> carrier reference. The import converts each of the four structures
+> to a dispatch slot.
+
+Cleft padding adds a copula and a relative pronoun around a plain
+clause: `X is what Y`, `it is X that Y`, `what X does is Y`, `X is the
+thing that Y`. The fix is always the same: drop the copula and the
+relative pronoun. `The import is what reconciles the structures`
+becomes `the import reconciles the structures`. An identity reading
+does not exempt the shape: `the primary key is what the index is built
+on` becomes `the index is built on the primary key`.
+
+Rhetorical-question framing embeds a question as the subject or the
+object of a declarative: `asks one question`, `answers two questions`,
+`the question is whether`. The fact the question names is available
+directly, so state it.
+
+Naming-as-justification argues for the choice of a name: `is named
+for`, `hence the name`, `the name reflects`. State what the named
+thing is instead.
+
+Test: rewrite the sentence as its plain clause. If a reader loses no
+fact, the frame was a framing device.
+
+These are not this fault:
+
+- a `what` clause or a `which` clause that is the object of a content
+  verb, not the complement of a copula: `the response contains what
+  the caller requested`, `the log records which orders failed`;
+- an indirect question that states the fact through its verb: `the
+  config states whether retries are enabled`;
+- `X is the N that Y`, where N is a noun that classifies X: `the cache
+  is the store that the reader queries first`;
+- a literal exchange between components: `the server answers each
+  request with a status code`;
+- an entry in a section that lists open questions, such as `Open
+  questions` in a design document;
+- a name stated as a fact a reader needs, such as a rename or a naming
+  convention, or the choice of a name in the Decision section of an ADR;
+- a heading (§7.18 judges it), quoted material (§6.3), or a literal
+  token (§6.2).
+
+Other rules have a nearby claim:
+
+- §7.18 covers headings only, and this rule covers body prose only, so
+  the two never judge one line.
+- §5.7: where an `X rather than Y` contrast argues for a name, report
+  the sentence under this rule only. Stating what the type is removes
+  the contrast too. A contrast about behaviour stays a §5.7 finding.
+- §5.9 ignores the copula of a cleft. Where `asks` or `answers` also
+  repeats in the paragraph, report the sentence under this rule only,
+  since the fix removes the verb.
+- §5.1 and §5.5: where a system `asks` or `answers` a question that
+  frames a fact, report it under this rule only. A human trait or a
+  metaphor outside a question frame stays a finding under that rule.
+- §7.15: where `question` or `answer` stands for the facts the
+  sentence frames, report it under this rule only. Another abstract
+  noun stays a §7.15 finding.
+- §7.12 cuts a clause that follows from another fact. This rule keeps
+  the one clause and removes the frame around it.
+
+A parser can flag the cleft signatures. Telling a cleft apart from a
+`what` clause or a classifying noun, and recognising a question or a
+name used as a frame, needs judgement, so this stays inference-based.
 
 ## 6. Vocabulary rules (Deterministic)
 
