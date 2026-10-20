@@ -107,7 +107,7 @@ The rule `no-work-breakdown-or-tracker-pointer` (SPEC §7.14) covers two
 of the faults §7.9 names for a Reference document: a sentence that
 divides the subject into units of work, and an issue-tracker id used as
 the pointer to later work. It extends both to every document type,
-Design and API Design included.
+Design, API Design, and PR Description included.
 
 `no-planning-content-in-reference` is conditional on document type,
 because most of what it forbids is correct content in a plan, an RFC,
@@ -130,6 +130,30 @@ document names what is still unsettled or what a future capability
 would add, with no unit of work and no tracker id attached. An entry
 that does name one is a §7.14 finding regardless of the section it
 sits in.
+
+## PR Description: a type with two conditioned rules
+
+The PR Description type (SPEC Appendix F) has two rules,
+`no-abstract-stand-in-for-artefact` (SPEC §7.15) and
+`no-check-without-result` (SPEC §7.16). Both are conditional on
+document type, the way `no-planning-content-in-reference` (§7.9) is,
+because each fault depends on the document a sentence is in:
+`Context` is correct as an ADR section heading, and a bare command
+is correct as a How-to guide step.
+
+Neither rule is a banned-word entry. Each substitute noun has a
+correct abstract use (`line coverage rose to 84%`), and a word-list
+lookup reads one token, not the section the token is in.
+
+Both rules sit at the end of SPEC §7, after §7.14, for the reason
+§7.14 itself sits there: a rule inserted beside §7.9 would renumber
+rules the catalogue and the Contents list cite by number.
+
+No standards body defines a pull request description. Appendix F
+cites two industry guides that converge on the same content, and the
+local reference marks its section structure and both rules as
+Software English's own, the same way `templates/design.md` marks its
+own open-questions addition.
 
 ## Register: a new section, inference-based only
 

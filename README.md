@@ -34,9 +34,9 @@ sentence-level rules. A type governs a document's required structure.
 A Design document, for example, may hold an open-questions section
 and a future-extension section. A Reference document may not.
 
-Fourteen types exist today:
+Fifteen types exist today:
 
-- RFC, ADR, Design, API Design, Specification, Technical Manual
+- RFC, ADR, Design, API Design, PR Description, Specification, Technical Manual
 - Diátaxis's four types: Tutorial, How-to guide, Reference, Explanation
 - Lab Notebook, Portfolio Journal, Research Note, Evidence List
 

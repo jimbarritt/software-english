@@ -52,6 +52,8 @@ not exhaustive.
   - [7.12 No entailed restatement](#712-no-entailed-restatement-inference-based)
   - [7.13 No mechanism for outcome](#713-no-mechanism-for-outcome-inference-based)
   - [7.14 No work breakdown or issue-tracker pointer](#714-no-work-breakdown-or-issue-tracker-pointer-inference-based)
+  - [7.15 No abstract stand-in for an artefact](#715-no-abstract-stand-in-for-an-artefact-inference-based)
+  - [7.16 No check without its result](#716-no-check-without-its-result-inference-based)
 - [8. Register rules](#8-register-rules)
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
@@ -694,7 +696,7 @@ reference to the discussion that surfaced it.
 ### 7.8 Document type (Inference-based)
 
 Identify a document's target type before writing it. A type (RFC, ADR,
-Specification, Technical Manual, and similar) governs structure and
+PR Description, Specification, Technical Manual, and similar) governs structure and
 required sections beyond Software English's own sentence-level rules. See
 [Appendix F](#appendix-f-document-type-templates) for a by-reference list:
 Software English does not redefine any of these structures, only points to each
@@ -843,8 +845,8 @@ this reader's sentence at all, defined or not.
 
 ### 7.14 No work breakdown or issue-tracker pointer (Inference-based)
 
-This rule applies to every document type, Design and API Design
-included. It names two faults.
+This rule applies to every document type, Design, API Design, and PR
+Description included. It names two faults.
 
 A work-breakdown sentence divides the subject into units of work:
 what this piece of work covers, and what a later piece covers. A unit
@@ -867,7 +869,7 @@ the design permits:
 Test: remove the unit of work and the id. Keep any fact about the
 subject that remains. Delete the sentence if none remains.
 
-Two exceptions:
+Three exceptions:
 
 - An entry in a section headed References, Normative References,
   Informative References, or Bibliography may cite an issue or a pull
@@ -875,6 +877,11 @@ Two exceptions:
 - A Lab Notebook entry names the task it belongs to, and a Portfolio
   Journal entry records work already done. Neither points to later
   work, so neither is this fault.
+- In a PR Description, a closing-keyword line (`Closes #11`,
+  `Fixes #10`) names an issue the change resolves, in the form a
+  tracker reads to close the issue. It points to no later work, so it
+  is not this fault. A sentence that points to a follow-up pull
+  request or a later change is still this fault.
 
 §7.9 forbids all planning content, in a Reference document only. It
 exempts a design document's open questions and future extensions.
@@ -886,6 +893,100 @@ This rule is Software English's own addition. Distinct from §7.5's
 no-unanchored-reference: the id can resolve and still be this fault.
 Telling a unit of work apart from a part of the subject needs
 judgement, so this stays inference-based.
+
+### 7.15 No abstract stand-in for an artefact (Inference-based)
+
+This rule is conditional on document type. It applies only to a
+document whose type under §7.8 is PR Description, listed in
+[Appendix F](#appendix-f-document-type-templates).
+
+A PR description names the artefact that was wrong or missing, and
+the artefact the change alters: a file, a field, a record, a
+request, a response, or a message. An abstract noun used in place
+of that artefact is a fault. A reviewer cannot check a change
+against a noun that names nothing in the system. The common
+stand-ins are `evidence`, `context`, `visibility`, `coverage`, and
+`insight`.
+
+Fault: `The record written to the downstream system contained no
+evidence.` The missing thing was a receipt file attached to the
+record.
+Fix: `The record written to the downstream system had no receipt
+file attached.`
+
+Fault: `The report gave the operator no visibility.`
+Fix: `The report listed no failed orders.`
+
+A count of items the sentence never names is the same fault: `It
+reports four counts` names none of the four.
+Fix: `The summary reports the number of orders read, written,
+skipped, and failed.`
+
+The rule covers the problem statement and the statement of what the
+change does: the sections headed Summary, Problem, or Change, or, in
+a description with no headings, the sentences that state what was
+wrong before the change and what the change does.
+
+Test: ask which file, field, record, request, or item the noun
+refers to. Replace the noun with it when the answer names one.
+
+Three exceptions:
+
+- A noun where the thing named is itself abstract, such as a
+  measured quantity a tool reports (`Line coverage of the parser
+  rose from 71% to 84%.`), is not this fault.
+- A heading or a section name (`Context`), a document type name
+  (`Evidence List`), or a literal token (§6.2), is not this fault.
+- A sentence outside the problem statement and the change statement
+  is not this fault.
+
+Not a banned-word entry: each noun has a correct abstract use, and a
+word-list lookup reads one token, not the section the token is in.
+Distinct from §7.13: that rule cuts an implementation unit a
+reader's task does not act on. This rule asks for the artefact a
+reviewer checks the change against, which a reviewer's task does act
+on. Telling an abstract stand-in apart from a correct abstract noun
+needs judgement, so this stays inference-based. See
+[`templates/pull-request.md`](../templates/pull-request.md).
+
+### 7.16 No check without its result (Inference-based)
+
+This rule is conditional on document type. It applies only to a
+document whose type under §7.8 is PR Description, listed in
+[Appendix F](#appendix-f-document-type-templates).
+
+A verification entry pairs a check with its result. A check is a
+command, a test suite, or a manual step. A check listed with no
+result reads as evidence that the change works, and states no
+result.
+
+Fault: a Verification section with the single entry `` `make
+test` ``.
+Fix: `` `make test`: passed, 212 tests ``.
+
+Fault: `Tested locally.`, which names no check and no result.
+Fix: `` Ran the importer against `fixtures/ledger.csv`: 1,204 rows
+written, 0 rejected. ``
+
+A failing or a partial result is still a result: `` `make e2e`: 2
+failures, both in `test_retry`, and both also fail on `main` `` is
+not this fault.
+
+Three exceptions:
+
+- An entry in a section that lists what did not run, or could not
+  run (headed Not verified or Not tested), such as `` `make e2e`:
+  not run, because the suite needs staging credentials ``, is
+  correct content in a PR description and is not this fault. It
+  states a limit plainly.
+- A command a reviewer is asked to run, in a section headed How to
+  try it or How to reproduce, and a command the change adds or
+  alters, named in the Change section, are not verification entries.
+- A command followed directly by its pasted output is not this
+  fault: the output is the result.
+
+Telling a verification entry apart from a command named for another
+reason needs judgement, so this stays inference-based.
 
 ## 8. Register rules
 
@@ -1083,6 +1184,7 @@ relying on a detail the local reference omits.
 | ADR | Nygard, ["Documenting Architecture Decisions"](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) (2011); [adr.github.io](https://adr.github.io/) | [`templates/adr.md`](../templates/adr.md) |
 | Design | [IEEE Std 1016-2009](https://ieeexplore.ieee.org/document/5167255/) (software design descriptions); Ubl, ["Design Docs at Google"](https://www.industrialempathy.com/posts/design-docs-at-google/) (2020) | [`templates/design.md`](../templates/design.md) |
 | API Design | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) and [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP); [Apache Avro](https://avro.apache.org/docs/current/specification/) and [JSON Schema](https://json-schema.org/specification) (schema notation); [CloudEvents 1.0.2](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md) (event envelope) | [`templates/api-design.md`](../templates/api-design.md) |
+| PR Description | Google Engineering Practices, ["Writing good CL descriptions"](https://google.github.io/eng-practices/review/developer/cl-descriptions.html); Linux kernel, ["Submitting patches"](https://www.kernel.org/doc/html/latest/process/submitting-patches.html#describe-your-changes) (describe your changes) | [`templates/pull-request.md`](../templates/pull-request.md) |
 | Specification | [W3C QA Framework: Specification Guidelines](https://www.w3.org/TR/qaframe-spec/); RFC 2119 keywords (above) | [`templates/specification.md`](../templates/specification.md) |
 | Technical Manual | [Google developer documentation style guide](https://developers.google.com/style); [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/); [Diátaxis](https://diataxis.fr/) | [`templates/technical-manual.md`](../templates/technical-manual.md) |
 | Tutorial | [Diátaxis](https://diataxis.fr/tutorials/) | [`templates/tutorial.md`](../templates/tutorial.md) |
@@ -1123,9 +1225,18 @@ exemption for Design applies to it unchanged, and so does §7.14.
 OpenAPI and AsyncAPI are cross-references in its local reference, a
 generation target, not the document's own structure.
 
-Lab Notebook, Portfolio Journal, and Research Note are each a
-convergent convention: independent sources describe the same practice,
-with local variation, rather than one body defining a single formal
-standard. Evidence List is one joint standard, set by Cochrane and
-GRADE together. Each local reference states this distinction for its own
-type.
+PR Description is the one type in this table whose subject is a
+change already made, not a decision or a built system. A PR
+description states the change and the evidence that it works. §7.9
+does not apply to it: it is not a Reference document. §7.14 applies
+to it as to every type, with its own exception for a closing-keyword
+line. Two rules apply to a PR description and to no other type:
+§7.15 requires it to name each artefact a sentence refers to, and
+§7.16 requires each check it lists to state its result.
+
+Lab Notebook, Portfolio Journal, Research Note, and PR Description
+are each a convergent convention: independent sources describe the
+same practice, with local variation, rather than one body defining a
+single formal standard. Evidence List is one joint standard, set by
+Cochrane and GRADE together. Each local reference states this
+distinction for its own type.
