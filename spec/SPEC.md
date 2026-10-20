@@ -634,11 +634,51 @@ where it is not.
 
 ### 7.6 No vacuous classification properties (Inference-based)
 
-Do not state a property of a classification that already follows from
-its member definitions. State a cardinality or exclusivity constraint
+A property of a set that a reader can already see from the set's
+members adds no fact. This rule names two faults.
+
+A taxonomy property is a cardinality or exclusivity constraint
 (`exactly one`, `at most one`, `mutually exclusive`,
-`collectively exhaustive`, `no overlap`, `one and only one`) only where
-a mechanism reads it, and state it there, not in the prose definition.
+`collectively exhaustive`, `no overlap`, `one and only one`) that
+already follows from a classification's member definitions. State such
+a constraint only where a mechanism reads it, and state it there, not
+in the prose definition.
+
+Fault: `The cache defines a memory tier, a disk tier, and a remote tier. Every entry belongs to exactly one tier.`
+Fix: delete the second sentence. Where a check enforces the constraint,
+state it in that check.
+
+A count signpost is a sentence that starts with a numeral or a number
+word and states only how many items come directly after it. A reader
+counts the items, so the count states no fact. The trigger is a number
+word at the head of a sentence, followed by a colon and a list, by an
+ordered or unordered list, or by the same number of sentences that each
+name one item.
+
+Fault: `Three costs follow from that:` followed by a three-item list.
+Fault: `Three routes drop an entry:` followed by a three-item list.
+Fix: delete the sentence and start with the first item. Where the
+sentence names what the items belong to, keep that noun and cut the
+count: `The retry policy adds these costs:`.
+
+Three exceptions:
+
+- A count that states a fact beyond the number of items is not this
+  fault: a part of a larger set (`Three of the five routes drop an
+  entry:`), or a bound a mechanism checks.
+- A count whose items do not come directly after it, such as a summary
+  (§7.1) that states a count the body expands in separate sections, is
+  not this fault.
+- A number that is a quantity, not a count of the items
+  (`Three retries run before the dead-letter write.`), is not this
+  fault.
+
+The phrases `two things` and `three things` are on the fixed list
+(`vocabulary/banned.tsv`), and banned-word reports them. Distinct from
+§8.1's no-cadence-device: a cadence device restates the sentence before
+it, and a count signpost announces the items after it. Both triggers
+are findable in the text. Whether a found instance states a fact beyond
+the count needs judgement, so this stays inference-based.
 
 ### 7.7 No process narration (Inference-based)
 
