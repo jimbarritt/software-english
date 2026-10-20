@@ -54,6 +54,8 @@ not exhaustive.
   - [7.14 No work breakdown or issue-tracker pointer](#714-no-work-breakdown-or-issue-tracker-pointer-inference-based)
   - [7.15 No abstract stand-in for an artefact](#715-no-abstract-stand-in-for-an-artefact-inference-based)
   - [7.16 No check without its result](#716-no-check-without-its-result-inference-based)
+  - [7.17 No withholding heading](#717-no-withholding-heading-inference-based)
+  - [7.18 No question or argument heading](#718-no-question-or-argument-heading-inference-based)
 - [8. Register rules](#8-register-rules)
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
@@ -987,6 +989,133 @@ Three exceptions:
 
 Telling a verification entry apart from a command named for another
 reason needs judgement, so this stays inference-based.
+
+### 7.17 No withholding heading (Inference-based)
+
+This rule applies to every document type. Its scope is headings only,
+at every level, the document title included. In body prose the same
+words form no sentence, so the fault occurs only in a heading.
+
+A heading names what its section states. A withholding heading names
+the section only by what a reader gets from reading it: its meaning,
+its consequence, its outcome, or a promise that it is notable. A
+reader must read the section to learn what the heading refers to. A
+heading is also read alone, in a contents list, a link, or a search
+result, and there a withholding heading states nothing.
+
+Fault: the heading `What this means for everything else`.
+Fix: state the fact the section states: `Retries are capped at three attempts`.
+
+Fault: the heading `What we found`, over a section that reports one
+measurement.
+Fix: `Cold start takes 200 ms`.
+
+Fault: the heading `The surprising part`.
+Fix: name the fact the section states: `The parser reads each file twice`.
+
+A heading that names a subject, but refers to the section only by its
+meaning, is the same fault: `What the retry cap means for the scheduler`.
+
+Test: read the heading alone, without its section. Check whether it
+names a fact the section states, or a subject and the property of it
+the section states: a cost, a content, a limit, an owner, or a
+behaviour. Where it names neither, write the fact as the heading.
+
+Four exceptions:
+
+- A heading that names a subject, or a subject and a property
+  (`Retry policy`, `What a session-store entry contains`), is not this
+  fault. A heading need not be a full sentence.
+- A conventional section name is not this fault. It names the
+  section's function, reads the same in any document of its type, and
+  a reader looks the section up by it: `Summary`, `Context`,
+  `Decision`, `Consequences`, `Recommendation`. Every section name a
+  document type's template lists (§7.8) is one.
+- A task heading in the imperative or the infinitive (`Install the
+  CLI`, `How to try it`) is not this fault.
+- A heading that is a literal token (§6.2), such as a command or a
+  file name, is not this fault.
+
+The formulaic phrases on the fixed list (`vocabulary/banned.tsv`),
+such as `at a glance`, `the big picture`, and `the upshot`, are caught
+by banned-word. This rule covers a withholding heading in words not on
+the list.
+
+Distinct from §7.5's no-unanchored-reference: that rule asks for the
+referent a heading names. A heading can name its referent and still
+withhold its content. Where both rules match one heading, report it
+under this rule only: the fix states the fact, and the fact names the
+referent. A heading phrased as a direct question is a §7.18 finding,
+not a finding under this rule. A metaphor in a heading is a §5.5
+finding, and a heading that states what a subject does not do is a
+§5.7 finding. This rule judges what a heading names, not how the
+heading words it.
+
+Telling a withholding heading apart from a heading that names a
+subject needs judgement, so this stays inference-based.
+
+### 7.18 No question or argument heading (Inference-based)
+
+This rule applies to every document type. Its scope is headings only,
+at every level, the document title included.
+
+A heading states a claim. It does not ask a question the section then
+answers, and it does not present a case for a claim. Two shapes are
+this fault.
+
+A question heading is a direct question: interrogative word order, a
+question mark, or both. A rhetorical question is the common case. A
+plain question is the same fault, because the heading asks and only
+the section states.
+
+Fault: the heading `Why would anyone run it twice?`
+Fix: state the answer: `A second run reuses the cached result`.
+
+Fault: the heading `Does the cache survive a restart?`
+Fix: `A restart empties the cache`.
+
+An argument heading announces a case for a claim, not the claim
+itself.
+
+Fault: the heading `The case for capping retries`.
+Fault: the heading `In defence of a second run`.
+Fix: state the claim (`Retries are capped at three attempts`), and
+give the reasons in the section.
+
+Test: state in one sentence what the section answers or argues for.
+If the heading asks for that sentence, or argues for it, use the
+sentence as the heading.
+
+Four exceptions:
+
+- An indirect question in statement word order, with no question
+  mark, is not this fault when it names its subject and the property
+  the section states: `What a session-store entry contains`, `How the
+  scheduler orders jobs`. §7.5 permits that shape when the heading
+  names its referent.
+- A task heading (`How to try it`, `How to reproduce`) names a task,
+  not a question, and is not this fault.
+- A section name that names questions, such as `Open questions` in a
+  design document, is not this fault.
+- A heading that is a literal token (§6.2), or a verbatim quotation
+  (§6.3) that is the section's subject, such as an error message, is
+  not this fault.
+
+Where §7.17 also matches a heading
+(`What does this mean for everything else?`), report it under this
+rule only. Where §7.5 also matches, as the bare `it` in
+`Why would anyone run it twice?` does, report it under this rule only:
+the fix states the claim, and the claim names the subject. A metaphor
+(§5.5) or a contrastive frame (§5.7) in the same heading is a separate
+finding under that rule.
+
+§8.1 excludes a heading because a heading is not a sentence. This rule
+judges the heading itself, so the two do not overlap.
+
+A parser can flag a heading that ends in a question mark. Deciding
+whether the heading is a question the section answers, a quoted
+literal, or a case for a claim needs judgement, so this stays
+inference-based.
 
 ## 8. Register rules
 

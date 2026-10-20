@@ -170,3 +170,32 @@ a pattern. Neither check decides whether the flagged text adds a
 fact. Each can flag a candidate for the model pass, but neither meets
 §2's test for the deterministic tier. The catalogue therefore has no
 deterministic register check.
+
+## Headings: two document rules, judged on the heading alone
+
+The rules `no-withholding-heading` (SPEC §7.17) and
+`no-question-or-argument-heading` (SPEC §7.18) judge a heading as a
+unit. Each fault occurs only in a heading: in body prose, neither
+shape forms a sentence a writer produces.
+
+Both are document rules, beside `no-unanchored-reference` (§7.5), for
+the reason §7.5 gives: a heading is also read alone, in a contents
+list, a link, or a search result. They are not register rules. §8
+judges rhythm and repetition across sentences, and these rules judge
+what one heading names.
+
+Both are new entries at the end of §7, after §7.16, for the same
+reason §7.14 is there: a rule inserted beside §7.5 would renumber
+rules the catalogue and the Contents list cite by number.
+
+Neither rule requires a heading to be a full sentence. A heading that
+names a subject (`Retry policy`), or a subject and a property
+(`What a session-store entry contains`), passes both. §7.5's own fixed
+headings, the noun-phrase headings `templates/technical-manual.md`
+recommends, and each template's section names stay correct.
+
+Both are inference-based. The fixed list already contains formulaic
+heading phrases (`at a glance`, `the big picture`), and banned-word
+catches them. A parser can also flag a heading that ends in a question
+mark. Neither check decides whether a heading states its section's
+content, so neither meets §2's test for the deterministic tier.
