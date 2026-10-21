@@ -57,6 +57,7 @@ not exhaustive.
   - [7.16 No check without its result](#716-no-check-without-its-result-inference-based)
   - [7.17 No withholding heading](#717-no-withholding-heading-inference-based)
   - [7.18 No question or argument heading](#718-no-question-or-argument-heading-inference-based)
+  - [7.19 No unstated presupposition](#719-no-unstated-presupposition-inference-based)
 - [8. Register rules](#8-register-rules)
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
@@ -714,6 +715,12 @@ parent heading that names a subject. A heading is also read alone: in a
 contents list, in a link, or in a search result. The question shape is
 not the fault; the missing referent is.
 
+Distinct from §7.19's no-unstated-presupposition: a definite phrase
+that contains a cardinal or a participle naming a completed act
+(`the four surveyed carriers`, `the agreed plan`) needs an earlier
+statement of a fact, not only an earlier noun. Where both rules match
+one phrase, report it under §7.19 only.
+
 This rule exists because the phrasing survives a move from a
 conversation, where the referent is shared, into a standalone document,
 where it is not.
@@ -1220,6 +1227,89 @@ A parser can flag a heading that ends in a question mark. Deciding
 whether the heading is a question the section answers, a quoted
 literal, or a case for a claim needs judgement, so this stays
 inference-based.
+
+### 7.19 No unstated presupposition (Inference-based)
+
+This rule applies to every document type.
+
+A definite noun phrase presupposes a fact. `The four surveyed
+carriers` presupposes that a survey took place, and that it covered
+four carriers. A document states that fact before the phrase that
+refers to it. A reader can tell what kind of thing the noun names, but
+not the fact the phrase depends on.
+
+Either of two markers identifies the fault:
+
+- a cardinal inside the phrase, a number word or a numeral (`the four
+  carriers`, `the three tables`, `both options`), where no earlier
+  sentence states that count;
+- a past participle inside the phrase that names a completed act
+  (`surveyed`, `rejected`, `agreed`, `measured`), where no earlier
+  sentence states that the act took place, or what it covered.
+
+Fault, as the first sentence of a document:
+
+> The four surveyed carriers all reject a weekend dispatch slot.
+
+No sentence states which four carriers, who surveyed them, or when.
+State the fact before the phrase that refers to it:
+
+> The dispatch team surveyed four carriers in March 2026: A, B, C,
+> and D. None accepts a weekend dispatch slot.
+
+The same phrase is correct once the document states the fact. After
+the first sentence of the fix, `the four surveyed carriers` is
+anchored. So is `the four tables` in a document that lists four
+tables.
+
+Test: for each definite phrase with a cardinal or a completed-act
+participle, find the earlier sentence that states the count, or the
+act and what it covered. Where no such sentence exists, write it
+before the phrase. A heading is in scope, and is anchored when the
+document states the fact before the heading.
+
+These are not this fault:
+
+- a phrase that points to where the document states the fact: `the
+  four carriers listed in §3`;
+- a cardinal whose items the same sentence names: `the three routes:
+  read, write, and delete`;
+- a cardinal that is part of a name or a literal token (`two-phase
+  commit`, `the 404 response`), or a number that is a quantity, not a
+  count of referents (`the 30-second timeout`);
+- a participle that names a state or a kind, not a completed act
+  (`the closed connection`, `the compiled binary`), or a declared
+  status value (§5.8);
+- an act the document type itself records, such as `the changed
+  files` in a PR Description, whose subject is the change
+  ([Appendix F](#appendix-f-document-type-templates));
+- quoted material (§6.3) or a literal token (§6.2).
+
+Other rules have a nearby claim:
+
+- §7.5 asks for an earlier noun for an abstract singular (`the
+  design`, `the plan`). This rule asks for an earlier statement of a
+  fact, and the noun can be concrete and plural. Where both rules
+  match one phrase, as `the agreed plan` does in a document that
+  defines no plan, report it under this rule only: the fix states the
+  agreement and names the plan.
+- §7.15: where the head noun is abstract and names none of the items
+  it counts (`It reports four counts`), report it under §7.15 only.
+  Where the head noun names a concrete kind and only the count or the
+  act is unstated, report it under this rule only.
+- §7.6: a count signpost states a count the items directly after it
+  already show. This fault states a count no earlier sentence
+  supports.
+- §7.4 covers a term whose meaning is not defined. Here the noun is
+  understood; the document never states the fact it depends on.
+- §7.7: state the fact the phrase depends on and its result, not the
+  history of the work. A fix that adds who asked or what was
+  discussed is a §7.7 finding.
+
+Not a banned-word entry: each phrase is correct once the document
+states the fact. A parser can find a cardinal or a participle inside
+a definite phrase. Whether an earlier sentence states the fact needs
+the whole document, not a lookup, so this stays inference-based.
 
 ## 8. Register rules
 
