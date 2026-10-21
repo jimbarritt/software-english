@@ -34,6 +34,7 @@ not exhaustive.
   - [5.8 No undeclared state verb](#58-no-undeclared-state-verb-inference-based)
   - [5.9 No catch-all verb](#59-no-catch-all-verb-inference-based)
   - [5.10 No framing device](#510-no-framing-device-inference-based)
+  - [5.11 No ownership or entitlement for a system](#511-no-ownership-or-entitlement-for-a-system-inference-based)
 - [6. Vocabulary rules](#6-vocabulary-rules-deterministic)
   - [6.1 One sense per word](#61-one-sense-per-word-deterministic)
   - [6.2 Literal tokens](#62-literal-tokens-deterministic)
@@ -184,7 +185,7 @@ pieces back together:
 
 Four of the five sentences are under ten words, and together they
 state one fact: what the design defines, and where. "Their contract
-is below" states no fact of its own. "Its", "Their", "It", "It" refer
+is below" states no fact. "Its", "Their", "It", "It" refer
 in turn to the design, the events, and the contract, so the referent
 changes between consecutive sentences. The rhythm is staccato, and a
 pronoun whose referent changes from one sentence to the next makes a
@@ -271,6 +272,10 @@ Inference-based tier: a paraphrase of the same fault not on the fixed
 list (for example, `the cache is happy to serve stale data`) needs model
 judgement.
 
+Distinct from §5.11: a claim of ownership or entitlement (`its own
+copy`, `is entitled to`, `deserves`) gives a system a status, not a
+mind. Report it under §5.11.
+
 ### 5.2 No location or motion verb for an abstract subject (Deterministic)
 
 A location or motion verb (`sits`, `lives`, `resides`, `stands`, `rests`,
@@ -300,6 +305,11 @@ on a structure noun (`does not move`, `pass over`, `goes past`) is not
 on this rule's list: the subject check cannot tell `the schema does
 not move` from `the file does not move`. §5.5 covers it at the
 inference tier, and lists the motion idioms that need no subject check.
+
+`belongs to` stays correct as this rule's fix: its object is a set
+or a whole the subject is part of. §5.11 judges `belongs to` only
+where its object is a system said to own the subject (`the lock
+belongs to the process`).
 
 ### 5.3 No unstated commentary (Inference-based)
 
@@ -593,6 +603,138 @@ Other rules have a nearby claim:
 A parser can flag the cleft signatures. Telling a cleft apart from a
 `what` clause or a classifying noun, and recognising a question or a
 name used as a frame, needs judgement, so this stays inference-based.
+
+### 5.11 No ownership or entitlement for a system (Inference-based)
+
+This rule applies to every document type.
+
+A plain possessive states a fact: a service has a config, a record has
+an identifier. A possession or entitlement construction adds a second
+layer. It states that the possessor owns the thing, or has the
+standing to claim it. Only a person or an organisation of people has
+that standing. A system, a service, a component, a process, a
+document, a record, or an abstract concept does not.
+
+The family has two groups:
+
+- emphasis on a possessive: `own`, `its own`, `of its own`, `in its
+  own right`;
+- entitlement: `belongs to`, `is entitled to`, `has a right to`,
+  `deserves`, `earns`, `claims`, `is owed`.
+
+Fault:
+
+> The dispatch queue's own copy of the manifest is rebuilt nightly.
+
+Cutting `own` changes nothing the sentence states. Cut the layer and
+keep the possessive:
+
+> The dispatch queue's copy of the manifest is rebuilt nightly.
+
+An idiom of standing is the same fault:
+
+> The cache is a service in its own right.
+
+Cut the idiom:
+
+> The cache is a service.
+
+An entitlement has no plain possessive under it. State the allocation,
+and name the mechanism that makes it:
+
+> Each partition is entitled to one consumer in the group.
+
+> The group coordinator assigns each partition to one consumer in the
+> group.
+
+`belongs to` names the possessor in its object, not its subject:
+
+> Each lock belongs to the process that acquired it.
+
+> Only the process that acquired a lock can release it.
+
+`deserves` and `earns` state a judgement of desert. State the fact
+the judgement rests on, or the instruction it implies:
+
+> The retry path deserves a dedicated thread pool.
+
+> Run the retry path on a dedicated thread pool, so a burst of retries
+> does not delay a new request.
+
+Test: find the possessor. It is the subject of `deserves`, `earns`,
+`claims`, `is owed`, `is entitled to`, or `has a right to`, the object
+of `belongs to`, or the noun or pronoun before `own`. Where it is a
+person or an organisation of people, the sentence is correct.
+Otherwise, cut the layer, or replace it with a plain possessive, `has`,
+or the mechanism that allocates the thing. If a reader loses no fact,
+the layer was this fault.
+
+These are not this fault:
+
+- a plain possessive or a plain `has`, with any possessor: `the
+  service's config`, `the record's identifier`, `the queue has three
+  consumers`;
+- a possessor that is a person or an organisation of people: `the
+  user's own pen`, `the author's own draft`, `the team deserves the
+  time`, `the company owns the domain name`, since an organisation can
+  own property in law;
+- an idiom of standing about a person: `she is a maintainer in her own
+  right`;
+- `own` that states a fact, one each and not shared: `each event on
+  its own topic`, `each worker keeps its own copy of the cache`.
+  Cutting `own` here loses the fact that no two share one, so the test
+  above passes it;
+- `belongs to` as classification or membership, the plain verb §5.2
+  names: `a rule belongs to one tier`, `the record belongs to
+  partition 3`. Where `is a member of` or `is part of` states the same
+  fact, the verb classifies;
+- a term of art that names an operation, not a standing: `the worker
+  claims the next job`, where a claim is a lease the queue records, or
+  `the deposit earns interest`;
+- `claims that` in the sense of states (`the README claims that the
+  tool supports Windows`), which names no standing. Where it marks the
+  writer's doubt, §5.3 applies;
+- quoted material (§6.3) or a literal token (§6.2).
+
+Other rules have a nearby claim:
+
+- §5.1 covers a category error about mind: wanting, trying, knowing,
+  deciding. This rule covers a category error about status: the
+  standing to own a thing or to claim a desert. Neither entails the
+  other, and the fixes differ. §5.1 names the mechanism. This rule
+  cuts the added layer and keeps the possessive. Where one sentence
+  has both (`the cache knows its own size`), report two findings, one
+  under each rule.
+- §5.2 names `belongs to` as the plain classification verb that
+  replaces a location verb. That use is correct here too: its object
+  is a set or a whole, not a possessor. This rule fires on `belongs
+  to` only where the object is a system said to own the subject. §5.2
+  judges a location or motion verb, so the two rules never judge one
+  verb.
+- §5.5 bans `carry` and `hold` as verbs of physical possession, and
+  replaces each with `has` or `contains`. This rule keeps the plain
+  possession verb, and cuts an emphasis or an entitlement added to it.
+  `in its own right` and `earns its place` are idioms, not
+  comparisons: report them under this rule only.
+- §5.3: `deserves` and `earns` can state the writer's judgement only.
+  Where no fact remains once the judgement is cut (`the refactor
+  deserves praise`), report it under §5.3 only, since the fix deletes
+  the sentence. Where a fact remains, report it under this rule only.
+- §5.4 cuts a qualifier that adds no information. `own` adds none
+  either, but it attaches to a possessor, and the possessor decides
+  the fault. Report `own` under this rule only.
+- §6.1 judges the sense of an approved word by lookup. No word in this
+  family is in the approved vocabulary, so vocabulary-membership
+  reports each one as unlisted, whatever the possessor. This rule
+  judges the possessor, which no lookup reads.
+
+Not a banned-word entry, and not a fixed list with a subject check
+like §5.1's. Each construction is correct with a person as the
+possessor. A subject check would also fire on three correct uses with
+a system as the possessor: `belongs to` as classification, `own`
+meaning one each, and a term of art. A parser can find each member of
+the family. Whether the possessor is a person, and whether the cut
+loses a fact, needs judgement, so this stays inference-based.
 
 ## 6. Vocabulary rules (Deterministic)
 
