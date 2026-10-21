@@ -62,6 +62,7 @@ not exhaustive.
 - [8. Register rules](#8-register-rules)
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
+  - [8.3 No distributive tail](#83-no-distributive-tail-inference-based)
 - [Appendices](#appendices)
   - [Appendix A. Machine-readable rule catalogue](#appendix-a-machine-readable-rule-catalogue)
   - [Appendix B. Enforcement and fact preservation](#appendix-b-enforcement-and-fact-preservation)
@@ -1568,6 +1569,66 @@ These are not this fault:
 Telling a needed repetition apart from a mechanical one needs
 judgement, so this stays inference-based. High false-positive risk:
 this rule runs at warning severity, never error.
+
+### 8.3 No distributive tail (Inference-based)
+
+A distributive tail is a clause joined with `and` to a sentence that
+states a count or a set. It gives one property to every member, with
+`each`, `both`, or `every one of them`. The tail is this fault where
+that property is a fact about the document's own layout:
+
+> Four checks run on upload, and each is a step below.
+
+The main clause states a fact about the system. The tail states where
+the document describes each check. `And` joins two clauses of the same
+kind, and these two clauses differ in kind. The tail sets out a note
+on the document's structure as a second finding. Its property is a
+modifier of the noun phrase, written as a clause. Write the property
+as a modifier of the noun phrase:
+
+> Four checks run on upload, described in the steps below.
+
+The same fault with `both`:
+
+> The service exposes two endpoints, and both are listed in the table.
+
+Fix:
+
+> The service exposes two endpoints, listed in the table.
+
+Test: first, check that the property is about the document's layout,
+not the subject matter. Then write it as a modifier of the noun
+phrase. If a reader loses no fact, the tail was this fault.
+
+A tail whose property is a fact about the members is correct:
+
+> Three consumers read the topic, and each commits its offset
+> independently.
+
+The tail states a fact about the consumers, not about the document.
+Keep it.
+
+These are not this fault:
+
+- a tail whose property is a fact about the subject matter, as in the
+  consumer example;
+- a distributive word in the main clause, with no tail joined by
+  `and` (`Each of the four checks is a step in §4.`);
+- a separate sentence that states where the document describes the
+  members (`§4 describes each check.`);
+- quoted material (§6.3).
+
+Distinct from §8.1's no-cadence-device: a cadence device restates a
+fact the sentence before it already states. A distributive tail adds a
+fact about the document, inside the same sentence. Distinct from §7.6:
+a count signpost states only how many items come directly after it. A
+distributive tail is a clause joined to a count whose main clause
+states a fact. Where a sentence states only a count of the items after
+it, report it under §7.6 only.
+
+A parser can find `, and each` or `, and both` after a count. Telling
+a property of the layout from a property of the subject matter needs
+judgement, so this stays inference-based.
 
 ## Appendices
 

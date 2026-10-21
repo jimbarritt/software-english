@@ -176,13 +176,17 @@ after §7. They judge patterns across sentences and across a whole
 document, and that fits neither §3's sentence structure nor §7's
 document structure.
 
-Both rules are inference-based. A verbless sentence is detectable only
-with part-of-speech tagging, and the linter uses the Python standard
-library alone. A repeated bullet or sentence shape is countable with
-a pattern. Neither check decides whether the flagged text adds a
-fact. Each can flag a candidate for the model pass, but neither meets
-§2's test for the deterministic tier. The catalogue therefore has no
-deterministic register check.
+Every rule in §8 is inference-based. A verbless sentence is detectable
+only with part-of-speech tagging, and the linter uses the Python
+standard library alone. A repeated bullet or sentence shape is
+countable with a pattern. Neither check decides whether the flagged
+text adds a fact. Each can flag a candidate for the model pass, but
+neither meets §2's test for the deterministic tier. The catalogue
+therefore has no deterministic register check.
+
+§8.3, no-distributive-tail, is inference-based for the same reason. A
+pattern finds `, and each` after a count. It cannot tell a property of
+the document's layout from a property of the subject matter.
 
 ## Headings: two document rules, judged on the heading alone
 
