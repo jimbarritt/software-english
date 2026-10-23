@@ -77,7 +77,15 @@ tier = "deterministic"
 check = "anthropomorphism"
 severity = "error"
 lookback_words = 4
-subject_signal = ["a word from vocabulary/structure.tsv", "it", "this", "that"]
+subject_gate = "not-human-subject"
+subject_signal = ["any word within lookback_words before the match, in the same clause, other than a word from human_referents or its plural"]
+human_referents = [
+  "user", "customer", "person", "people", "reader", "writer", "author",
+  "reviewer", "maintainer", "operator", "developer", "engineer",
+  "learner", "student", "human", "team", "contributor",
+  "i", "me", "you", "we", "us", "he", "him", "she", "her", "they", "them",
+  "who", "someone", "anyone", "everyone", "nobody",
+]
 word_list = [
   "wants", "tries", "knows", "believes", "decides", "gives up",
   "waits patiently", "gets confused", "has patience", "is happy",
@@ -86,8 +94,11 @@ word_list = [
   "worries", "struggles", "learns", "notices", "realizes", "realises",
   "expects", "intends", "plans", "chooses", "likes", "dislikes",
   "enjoys", "hates",
+  "asks", "tells", "answers", "says", "disagree",
+  "arrives", "arrive", "goes", "comes", "come", "enters", "enter",
+  "leaves", "leave", "moves", "move",
 ]
-description = 'A system, service, component, or process has no human trait, feeling, or intent (SPEC §5.1). Fires only when a structure noun or a system-referring pronoun appears within lookback_words before the match, to avoid flagging a human subject. "user" is excluded from the subject gate — it names a human referent, not a system one, despite living in structure.tsv for other reasons.'
+description = "A system, a service, a component, a process, or any other subject that is not a person has no human trait, feeling, or intent, and does no act of communication or of motion (SPEC §5.1). Fires unless a human referent comes within lookback_words before the match, in the same clause: a word from human_referents, or its plural. Any other subject counts as a system, including a proper noun such as a product, vendor, or service name (\"Postgres knows about the row\", \"the record arrives with a default status\"). Does not fire when nothing precedes the match in its clause, or only an imperative lead (\"tell the user\", \"do not leave a heading empty\", the start of a wrapped line), or when the word directly before the match is a determiner other than \"this\" or \"that\" (\"the answers\", \"a move\"), since the match is then a noun. A possessive (\"the user's database\") is not the subject, so it does not count as a human referent. A person named by a proper noun is not in human_referents: name the role (\"the maintainer\"), or add the skip-line marker. \"disagrees\", \"complains\", \"travels\", \"lands\", and \"reaches\" are in vocabulary/banned.tsv, so banned-word reports them. Distinct from abstract-location (SPEC §5.2), which keeps a system-subject check, because each of its verbs also has a literal or an adjectival use (\"a live install\", \"the rest of the file\")."
 
 [[rules]]
 id = "abstract-location"
@@ -102,7 +113,7 @@ word_list = [
   "stand", "stands", "stood", "lie", "lies", "lay", "rest", "rests",
   "rested", "hang", "hangs", "hung", "float", "floats", "floated",
 ]
-description = 'A location or motion verb ("sits", "lives", "resides") standing in for a plain classification verb ("is", "belongs to") when the subject is abstract, not physical — the same fault as "reach" or "carry" in banned.tsv, but not blockable as a flat banned word, because each of these verbs is correct English for a physical or human subject ("the operator sits at the console"). Gated the same way as anthropomorphism-fixed-list, and for the same reason: this fault is a default of fluent English, not a vocabulary gap — a writer actively avoiding it can still produce it without noticing. A motion verb with the same fault that also names a literal operation on a structure noun ("does not move", "pass over", "goes past") is not on this list, because the subject gate cannot tell "the schema does not move" from "the file does not move". no-metaphor-or-analogy covers it at the inference tier. "belongs to" as the fix here stays correct: its object is a set or a whole. no-ownership-or-entitlement-for-a-system (SPEC §5.11) judges "belongs to" only where its object is a system said to own the subject.'
+description = 'A location or motion verb ("sits", "lives", "resides") standing in for a plain classification verb ("is", "belongs to") when the subject is abstract, not physical — the same fault as "reach" or "carry" in banned.tsv, but not blockable as a flat banned word, because each of these verbs is correct English for a physical or human subject ("the operator sits at the console"). Fires only when a structure noun other than a human referent, or a system-referring pronoun, comes within lookback_words before the match. This check is narrower than the one anthropomorphism-fixed-list uses, because each verb here also has a literal or an adjectival use. The fault is a default of fluent English, not a vocabulary gap — a writer actively avoiding it can still produce it without noticing. A verb of motion ("goes", "comes", "moves", "leaves", "arrives") is on the anthropomorphism-fixed-list, with its not-human-subject check: a motion verb takes a person as its subject, never a system or a structure. A positional idiom with no verb of its own ("pass over", "behind the serialiser") is on neither list; no-metaphor-or-analogy covers it at the inference tier. "belongs to" as the fix here stays correct: its object is a set or a whole. no-ownership-or-entitlement-for-a-system (SPEC §5.11) judges "belongs to" only where its object is a system said to own the subject.'
 
 [[rules]]
 id = "anthropomorphism-paraphrase"

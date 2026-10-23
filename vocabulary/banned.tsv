@@ -1,5 +1,5 @@
 reach	name the action: read, write, upload, fetch, call
-reaches	name the action: reads, writes, saves, arrives at
+reaches	name the action: reads, writes, saves, is received by
 reachable	read, or available
 gate	need, require, or check
 gates	needs, requires, or checks
@@ -8,9 +8,9 @@ trap	problem, mistake, or fault
 traps	problems, or mistakes
 surface	show, return, or report
 surfaces	shows, returns, or reports
-land	arrive, or be saved
-lands	arrives, or is saved
-landed	arrived, or was saved
+land	be received, or be saved
+lands	is received, or is saved
+landed	was received, or was saved
 carried across	sent, copied, or included
 drive	run, call, or start
 drives	runs, calls, or starts
@@ -189,6 +189,7 @@ ride on	name the mechanism: the event includes it, the topic publishes it, the s
 rides on	name the mechanism: the event includes it, the topic publishes it, the service sends it
 riding on	name the mechanism: the event includes it, the topic publishes it, the service sends it
 rode on	name the mechanism: the event includes it, the topic publishes it, the service sends it
+travel	name the action: be sent, be published, be received
 travels	name the action: is sent, is published, is received
 travelled	name the action: was sent, was published, was received
 travelling	name the action: sent, published, received
@@ -216,5 +217,5 @@ where this leaves	name the effect: what this means for
 where that leaves	name the effect: what that means for
 where does this leave	name the effect: what does this mean for
 where does that leave	name the effect: what does that mean for
-as they come	as they arrive, or name the trigger: when one is added
-as it comes	as it arrives, or name the trigger: when it is added
+as they come	name the trigger: when one is added
+as it comes	name the trigger: when it is added

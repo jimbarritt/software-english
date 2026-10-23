@@ -72,7 +72,7 @@ Appendix A holds prior art. Appendix B holds the formal schema, in
 Avro or JSON Schema. Appendix C holds a generated artefact, an OpenAPI
 or an AsyncAPI document, where one exists.
 
-Entity schema comes before the endpoints and the messages, because an
+The entity schema is before the endpoints and the messages, because an
 endpoint or a message example refers to an entity's type.
 
 ## Schema notation

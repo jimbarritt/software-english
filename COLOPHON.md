@@ -65,7 +65,7 @@ and fails in another.
 It is separate from `no-process-narration` (SPEC §7.7). That rule covers
 prose that narrates a decision's history. An unanchored reference
 narrates nothing; it names a thing the document does not identify. Both
-faults come from the same source: prose moved from a conversation,
+faults have the same source: prose moved from a conversation,
 where the referent is shared, into a standalone document. Each fails on
 a different mechanism, so each has its own rule.
 
@@ -179,7 +179,7 @@ document structure.
 Every rule in §8 is inference-based. A verbless sentence is detectable
 only with part-of-speech tagging, and the linter uses the Python
 standard library alone. A repeated bullet or sentence shape is
-countable with a pattern. Neither check decides whether the flagged
+countable with a pattern. Neither check can show whether the flagged
 text adds a fact. Each can flag a candidate for the model pass, but
 neither meets §2's test for the deterministic tier. The catalogue
 therefore has no deterministic register check.
@@ -214,5 +214,5 @@ recommends, and each template's section names stay correct.
 Both are inference-based. The fixed list already contains formulaic
 heading phrases (`at a glance`, `the big picture`), and banned-word
 catches them. A parser can also flag a heading that ends in a question
-mark. Neither check decides whether a heading states its section's
+mark. Neither check can show whether a heading states its section's
 content, so neither meets §2's test for the deterministic tier.

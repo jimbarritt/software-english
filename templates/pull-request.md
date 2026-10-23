@@ -36,7 +36,7 @@ states those facts. It does not restate the diff file by file.
 
 Both guides ask for the same content: the problem the change solves,
 then what the change does and why, with any known shortcoming
-named. The kernel guide also asks for a description a reviewer
+named. The kernel guide also requires a description a reviewer
 understands without following a link.
 
 ## Structural conventions
@@ -96,7 +96,7 @@ change statement.
 
 Read the whole description from start to end before presenting it,
 as a reviewer reads it. A pass that corrects only the lines an
-earlier pass flagged can leave a sentence that states no fact:
+earlier pass flagged can produce a sentence that states no fact:
 
 > It reports four counts, and a reason where the sync itself stopped.
 

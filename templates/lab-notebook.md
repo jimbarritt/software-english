@@ -23,7 +23,7 @@ convergent practice, not a formal standard.
 - No entry is erased.
 - No correction fluid is used.
 - An error is struck through with one line, so the original text stays
-  legible. The correction goes beside it, not over it.
+  legible. The correction is beside it, not over it.
 
 ## Common variants
 

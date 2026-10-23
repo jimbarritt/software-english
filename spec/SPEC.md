@@ -261,13 +261,44 @@ Imperative for instructions. Configurable: see
 A system, service, component, or process has no human trait, feeling, or
 intent. State the mechanism.
 
-Deterministic-tier fixed list (verbs/adjectives that fail when a
-structure noun (§6, [`vocabulary/structure.tsv`](../vocabulary/structure.tsv))
-or a system-referring pronoun (`it`, `this`, `that`) appears within
-four words before the match):
-`wants, tries, knows, believes, decides, gives up, waits patiently, gets confused, has patience, is happy, is confused, is smart, understands, thinks, remembers, forgets, hopes, assumes, agrees, refuses, prefers, cares, worries, struggles, learns, notices, realizes, expects, intends, plans, chooses, likes, dislikes, enjoys, hates`.
-The nearby-subject requirement exists so that a human subject
-(`the reviewer expects a passing test`) does not trigger a false match.
+Deterministic-tier fixed list (verbs and adjectives that fail unless a
+human referent is within four words before the match, in the same
+clause):
+`wants, tries, knows, believes, decides, gives up, waits patiently, gets confused, has patience, is happy, is confused, is smart, understands, thinks, remembers, forgets, hopes, assumes, agrees, refuses, prefers, cares, worries, struggles, learns, notices, realizes, realises, expects, intends, plans, chooses, likes, dislikes, enjoys, hates, asks, tells, answers, says, disagree, arrives, arrive, goes, comes, come, enters, enter, leaves, leave, moves, move`.
+
+A human referent is a word that names a person or a group of people
+(`user`, `customer`, `person`, `reviewer`, `team`, and similar), its
+plural, or a personal pronoun (`I`, `you`, `we`, `she`, `they`,
+`who`). The rule catalogue lists them in full. Any other subject is a
+system, including a proper noun such as the name of a product, a
+vendor, or a service:
+
+> Postgres knows about the row.
+> The worker asks the database whether the feature is enabled.
+> The record arrives with a default status.
+
+State the mechanism instead:
+
+> Postgres contains the row.
+> The worker queries the database for the feature flag.
+> The record is created with a default status.
+
+A verb of motion is on this list because motion is an act of a person.
+A record, a message, or a file is sent, saved, added, or read. The
+transport verbs `travels`, `lands`, and `reaches` are in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv), with `disagrees`
+and `complains`, so the banned-word check reports them.
+
+A human subject does not cause a match (`the reviewer expects a
+passing test`). There is also no match when nothing precedes the match
+in its clause, or only an imperative lead (`tell the user`, `do not
+leave a heading empty`), or when the word directly before the match is
+a determiner other than `this` or `that` (`the answers`, `a move`),
+because the match is then a noun.
+
+A person's name is not a human referent to this check
+(`Jim knows the answer`). Name the role
+(`the maintainer knows the answer`), or add the skip-line marker.
 
 Inference-based tier: a paraphrase of the same fault not on the fixed
 list (for example, `the cache is happy to serve stale data`) needs model
@@ -292,20 +323,27 @@ The same verbs are correct English for a physical or human subject:
 > The operator sits at the console.
 > The user lives in London.
 
-So this rule applies the same condition as §5.1: a nearby structure noun
-(excluding a human referent such as `user`) or a system-referring pronoun.
+So this rule fails only when a structure noun (other than a human
+referent such as `user`) or a system-referring pronoun (`it`, `this`,
+`that`) is within four words before the match. This condition is
+narrower than the §5.1 condition, because each verb on this list also
+has a literal or an adjectival use (`a live install`, `the rest of the
+file`).
 
 This rule exists because the fault is a default of fluent English, not a
 vocabulary gap: a writer actively avoiding it can still produce it
 without noticing. It cannot go in the flat banned-word list (§6) because,
-unlike `reach` or `leverage`, these verbs have a correct use: only the
-subject decides.
+unlike `reach` or `leverage`, these verbs have a correct use, and
+whether a use is correct depends only on its subject.
 
-A motion verb with the same fault that also names a literal operation
-on a structure noun (`does not move`, `pass over`, `goes past`) is not
-on this rule's list: the subject check cannot tell `the schema does
-not move` from `the file does not move`. §5.5 covers it at the
-inference tier, and lists the motion idioms that need no subject check.
+A verb of motion (`goes`, `comes`, `moves`, `leaves`, `arrives`) is on
+the §5.1 list, with the §5.1 human-referent condition: motion is an act
+of a person, so `the schema does not move` and `the file does not move`
+are the same fault. State the operation instead (`the schema does not
+change`, `the file stays in the same directory`). A positional idiom
+with no verb of its own (`pass over`, `behind the serialiser`) is on
+neither list. §5.5 covers it at the inference tier, and lists the
+motion idioms that need no subject check.
 
 `belongs to` stays correct as this rule's fix: its object is a set
 or a whole the subject is part of. §5.11 judges `belongs to` only
@@ -338,9 +376,9 @@ State the mechanism instead:
 
 Deterministic-tier fixed list (in
 [`vocabulary/banned.tsv`](../vocabulary/banned.tsv)): a formulaic
-transport metaphor, where data, a message, or an event is said to move
-by itself:
-`ride on, rides on, riding on, rode on, travels, travelled, travelling, piggyback, hitch a ride, along for the ride, ferry, carried across, flows through, landed`.
+transport metaphor, where data, a message, or an event is given a
+transport verb of its own:
+`ride on, rides on, riding on, rode on, travel, travels, travelled, travelling, piggyback, hitch a ride, along for the ride, ferry, carried across, flows through, landed`.
 State the mechanism instead: the event includes it, the topic
 publishes it, the service sends it.
 
@@ -359,17 +397,18 @@ motion idiom, where the subject is inside the fixed phrase, so no
 subject check is needed:
 `where this leaves, where that leaves, where does this leave, where does that leave, as they come, as it comes`.
 State the effect instead: what this means for the retry policy, add
-more here, handle each event when it arrives.
+more here, handle each event when the topic publishes it.
 
 Inference-based tier: a metaphor or an analogy not on the fixed list
 (for example, `the retry queue is the system's safety net`) needs
-model judgement to recognise. This includes a verb of physical motion
-or position given an abstract subject: `the published schema does not
-move` (does not change), `the field can be renamed behind the
-serialiser` (renamed without changing the response). These verbs are
-not on a fixed list, because each also names a literal operation on a
-structure noun: `the file does not move`, `a second pass over the
-input`, `the service runs behind the proxy`.
+model judgement to recognise. This includes a positional idiom with no
+verb of its own, given an abstract subject: `the field can be renamed
+behind the serialiser` (renamed without changing the response), `a
+second pass over the contract` (a second read of the contract). These
+idioms are not on a fixed list, because each also names a literal
+operation: `a second pass over the input`,
+`the service runs behind the proxy`. A verb of motion itself
+(`the published schema does not move`) is on the §5.1 fixed list.
 
 The inference-based tier also includes a container-and-form noun
 (`shape`, `layer`, `space`) applied to a schema, a type, an API, or a
@@ -414,8 +453,8 @@ model judgement to tell it apart from a literal use of "honest".
 
 A sentence states what happens. It does not state what does not
 happen, what a component cannot do, or how a case differs from an
-unasked question. That shape answers an objection instead of stating
-the fact:
+unasked question. A sentence of that shape is a reply to an objection,
+not a statement of the fact:
 
 > A file write is the one exception: Claude Code cannot undo a write
 > already on disk. Claude still sees the report and fixes the file.
@@ -573,8 +612,7 @@ These are not this fault:
   config states whether retries are enabled`;
 - `X is the N that Y`, where N is a noun that classifies X: `the cache
   is the store that the reader queries first`;
-- a literal exchange between components: `the server answers each
-  request with a status code`;
+- a literal exchange between components: `the server returns a status code for each request`;
 - an entry in a section that lists open questions, such as `Open
   questions` in a design document;
 - a name stated as a fact a reader needs, such as a rename or a naming
@@ -722,8 +760,8 @@ Other rules have a nearby claim:
   deserves praise`), report it under §5.3 only, since the fix deletes
   the sentence. Where a fact remains, report it under this rule only.
 - §5.4 cuts a qualifier that adds no information. `own` adds none
-  either, but it attaches to a possessor, and the possessor decides
-  the fault. Report `own` under this rule only.
+  either, but it attaches to a possessor, and whether it is a fault
+  depends on the possessor. Report `own` under this rule only.
 - §6.1 judges the sense of an approved word by lookup. No word in this
   family is in the approved vocabulary, so vocabulary-membership
   reports each one as unlisted, whatever the possessor. This rule
@@ -885,7 +923,7 @@ Fix: delete the second sentence. Where a check enforces the constraint,
 state it in that check.
 
 A count signpost is a sentence that starts with a numeral or a number
-word and states only how many items come directly after it. A reader
+word and states only how many items follow it directly. A reader
 counts the items, so the count states no fact. The trigger is a number
 word at the head of a sentence, followed by a colon and a list, by an
 ordered or unordered list, or by the same number of sentences that each
@@ -902,7 +940,7 @@ Three exceptions:
 - A count that states a fact beyond the number of items is not this
   fault: a part of a larger set (`Three of the five routes drop an
   entry:`), or a bound a mechanism checks.
-- A count whose items do not come directly after it, such as a summary
+- A count whose items do not follow it directly, such as a summary
   (§7.1) that states a count the body expands in separate sections, is
   not this fault.
 - A number that is a quantity, not a count of the items
@@ -1199,7 +1237,7 @@ artefact for the noun to belong to, report it under this rule only.
 Not a banned-word entry: each noun has a correct abstract use, and a
 word-list lookup reads one token, not the document the token is in.
 Distinct from §7.13: that rule cuts an implementation unit a
-reader's task does not act on. This rule asks for the artefact a
+reader's task does not act on. This rule requires the artefact a
 reader checks a sentence against, which a reader's task does act
 on. Telling an abstract stand-in apart from a correct abstract noun
 needs judgement, so this stays inference-based. See
@@ -1295,7 +1333,7 @@ such as `at a glance`, `the big picture`, and `the upshot`, are caught
 by banned-word. This rule covers a withholding heading in words not on
 the list.
 
-Distinct from §7.5's no-unanchored-reference: that rule asks for the
+Distinct from §7.5's no-unanchored-reference: that rule requires the
 referent a heading names. A heading can name its referent and still
 withhold its content. Where both rules match one heading, report it
 under this rule only: the fix states the fact, and the fact names the
@@ -1319,8 +1357,8 @@ this fault.
 
 A question heading is a direct question: interrogative word order, a
 question mark, or both. A rhetorical question is the common case. A
-plain question is the same fault, because the heading asks and only
-the section states.
+plain question is the same fault, because the heading is a question and
+only the section states the claim.
 
 Fault: the heading `Why would anyone run it twice?`
 Fix: state the answer: `A second run reuses the cached result`.
@@ -1336,9 +1374,9 @@ Fault: the heading `In defence of a second run`.
 Fix: state the claim (`Retries are capped at three attempts`), and
 give the reasons in the section.
 
-Test: state in one sentence what the section answers or argues for.
-If the heading asks for that sentence, or argues for it, use the
-sentence as the heading.
+Test: state in one sentence the claim of the section. If the heading
+is a question with that sentence as its answer, or a case for that
+sentence, use the sentence as the heading.
 
 Four exceptions:
 
@@ -1367,7 +1405,7 @@ finding under that rule.
 judges the heading itself, so the two do not overlap.
 
 A parser can flag a heading that ends in a question mark. Deciding
-whether the heading is a question the section answers, a quoted
+whether the heading is a question answered by the section, a quoted
 literal, or a case for a claim needs judgement, so this stays
 inference-based.
 
@@ -1430,8 +1468,8 @@ These are not this fault:
 
 Other rules have a nearby claim:
 
-- §7.5 asks for an earlier noun for an abstract singular (`the
-  design`, `the plan`). This rule asks for an earlier statement of a
+- §7.5 requires an earlier noun for an abstract singular (`the
+  design`, `the plan`). This rule requires an earlier statement of a
   fact, and the noun can be concrete and plural. Where both rules
   match one phrase, as `the agreed plan` does in a document that
   defines no plan, report it under this rule only: the fix states the
@@ -1621,7 +1659,7 @@ These are not this fault:
 Distinct from §8.1's no-cadence-device: a cadence device restates a
 fact the sentence before it already states. A distributive tail adds a
 fact about the document, inside the same sentence. Distinct from §7.6:
-a count signpost states only how many items come directly after it. A
+a count signpost states only how many items follow it directly. A
 distributive tail is a clause joined to a count whose main clause
 states a fact. Where a sentence states only a count of the items after
 it, report it under §7.6 only.
@@ -1681,7 +1719,7 @@ shown:
 
 ### Appendix D. Vocabulary governance
 
-A word enters the approved vocabulary when it names a real, recurring
+A word is added to the approved vocabulary when it names a real, recurring
 concept in software/systems engineering prose and has one dominant sense
 in that context. No formal versioning yet.
 

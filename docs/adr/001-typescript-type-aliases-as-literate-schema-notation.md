@@ -35,7 +35,7 @@ order with lines.
 TypeScript type aliases use one keyword, `type`, and mark only the
 optional field, so a required field has no marker. A constraint the
 type system cannot express (a timestamp format, a decimal string, a
-minimum) goes in a trailing comment. Most readers of a design document
+minimum) is in a trailing comment. Most readers of a design document
 already read TypeScript.
 
 TypeSpec (Microsoft, version 1.16.0) reads like TypeScript with
