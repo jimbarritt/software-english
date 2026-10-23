@@ -216,3 +216,40 @@ heading phrases (`at a glance`, `the big picture`), and banned-word
 catches them. A parser can also flag a heading that ends in a question
 mark. Neither check can show whether a heading states its section's
 content, so neither meets §2's test for the deterministic tier.
+
+## Count and list: inference-based at error severity
+
+§7.20, no-count-list-mismatch, started as a request for a fully
+deterministic, blocking check: a number word before a colon list or an
+and/or list, where the item count differs. A prototype of that literal
+check, run against both this repository's and `claude-plugins`' own
+real prose, found 15 matching sentences and flagged 7 of them. Every
+one of the 7 was a false positive: an explanatory colon (`on both
+flags: a pending rule is never a finding`), a quantity (`state the
+result in one or two lines`), and a list item that itself contains
+`or`/`and` (`two transports: an HTTP API, and an event or message API
+over Kafka`).
+
+The rule's own worked example shows why a comma alone cannot decide
+this: `one of two modes: on the primary queue, with a priority flag,
+or on a queue of its own` reads as three comma-separated items, or as
+two items where `with a priority flag` modifies the first. The same
+comma marks both a separator and a modifier boundary, and only
+judgement separates them. §2's deterministic-tier bar needs a lookup
+or a regular grammar with no interpretation of meaning; splitting
+this list fails that test, so the rule stays inference-based.
+
+The "error, not warning" half of the request still applies: tier and
+severity are independent (§2), so §7.20 is the catalogue's first
+inference-based rule at `error` severity. A finding under it states a
+wrong fact, not a style preference, so a blocking severity fits even
+where a model, not a lookup, makes the call.
+
+`claude-plugins`' `swe` plugin adds a located-candidate detector for
+this rule and for `define-before-use` (§7.4, newly catalogued by the
+same change): deterministic Python that finds a site worth judging,
+with no judgement of the fault itself, and no entry onto the findings
+list.
+The pattern is the same one `register_candidates_test.sh` and
+`definite_phrase_candidates_test.sh` already establish for §8's and
+§7.19's rules.

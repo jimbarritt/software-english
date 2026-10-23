@@ -59,6 +59,7 @@ not exhaustive.
   - [7.17 No withholding heading](#717-no-withholding-heading-inference-based)
   - [7.18 No question or argument heading](#718-no-question-or-argument-heading-inference-based)
   - [7.19 No unstated presupposition](#719-no-unstated-presupposition-inference-based)
+  - [7.20 No count that differs from its list](#720-no-count-that-differs-from-its-list-inference-based)
 - [8. Register rules](#8-register-rules)
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
@@ -860,6 +861,54 @@ Define a named term before its first normative use. Introducing a term
 and relying on it in the same sentence, without stating what it means,
 forces a reader to infer the definition from usage instead.
 
+A definition clause is any of these: a sentence stating what the term
+means (`X means`, `X refers to`, `X is defined as`); the term set in
+bold at its introduction; a glossary or table entry; a link to where
+another document defines it; or a parenthetical gloss at the first use.
+Headings are in scope: a term used in a heading before the body defines
+it is used before it is defined.
+
+Fault:
+
+> The router sends an order in one of two modes: on the primary queue,
+> with a priority flag, or on a queue of its own.
+
+`mode` names no term of the domain, and no sentence defines it anywhere
+in the document. Fix: use the names the document already defines, or
+define the term before its first use. Better, state the two cases
+directly, with no coined term at all:
+
+> The router sends an order to the primary queue with a priority flag
+> set, or to a queue of its own.
+
+Test: for each term the intended reader does not already use, find the
+sentence that defines it, and check that the sentence precedes the
+term's first use.
+
+These are not this fault:
+
+- a term of the domain the intended reader already uses (`order`,
+  `router`);
+- a word in the approved vocabulary ([Appendix D](#appendix-d-vocabulary-governance));
+- quoted material (§6.3) or a literal token (§6.2).
+
+A word outside the approved vocabulary is not, by itself, this fault:
+vocabulary-membership already reports each such word, one occurrence at
+a time ([Appendix D](#appendix-d-vocabulary-governance)). This rule
+fires only where the term also recurs with no definition clause.
+
+Other rules have a nearby claim:
+
+- §7.13: the reciprocal clause is already there.
+- §7.15: where the undefined noun substitutes for an artefact the
+  sentence can name, report it under §7.15 only. Naming the artefact
+  removes the undefined term too.
+- §7.19: the reciprocal clause is already there.
+
+A lookup can find a word outside the approved vocabulary that recurs in
+a document. Whether the intended reader already knows it, and whether a
+sentence defines it, needs judgement, so this stays inference-based.
+
 ### 7.5 No unanchored reference (Inference-based)
 
 A definite reference (`the design`, `the decision`, `the plan`,
@@ -950,9 +999,12 @@ Three exceptions:
 The phrases `two things` and `three things` are on the fixed list
 (`vocabulary/banned.tsv`), and banned-word reports them. Distinct from
 §8.1's no-cadence-device: a cadence device restates the sentence before
-it, and a count signpost announces the items after it. Both triggers
-are findable in the text. Whether a found instance states a fact beyond
-the count needs judgement, so this stays inference-based.
+it, and a count signpost announces the items after it. Distinct from
+§7.20: a count signpost states a count the items directly after it
+already show, correctly; a count that differs from its own list states
+a wrong fact, and belongs under §7.20 only. Both triggers are findable
+in the text. Whether a found instance states a fact beyond the count
+needs judgement, so this stays inference-based.
 
 ### 7.7 No process narration (Inference-based)
 
@@ -1181,8 +1233,9 @@ names nothing in the system.
 In a PR description, the common stand-ins are `evidence`, `context`,
 `visibility`, `coverage`, and `insight`. In a reference or a design
 document, the common substitutes are structural nouns: `shape`,
-`form`, and `flavour`. The noun `surface` is on the fixed list, so
-banned-word catches it (§5.5).
+`form`, `flavour`, `placement`, `arrangement`, `positioning`, and
+`layout`. The noun `surface` is on the fixed list, so banned-word
+catches it (§5.5).
 
 Fault: `The record written to the downstream system contained no
 evidence.` The missing thing was a receipt file attached to the
@@ -1206,6 +1259,13 @@ reports four counts` names none of the four.
 Fix: `The summary reports the number of orders read, written,
 skipped, and failed.`
 
+Fault: `Mode` substitutes for the difference between two payloads: `The
+router sends an order in one of two modes: on the primary queue, with
+a priority flag, or on a queue of its own.` `Mode` names no field, no
+request, and no response a reader can check the sentence against.
+Fix: `The router sends an order to the primary queue with a priority
+flag set, or to a queue of its own.`
+
 On a PR description, the rule covers the problem statement and the
 statement of what the change does: the sections headed Summary,
 Problem, or Change, or, in a description with no headings, the
@@ -1222,8 +1282,10 @@ Four exceptions:
 - A noun where the thing named is itself abstract, such as a
   measured quantity a tool reports (`Line coverage of the parser
   rose from 71% to 84%.`), is not this fault.
-- A structural noun in its literal sense (`an HTML form`) is not
-  this fault.
+- A structural noun in its literal sense is not this fault: `an HTML
+  form`; `a CSS grid layout`; `pod placement` in a cluster scheduler;
+  or a named thing's own layout, a reader can inspect directly (`the
+  repository layout`, a document's own layout of sections, §8.3).
 - A heading or a section name (`Context`), a document type name
   (`Evidence List`), or a literal token (§6.2), is not this fault.
 - On a PR description, a sentence outside the problem statement and
@@ -1481,6 +1543,10 @@ Other rules have a nearby claim:
 - §7.6: a count signpost states a count the items directly after it
   already show. This fault states a count no earlier sentence
   supports.
+- §7.20: a cardinal whose items the same sentence names is not this
+  fault, correctly, when the count matches that list. Where the count
+  differs from its own list, report it under §7.20 only: the fault is
+  a wrong count, not an unstated one.
 - §7.4 covers a term whose meaning is not defined. Here the noun is
   understood; the document never states the fact it depends on.
 - §7.7: state the fact the phrase depends on and its result, not the
@@ -1491,6 +1557,71 @@ Not a banned-word entry: each phrase is correct once the document
 states the fact. A parser can find a cardinal or a participle inside
 a definite phrase. Whether an earlier sentence states the fact needs
 the whole document, not a lookup, so this stays inference-based.
+
+### 7.20 No count that differs from its list (Inference-based)
+
+This rule applies to every document type.
+
+A count in a sentence matches the number of items the same sentence
+lists after it, after a colon or as an and/or list. A count that
+differs from its own list states a false fact: a reader who counts the
+list finds a number other than the one the sentence stated. The same
+fault also covers a list whose punctuation does not let a reader tell
+how many items it has, so a reader cannot check the count against it
+at all.
+
+Fault:
+
+> The router sends an order in one of two modes: on the primary queue,
+> with a priority flag, or on a queue of its own.
+
+Two readings of the list differ from the stated count of two. Read
+as three comma-separated items (the primary queue; a priority flag;
+a queue of its own), the list has three, not two. Read as two items,
+where `with a priority flag` modifies the first (the primary queue,
+with a priority flag set; or a queue of its own), the comma that
+separates the items is indistinguishable, on the page, from the comma
+that sets off the modifier inside the first item. Either way, a reader
+cannot check `one of two` against the list that follows it.
+
+Fix: delete the count rather than correct it, and state the cases
+directly:
+
+> The router sends an order to the primary queue with a priority flag
+> set, or to a queue of its own.
+
+A corrected count that still only announces the list below it, such as
+`two ways:` followed by a two-item list, is a §7.6 count
+signpost, not this fault.
+
+Test: count the items in the list. Where a comma could separate two
+items or set off a modifier inside one item, the sentence has this
+fault even where the stated count matches one of the two readings.
+
+These are not this fault:
+
+- a number that is a quantity, not a count of the items (`state the
+  result in one or two lines: what ran, and what it found`);
+- a colon that introduces an explanation, not a list (`on both flags:
+  a pending rule is never a finding`);
+- a part of a larger set whose count matches its part (`Two of the
+  five routes drop an entry: read and write.`);
+- quoted material (§6.3) or a literal token (§6.2).
+
+Distinct from §7.6: a count signpost states a count its list already
+shows, correctly, and adds no fact; this rule's fault is a count that
+states a fact its list contradicts. Report a match under one rule
+only, as each section states.
+
+Distinct from §7.19: a cardinal whose items the same sentence names is
+not a §7.19 fault, so long as the count matches the list. Where the
+count differs from the list, report it under this rule only.
+
+A mismatch states a wrong fact, so this rule runs at `error` severity,
+unlike the other rules in this section. Splitting the list needs
+judgement: a comma can separate two items or set off a modifier inside
+one, as the example's two readings show, so a regular grammar cannot
+decide this rule on its own (§2), and it stays inference-based.
 
 ## 8. Register rules
 
