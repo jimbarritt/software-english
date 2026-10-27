@@ -1,0 +1,7 @@
+# Files exempt from swe's checks. One glob pattern per line. A pattern
+# with a "/" matches the path relative to this file's directory; a
+# pattern with no "/" matches the basename, at any depth.
+#
+# The "before" sample is written in the register the talk describes.
+# Its faults are the content.
+docs/public/presentations/intro/samples/gmail-messages-before.md
