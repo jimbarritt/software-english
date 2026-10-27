@@ -28,51 +28,58 @@ continue with the habits slide, which lists the same kinds of fault.
 
 ## The plugin checks the session's prose against the spec
 
-<svg class="map" viewBox="0 0 1100 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of the spec, the plugin, the session and its prose">
+<svg class="map" viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of the spec, the plugin, the lint script, the session and its prose">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#5b6b7c"/>
     </marker>
   </defs>
-  <rect x="10" y="10" width="400" height="450" rx="14" fill="#e4f3ec" stroke="#0b6e4f" stroke-width="3"/>
+  <rect x="10" y="10" width="400" height="460" rx="14" fill="#e4f3ec" stroke="#0b6e4f" stroke-width="3"/>
   <text x="210" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#0b6e4f">Software English, the spec</text>
-  <rect x="40" y="76" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="210" y="105" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">Vocabulary</text>
-  <text x="210" y="131" text-anchor="middle" font-size="17" fill="#5b6b7c">approved words and banned words</text>
-  <rect x="40" y="164" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="210" y="193" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">6 deterministic rules</text>
-  <text x="210" y="219" text-anchor="middle" font-size="17" fill="#5b6b7c">a script checks them</text>
-  <rect x="40" y="252" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="210" y="281" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">30 inference rules</text>
-  <text x="210" y="307" text-anchor="middle" font-size="17" fill="#5b6b7c">a model judges them</text>
-  <rect x="40" y="340" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="210" y="369" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">15 document types</text>
-  <text x="210" y="395" text-anchor="middle" font-size="17" fill="#5b6b7c">the structure each type requires</text>
-  <line x1="410" y1="235" x2="528" y2="235" stroke="#5b6b7c" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="470" y="222" text-anchor="middle" font-size="16" fill="#5b6b7c">rule data</text>
-  <rect x="530" y="10" width="560" height="450" rx="14" fill="none" stroke="#5b6b7c" stroke-width="3" stroke-dasharray="10 8"/>
+  <rect x="40" y="80" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+  <text x="210" y="109" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">Vocabulary</text>
+  <text x="210" y="135" text-anchor="middle" font-size="17" fill="#5b6b7c">approved words and banned words</text>
+  <rect x="40" y="170" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+  <text x="210" y="199" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">6 deterministic rules</text>
+  <text x="210" y="225" text-anchor="middle" font-size="17" fill="#5b6b7c">a script checks them</text>
+  <rect x="40" y="260" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+  <text x="210" y="289" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">30 inference rules</text>
+  <text x="210" y="315" text-anchor="middle" font-size="17" fill="#5b6b7c">a model judges them</text>
+  <rect x="40" y="350" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+  <text x="210" y="379" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">15 document types</text>
+  <text x="210" y="405" text-anchor="middle" font-size="17" fill="#5b6b7c">the structure each type requires</text>
+  <line x1="410" y1="240" x2="528" y2="240" stroke="#5b6b7c" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="470" y="227" text-anchor="middle" font-size="16" fill="#5b6b7c">rule data</text>
+  <rect x="530" y="10" width="560" height="460" rx="14" fill="none" stroke="#5b6b7c" stroke-width="3" stroke-dasharray="10 8"/>
   <text x="810" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2a37">A Claude Code or Copilot CLI session</text>
-  <rect x="560" y="76" width="220" height="64" rx="10" fill="#eef1f4" stroke="#1f2a37" stroke-width="2"/>
-  <text x="670" y="115" text-anchor="middle" font-size="22" font-weight="600" fill="#1f2a37">Claude</text>
-  <rect x="560" y="236" width="220" height="150" rx="10" fill="#e4f3ec" stroke="#0b6e4f" stroke-width="3"/>
-  <text x="670" y="272" text-anchor="middle" font-size="22" font-weight="700" fill="#0b6e4f">swe plugin</text>
-  <text x="670" y="304" text-anchor="middle" font-size="17" fill="#1f2a37">three hooks</text>
-  <text x="670" y="330" text-anchor="middle" font-size="17" fill="#1f2a37">/swe:lint-file</text>
-  <text x="670" y="356" text-anchor="middle" font-size="17" fill="#1f2a37">the output style</text>
-  <rect x="860" y="76" width="200" height="64" rx="10" fill="#fbfbf9" stroke="#1f2a37" stroke-width="2"/>
-  <text x="960" y="115" text-anchor="middle" font-size="20" fill="#1f2a37">a document</text>
-  <rect x="860" y="176" width="200" height="64" rx="10" fill="#fbfbf9" stroke="#1f2a37" stroke-width="2"/>
-  <text x="960" y="215" text-anchor="middle" font-size="20" fill="#1f2a37">a commit message</text>
-  <rect x="860" y="276" width="200" height="64" rx="10" fill="#fbfbf9" stroke="#1f2a37" stroke-width="2"/>
-  <text x="960" y="315" text-anchor="middle" font-size="20" fill="#1f2a37">a reply</text>
-  <line x1="780" y1="108" x2="858" y2="108" stroke="#5b6b7c" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="819" y="94" text-anchor="middle" font-size="15" fill="#5b6b7c">writes</text>
-  <path d="M780,318 L858,318" stroke="#0b6e4f" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
-  <text x="819" y="300" text-anchor="middle" font-size="15" fill="#0b6e4f">script checks</text>
-  <path d="M670,236 L670,142" stroke="#0b6e4f" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
-  <text x="684" y="194" text-anchor="start" font-size="16" fill="#0b6e4f">Claude judges</text>
-  <text x="960" y="380" text-anchor="middle" font-size="16" fill="#b3261e">an error blocks the action</text>
-  <text x="960" y="404" text-anchor="middle" font-size="16" fill="#b3261e">until the text is fixed</text>
+  <rect x="560" y="80" width="200" height="60" rx="10" fill="#eef1f4" stroke="#1f2a37" stroke-width="2"/>
+  <text x="660" y="118" text-anchor="middle" font-size="22" font-weight="600" fill="#1f2a37">Claude</text>
+  <rect x="560" y="190" width="200" height="120" rx="10" fill="#e4f3ec" stroke="#0b6e4f" stroke-width="3"/>
+  <text x="660" y="222" text-anchor="middle" font-size="22" font-weight="700" fill="#0b6e4f">swe plugin</text>
+  <text x="660" y="250" text-anchor="middle" font-size="16" fill="#1f2a37">three hooks</text>
+  <text x="660" y="273" text-anchor="middle" font-size="16" fill="#1f2a37">/swe:lint-file</text>
+  <text x="660" y="296" text-anchor="middle" font-size="16" fill="#1f2a37">the output style</text>
+  <rect x="560" y="360" width="200" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+  <text x="660" y="389" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">lint script</text>
+  <text x="660" y="413" text-anchor="middle" font-size="16" fill="#5b6b7c">the deterministic tier</text>
+  <rect x="820" y="80" width="240" height="370" rx="12" fill="#fbfbf9" stroke="#1f2a37" stroke-width="2"/>
+  <text x="940" y="110" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">the prose</text>
+  <rect x="845" y="130" width="190" height="52" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
+  <text x="940" y="163" text-anchor="middle" font-size="18" fill="#1f2a37">a document</text>
+  <rect x="845" y="200" width="190" height="52" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
+  <text x="940" y="233" text-anchor="middle" font-size="18" fill="#1f2a37">a commit message</text>
+  <rect x="845" y="270" width="190" height="52" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
+  <text x="940" y="303" text-anchor="middle" font-size="18" fill="#1f2a37">a reply</text>
+  <text x="940" y="372" text-anchor="middle" font-size="15" fill="#b3261e">an error blocks the action</text>
+  <text x="940" y="394" text-anchor="middle" font-size="15" fill="#b3261e">until the text is fixed</text>
+  <line x1="760" y1="110" x2="818" y2="110" stroke="#5b6b7c" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="789" y="98" text-anchor="middle" font-size="15" fill="#5b6b7c">writes</text>
+  <line x1="660" y1="190" x2="660" y2="142" stroke="#0b6e4f" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="672" y="171" text-anchor="start" font-size="15" fill="#0b6e4f">Claude judges</text>
+  <line x1="660" y1="310" x2="660" y2="358" stroke="#0b6e4f" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="672" y="339" text-anchor="start" font-size="15" fill="#0b6e4f">runs</text>
+  <line x1="760" y1="395" x2="818" y2="395" stroke="#0b6e4f" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="789" y="383" text-anchor="middle" font-size="15" fill="#0b6e4f">checks</text>
 </svg>
 
 <!--
