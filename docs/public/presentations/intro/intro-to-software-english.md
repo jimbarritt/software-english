@@ -502,3 +502,25 @@ the fix.
 <!--
 Ask for questions.
 -->
+
+---
+
+<p class="eyebrow">Colophon</p>
+
+## Claude wrote the first draft, and it broke the rules the deck describes
+
+- **A withholding heading.** A reviewer found `The habits, named`. A full
+  review then found ten more headings with a similar fault.
+- **A missing point.** The deck omitted that agents may also read the
+  prose more reliably.
+- **A metaphor.** A habit was named `A mind in the machine`.
+- **Seven errors.** The first deterministic run flagged seven.
+- **Two figures with no source.** Both were removed.
+
+<!--
+Appendix. Skip it in the talk unless someone asks how the deck was made.
+The first lint pass accepted the heading that the reviewer found. The
+two figures were a count of rules that started as feedback and a count
+of errors per paragraph. The first figure was replaced by counts of
+closed issues. The second was deleted.
+-->
