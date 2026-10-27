@@ -264,3 +264,11 @@ section.title h3 {
   font-size: 0.8em;
   margin: 0;
 }
+
+/* The map slide: the SVG fills the width under the heading */
+section svg.map {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 0.3em;
+}
