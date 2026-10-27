@@ -175,11 +175,11 @@ Software English covers prose about software and systems:
 
 The primary reader of Software English prose is a person. The
 restricted grammar and the closed vocabulary also make the prose
-checkable by a script.
+checkable by a script. Software English also defines 15 document types,
+each with its own required structure.
 
-Software English takes its approach from the field of controlled
-languages. It is independent of ASD-STE100 and built for the software
-domain.
+Software English is independent of ASD-STE100 and built for the
+software domain.
 
 ---
 
@@ -285,25 +285,6 @@ new. Delete it and no fact is lost.
 
 Each fix is shorter than the text it replaces, and each one states a
 fact that text only implied.
-
----
-
-## Document types
-
-A type governs structure, on top of the sentence rules. 15 types today:
-RFC, ADR, Design, API Design, PR Description, Specification, Technical
-Manual, the four Diátaxis types, and four more.
-
-A **Reference** describes and only describes. It has no open question,
-no "next steps", and no pointer to a plan.
-
-> **What's next**
->
-> We'll add a section on the `modify` and `trash` endpoints in a
-> follow-up, and there's an open question about whether batch requests
-> deserve their own page. Watch this space.
-
-That section is a fault in a Reference, whatever its wording.
 
 ---
 
@@ -429,13 +410,20 @@ agent reads the report, edits the text, and runs the action again.
 ## Three checks you select yourself
 
 - **The output style.** `/output-style`, then "Software English".
-  Claude Code sends the rules with every request, so the rules apply
-  while the prose is written.
-  Cost: 6% to 11% more input tokens per turn.
+  Claude Code sends a condensed version of the rules with every
+  request: about 500 words, against about 14,500 in the spec. The rules
+  then apply while the prose is written. Cost: 6% to 11% more input
+  tokens per turn.
 - **`/swe:lint-file <path>`.** Both tiers, on one file, now.
 - **`/swe:install-commit-hook`.** A `pre-commit` hook that blocks a
   commit of a Markdown file with no clean lint record for that exact
   content.
+
+<!--
+The output style is a summary of the rules, not the full spec. The
+lint command and the hooks use the full rule catalogue and the word
+lists.
+-->
 
 ---
 
