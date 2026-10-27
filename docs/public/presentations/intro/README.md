@@ -1,4 +1,4 @@
-# Intro to Software English: the deck
+# Intro to Software English deck
 
 A 15 to 20 minute talk for engineers. It covers the writing habits of
 AI agents, the ASD-STE100 background, Software English with its two

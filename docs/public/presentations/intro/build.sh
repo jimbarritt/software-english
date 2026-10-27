@@ -16,12 +16,21 @@ marp_version="4.1.2"
 
 mkdir -p "$out"
 
-# The deck path goes first: --theme-set takes a list and would otherwise
-# read the deck as a second theme file.
-npx --yes --prefer-offline "@marp-team/marp-cli@${marp_version}" "$deck" \
+# Use an installed marp when there is one: npx checks the registry first,
+# and that check can stall with no network. The deck path goes first:
+# --theme-set takes a list and would otherwise read the deck as a second
+# theme file. Marp reads standard input when it is not a terminal and
+# waits for it to close, so the call closes it with </dev/null.
+if command -v marp >/dev/null 2>&1; then
+  marp_cmd=(marp)
+else
+  marp_cmd=(npx --yes --prefer-offline "@marp-team/marp-cli@${marp_version}")
+fi
+
+"${marp_cmd[@]}" "$deck" \
   --html \
   --theme-set "$here/theme.css" \
-  -o "$out/$name.html"
+  -o "$out/$name.html" </dev/null
 
 node -e '
 const { chromium } = require("playwright");

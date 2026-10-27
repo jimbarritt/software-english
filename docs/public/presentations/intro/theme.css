@@ -230,3 +230,17 @@ section::after {
   color: var(--muted);
   font-size: 0.6em;
 }
+
+/* Part label on a divider slide: a label, not a heading */
+.eyebrow {
+  color: var(--muted);
+  font-size: 0.85em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.4em 0;
+}
+
+section.lead .eyebrow {
+  color: #c3cbd4;
+}
