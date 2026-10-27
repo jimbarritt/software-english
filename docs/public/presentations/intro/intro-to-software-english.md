@@ -6,7 +6,7 @@ header: ""
 footer: "Intro to Software English"
 ---
 
-<!-- _class: lead -->
+<!-- _class: lead title -->
 <!-- _paginate: false -->
 <!-- _footer: "" -->
 
@@ -14,13 +14,14 @@ footer: "Intro to Software English"
 
 ### A controlled language for prose about software
 
-Why agents write the way they write, what aerospace did about the same
-problem in 1986, and a plugin that checks every commit message.
-
 <!--
 Timing: 15 to 20 minutes. Four parts: the habits of agents, aerospace
 in 1986, Software English, and the swe plugin. The sample document on
 the next slides is a Gmail API reference, written twice.
+
+The picture is a deliberate example. The robot's speech has at least
+ten faults that the rules name. Ask the audience to spot them, or
+continue with the habits slide, which lists the same kinds of fault.
 -->
 
 ---

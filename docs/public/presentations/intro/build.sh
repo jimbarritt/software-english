@@ -16,6 +16,10 @@ marp_version="4.1.2"
 
 mkdir -p "$out"
 
+# The built HTML refers to its images by relative path.
+rm -rf "$out/images"
+cp -r "$here/images" "$out/images"
+
 # Use an installed marp when there is one: npx checks the registry first,
 # and that check can stall with no network. The deck path goes first:
 # --theme-set takes a list and would otherwise read the deck as a second

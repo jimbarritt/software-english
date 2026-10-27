@@ -1,0 +1,45 @@
+<svg viewBox="0 0 1600 900" width="1600" height="900" xmlns="http://www.w3.org/2000/svg">
+
+<rect x="0" y="0" width="1600" height="900" fill="#2B2E33" />
+
+<!-- speech bubble tail, drawn first so the bubble body covers its base -->
+<path d="M632,395 L632,470 L520,440 Z" fill="#3A362F" stroke="#EDE7DB" stroke-width="6" stroke-linejoin="round" />
+
+<!-- speech bubble body -->
+<rect x="620" y="50" width="940" height="560" rx="56" fill="#3A362F" stroke="#EDE7DB" stroke-width="6" />
+
+<foreignObject x="675" y="105" width="830" height="450">
+  <div xmlns="http://www.w3.org/1999/xhtml" style="height: 450px; display: flex; align-items: center; font-family: system-ui, sans-serif; font-size: 40px; line-height: 1.35; color: #EDE7DB; font-weight: 600;">
+    To be honest, the load-bearing part of this endpoint is that it holds all the cards. It really wants to own the source of truth, so it waits patiently for downstream services &#8212; and once it&#39;s happy, it basically hands off the heavy lifting so nothing gets confused.
+  </div>
+</foreignObject>
+
+<!-- body, cropped by the bottom of the frame -->
+<rect x="190" y="516" width="360" height="650" rx="60" fill="#7C97A3" stroke="#EDE7DB" stroke-width="8" />
+<line x1="370" y1="560" x2="370" y2="900" stroke="#546873" stroke-width="6" opacity="0.5" />
+
+<!-- arm A: explaining gesture -->
+<path d="M200,590 Q115,520 90,485" fill="none" stroke="#546873" stroke-width="44" stroke-linecap="round" />
+<circle cx="90" cy="485" r="34" fill="#7C97A3" stroke="#EDE7DB" stroke-width="7" />
+
+<!-- arm B: holding the endpoint card -->
+<path d="M540,600 Q640,660 600,740" fill="none" stroke="#546873" stroke-width="44" stroke-linecap="round" />
+
+<!-- the endpoint card -->
+<rect x="530" y="740" width="230" height="150" rx="22" fill="#3A362F" stroke="#EDE7DB" stroke-width="7" />
+<rect x="597" y="778" width="96" height="64" rx="12" fill="#7C97A3" stroke="#EDE7DB" stroke-width="5" />
+<path d="M630,798 l-12,12 l12,12 M660,798 l12,12 l-12,12" fill="none" stroke="#3A362F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M542,810 L597,810" fill="none" stroke="#EDE7DB" stroke-width="6" stroke-linecap="round" />
+<path d="M582,799 L597,810 L582,821" fill="none" stroke="#EDE7DB" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M693,810 L748,810" fill="none" stroke="#EDE7DB" stroke-width="6" stroke-linecap="round" />
+<path d="M733,799 L748,810 L733,821" fill="none" stroke="#EDE7DB" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+<circle cx="600" cy="742" r="34" fill="#7C97A3" stroke="#EDE7DB" stroke-width="7" />
+
+<!-- head -->
+<rect x="240" y="340" width="260" height="180" rx="48" fill="#7C97A3" stroke="#EDE7DB" stroke-width="8" />
+<line x1="370" y1="340" x2="370" y2="290" stroke="#EDE7DB" stroke-width="8" stroke-linecap="round" />
+<circle cx="370" cy="280" r="16" fill="#C1694F" />
+<circle cx="370" cy="432" r="50" fill="#3A362F" stroke="#EDE7DB" stroke-width="8" />
+<circle cx="382" cy="418" r="22" fill="#C1694F" />
+
+</svg>

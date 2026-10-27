@@ -244,3 +244,23 @@ section::after {
 section.lead .eyebrow {
   color: #c3cbd4;
 }
+
+/* Title slide: a full-bleed picture (images/robot-dark.png, relative to the
+   built HTML), with the title below the speech bubble */
+section.title {
+  background: #2b2e33 url("images/robot-dark.png") center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 56px 44px 640px;
+}
+
+section.title h1 {
+  font-size: 1.5em;
+  margin-bottom: 0.25em;
+}
+
+section.title h3 {
+  font-size: 0.8em;
+  margin: 0;
+}

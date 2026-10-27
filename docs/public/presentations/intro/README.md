@@ -13,6 +13,7 @@ rule tiers, and the `swe` Claude Code plugin.
 | `build.sh` | Builds the deck to HTML and PDF. |
 | `samples/gmail-messages-before.md` | A Gmail API reference in the register an agent produces with no rule in force. 48 deterministic errors in 108 lines. |
 | `samples/gmail-messages-after.md` | The same facts in Software English. 0 errors, both tiers. |
+| `images/` | The robot picture on the title slide, in SVG and PNG. The speech in the picture is a deliberate example of the faults. The artwork is from the author's Design canvas "Helping Your Agent Talk Sense". |
 | `build/` | The built HTML and PDF. |
 
 ## Build
