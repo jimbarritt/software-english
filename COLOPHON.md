@@ -253,3 +253,37 @@ list.
 The pattern is the same one `register_candidates_test.sh` and
 `definite_phrase_candidates_test.sh` already establish for §8's and
 §7.19's rules.
+
+## Whole-document rules: three entries from a whole-file pass
+
+`claude-plugins`' `/swe:lint-file` has a third pass that reads a whole
+document, for faults that span more than one heading, paragraph, or
+list item. That pass used three rule ids of its own, with no entry in
+`rules/core-rules.toml`. Each now has a catalogue entry:
+`summary-before-detail` (SPEC §7.1), `no-contradiction-between-sections`
+(§7.21), and `no-precedent-before-subject` (§7.22).
+
+§7.1 existed as one sentence with no catalogue entry. It keeps its
+number. Its text now states what a summary is, its position in a
+document, and two faults. The rule fires on every document type and at
+every length.
+lint-file's pass applies it only to a Design or an API Design document
+of 300 lines or more. That narrower trigger is the tool's own choice,
+the same way the pass applies §8.2 and §7.5 past one unit.
+
+§7.21 and §7.22 are new entries at the end of §7, after §7.20, for the
+same reason earlier additions went there: a rule inserted beside §7.1
+or §7.10 would renumber rules the catalogue and the Contents list cite
+by number.
+
+§7.21 runs at `warning` severity, unlike §7.20. Both faults include a
+false fact. The §7.20 fault is inside one sentence, and counting its
+list checks it. The §7.21 fault spans sections. A scoped rule, a named
+exception, or a recorded history reads as a contradiction until a
+model judges the scope of each statement.
+
+All three are inference-based. A parser can find a status marker, the
+text before the first heading, or a section's paragraphs. None of
+those checks can show whether two statements contradict each other,
+whether a summary states the main fact, or which subject a paragraph
+describes, so none meets §2's test for the deterministic tier.

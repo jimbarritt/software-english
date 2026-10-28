@@ -17,7 +17,7 @@ drives	runs, calls, or starts
 flow	name the step
 flows through	name the step
 flowed through	name the step
-hit	call, reach a limit, or fail
+hit	call, exceed a limit, or fail
 leverage	use
 leverages	uses
 utilise	use
