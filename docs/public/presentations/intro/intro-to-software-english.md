@@ -26,60 +26,85 @@ continue with the habits slide, which lists the same kinds of fault.
 
 ---
 
+<!-- _class: mapslide -->
+
 ## The plugin checks the session's prose against the spec
 
-<svg class="map" viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of the spec, the plugin, the lint script, the session and its prose">
+<svg class="map" viewBox="0 0 1400 800" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" role="img" aria-label="Map of the spec, the plugin, the session, its prose and the git repository">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#5b6b7c"/>
-    </marker>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5b6b7c"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b6e4f"/></marker>
   </defs>
-  <rect x="10" y="10" width="400" height="460" rx="14" fill="#e4f3ec" stroke="#0b6e4f" stroke-width="3"/>
-  <text x="210" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#0b6e4f">Software English, the spec</text>
-  <rect x="40" y="80" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="210" y="109" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">Vocabulary</text>
-  <text x="210" y="135" text-anchor="middle" font-size="17" fill="#5b6b7c">approved words and banned words</text>
-  <rect x="40" y="170" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="210" y="199" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">6 deterministic rules</text>
-  <text x="210" y="225" text-anchor="middle" font-size="17" fill="#5b6b7c">a script checks them</text>
-  <rect x="40" y="260" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="210" y="289" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">30 inference rules</text>
-  <text x="210" y="315" text-anchor="middle" font-size="17" fill="#5b6b7c">a model judges them</text>
-  <rect x="40" y="350" width="340" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="210" y="379" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">15 document types</text>
-  <text x="210" y="405" text-anchor="middle" font-size="17" fill="#5b6b7c">the structure each type requires</text>
-  <line x1="410" y1="240" x2="528" y2="240" stroke="#5b6b7c" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="470" y="227" text-anchor="middle" font-size="16" fill="#5b6b7c">rule data</text>
-  <rect x="530" y="10" width="560" height="460" rx="14" fill="none" stroke="#5b6b7c" stroke-width="3" stroke-dasharray="10 8"/>
-  <text x="810" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2a37">A Claude Code or Copilot CLI session</text>
-  <rect x="560" y="80" width="200" height="60" rx="10" fill="#eef1f4" stroke="#1f2a37" stroke-width="2"/>
-  <text x="660" y="118" text-anchor="middle" font-size="22" font-weight="600" fill="#1f2a37">Claude</text>
-  <rect x="560" y="190" width="200" height="120" rx="10" fill="#e4f3ec" stroke="#0b6e4f" stroke-width="3"/>
-  <text x="660" y="222" text-anchor="middle" font-size="22" font-weight="700" fill="#0b6e4f">swe plugin</text>
-  <text x="660" y="250" text-anchor="middle" font-size="16" fill="#1f2a37">three hooks</text>
-  <text x="660" y="273" text-anchor="middle" font-size="16" fill="#1f2a37">/swe:lint-file</text>
-  <text x="660" y="296" text-anchor="middle" font-size="16" fill="#1f2a37">the output style</text>
-  <rect x="560" y="360" width="200" height="70" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-  <text x="660" y="389" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">lint script</text>
-  <text x="660" y="413" text-anchor="middle" font-size="16" fill="#5b6b7c">the deterministic tier</text>
-  <rect x="820" y="80" width="240" height="370" rx="12" fill="#fbfbf9" stroke="#1f2a37" stroke-width="2"/>
-  <text x="940" y="110" text-anchor="middle" font-size="20" font-weight="600" fill="#1f2a37">the prose</text>
-  <rect x="845" y="130" width="190" height="52" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
-  <text x="940" y="163" text-anchor="middle" font-size="18" fill="#1f2a37">a document</text>
-  <rect x="845" y="200" width="190" height="52" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
-  <text x="940" y="233" text-anchor="middle" font-size="18" fill="#1f2a37">a commit message</text>
-  <rect x="845" y="270" width="190" height="52" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
-  <text x="940" y="303" text-anchor="middle" font-size="18" fill="#1f2a37">a reply</text>
-  <text x="940" y="372" text-anchor="middle" font-size="15" fill="#b3261e">an error blocks the action</text>
-  <text x="940" y="394" text-anchor="middle" font-size="15" fill="#b3261e">until the text is fixed</text>
-  <line x1="760" y1="110" x2="818" y2="110" stroke="#5b6b7c" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="789" y="98" text-anchor="middle" font-size="15" fill="#5b6b7c">writes</text>
-  <line x1="660" y1="190" x2="660" y2="142" stroke="#0b6e4f" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="672" y="171" text-anchor="start" font-size="15" fill="#0b6e4f">Claude judges</text>
-  <line x1="660" y1="310" x2="660" y2="358" stroke="#0b6e4f" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="672" y="339" text-anchor="start" font-size="15" fill="#0b6e4f">runs</text>
-  <line x1="760" y1="395" x2="818" y2="395" stroke="#0b6e4f" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="789" y="383" text-anchor="middle" font-size="15" fill="#0b6e4f">checks</text>
+  <rect width="1400" height="800" fill="#fbfbf9"/>
+  <rect x="20" y="20" width="380" height="760" rx="14" fill="#e4f3ec" stroke="#0b6e4f" stroke-width="3"/>
+  <text x="210" y="62" text-anchor="middle" font-size="26" font-weight="700" fill="#0b6e4f">Software English</text>
+  <text x="210" y="90" text-anchor="middle" font-size="18" fill="#0b6e4f">the spec</text>
+  <g font-size="18" fill="#5b6b7c" text-anchor="middle">
+    <rect x="50" y="130" width="320" height="90" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+    <text x="210" y="167" font-size="21" font-weight="600" fill="#1f2a37">Vocabulary</text>
+    <text x="210" y="197">approved and banned words</text>
+    <rect x="50" y="280" width="320" height="90" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+    <text x="210" y="317" font-size="21" font-weight="600" fill="#1f2a37">6 deterministic rules</text>
+    <text x="210" y="347">a script checks them</text>
+    <rect x="50" y="430" width="320" height="90" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+    <text x="210" y="467" font-size="21" font-weight="600" fill="#1f2a37">30 inference rules</text>
+    <text x="210" y="497">a model judges them</text>
+    <rect x="50" y="580" width="320" height="90" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+    <text x="210" y="617" font-size="21" font-weight="600" fill="#1f2a37">15 document types</text>
+    <text x="210" y="647">the structure each one requires</text>
+  </g>
+  <rect x="470" y="20" width="910" height="560" rx="14" fill="none" stroke="#5b6b7c" stroke-width="3" stroke-dasharray="10 8"/>
+  <text x="925" y="62" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2a37">A Claude Code or Copilot CLI session</text>
+  <rect x="510" y="100" width="260" height="70" rx="10" fill="#eef1f4" stroke="#1f2a37" stroke-width="2"/>
+  <text x="640" y="143" text-anchor="middle" font-size="24" font-weight="600" fill="#1f2a37">Claude</text>
+  <rect x="510" y="260" width="260" height="150" rx="10" fill="#e4f3ec" stroke="#0b6e4f" stroke-width="3"/>
+  <text x="640" y="297" text-anchor="middle" font-size="24" font-weight="700" fill="#0b6e4f">swe plugin</text>
+  <g font-size="18" fill="#1f2a37" text-anchor="middle">
+    <text x="640" y="330">three hooks</text>
+    <text x="640" y="357">/swe:lint-file</text>
+    <text x="640" y="384">the output style</text>
+  </g>
+  <rect x="510" y="480" width="260" height="80" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
+  <text x="640" y="514" text-anchor="middle" font-size="22" font-weight="600" fill="#1f2a37">lint script</text>
+  <text x="640" y="542" text-anchor="middle" font-size="17" fill="#5b6b7c">the deterministic tier</text>
+  <rect x="960" y="100" width="380" height="460" rx="12" fill="#fbfbf9" stroke="#1f2a37" stroke-width="2"/>
+  <text x="1150" y="138" text-anchor="middle" font-size="22" font-weight="600" fill="#1f2a37">the prose</text>
+  <g text-anchor="middle">
+    <rect x="995" y="160" width="310" height="76" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
+    <text x="1150" y="192" font-size="20" fill="#1f2a37">a document</text>
+    <text x="1150" y="218" font-size="15" fill="#5b6b7c">checked by /swe:lint-file, or at commit</text>
+    <rect x="995" y="252" width="310" height="76" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
+    <text x="1150" y="284" font-size="20" fill="#1f2a37">a commit message</text>
+    <text x="1150" y="310" font-size="15" fill="#5b6b7c">checked by a hook, before the commit</text>
+    <rect x="995" y="344" width="310" height="76" rx="8" fill="#eef1f4" stroke="#5b6b7c" stroke-width="1.5"/>
+    <text x="1150" y="376" font-size="20" fill="#1f2a37">a reply</text>
+    <text x="1150" y="402" font-size="15" fill="#5b6b7c">not checked: the output style shapes it</text>
+  </g>
+  <text x="1150" y="468" text-anchor="middle" font-size="16" fill="#b3261e">A hook blocks a commit, a publish or</text>
+  <text x="1150" y="492" text-anchor="middle" font-size="16" fill="#b3261e">a message with a deterministic error</text>
+  <rect x="470" y="620" width="910" height="160" rx="14" fill="none" stroke="#5b6b7c" stroke-width="3"/>
+  <text x="1360" y="652" text-anchor="end" font-size="20" font-weight="700" fill="#1f2a37">The git repository</text>
+  <rect x="510" y="670" width="260" height="90" rx="10" fill="#fbfbf9" stroke="#1f2a37" stroke-width="2"/>
+  <text x="640" y="705" text-anchor="middle" font-size="21" font-weight="600" fill="#1f2a37">lint record</text>
+  <text x="640" y="735" text-anchor="middle" font-size="15" fill="#5b6b7c" font-family="Menlo, Consolas, monospace">.git/swe/lint-log.ndjson</text>
+  <rect x="960" y="670" width="380" height="90" rx="10" fill="#fbfbf9" stroke="#1f2a37" stroke-width="2"/>
+  <text x="1150" y="702" text-anchor="middle" font-size="21" font-weight="600" fill="#1f2a37">pre-commit hook</text>
+  <text x="1150" y="728" text-anchor="middle" font-size="16" fill="#5b6b7c">blocks a Markdown file in a commit</text>
+  <text x="1150" y="749" text-anchor="middle" font-size="16" fill="#5b6b7c">with no clean lint record</text>
+  <line x1="400" y1="335" x2="504" y2="335" stroke="#5b6b7c" stroke-width="3" marker-end="url(#a)"/>
+  <text x="452" y="320" text-anchor="middle" font-size="17" fill="#5b6b7c">rule data</text>
+  <line x1="770" y1="135" x2="954" y2="135" stroke="#5b6b7c" stroke-width="3" marker-end="url(#a)"/>
+  <text x="855" y="120" text-anchor="middle" font-size="17" fill="#5b6b7c">writes</text>
+  <line x1="640" y1="260" x2="640" y2="176" stroke="#0b6e4f" stroke-width="3" marker-end="url(#g)"/>
+  <text x="660" y="224" font-size="17" fill="#0b6e4f">Claude judges</text>
+  <line x1="640" y1="410" x2="640" y2="474" stroke="#0b6e4f" stroke-width="3" marker-end="url(#g)"/>
+  <text x="660" y="442" font-size="17" fill="#0b6e4f">runs</text>
+  <line x1="770" y1="520" x2="954" y2="520" stroke="#0b6e4f" stroke-width="3" marker-end="url(#g)"/>
+  <text x="855" y="505" text-anchor="middle" font-size="17" fill="#0b6e4f">checks</text>
+  <line x1="640" y1="560" x2="640" y2="664" stroke="#0b6e4f" stroke-width="3" marker-end="url(#g)"/>
+  <text x="660" y="604" font-size="17" fill="#0b6e4f">records the verdict</text>
+  <line x1="960" y1="715" x2="776" y2="715" stroke="#5b6b7c" stroke-width="3" marker-end="url(#a)"/>
+  <text x="868" y="700" text-anchor="middle" font-size="17" fill="#5b6b7c">reads</text>
 </svg>
 
 <!--
