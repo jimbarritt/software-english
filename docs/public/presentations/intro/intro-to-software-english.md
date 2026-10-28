@@ -28,7 +28,7 @@ continue with the habits slide, which lists the same kinds of fault.
 
 <!-- _class: mapslide -->
 
-## The plugin checks the session's prose against the spec
+## System Map
 
 <svg class="map" viewBox="0 0 1400 800" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" role="img" aria-label="Map of the spec, the plugin, the session, its prose and the git repository">
   <defs>
