@@ -287,3 +287,21 @@ text before the first heading, or a section's paragraphs. None of
 those checks can show whether two statements contradict each other,
 whether a summary states the main fact, or which subject a paragraph
 describes, so none meets §2's test for the deterministic tier.
+
+## Reader-reaction prediction: one catalogued fault inside §5.3
+
+§5.3 names three faults in one sentence: an editorial judgement, a
+guess at how someone might react, and a remark about the writing. None
+had a catalogue entry, so the inference tier had no rule id to judge a
+prediction against. `no-reader-reaction-prediction` catalogues the
+second fault, with advice that states no consequence included. §5.3
+keeps its number; its text now states the fault, the fix, and what is
+not the fault.
+
+The rule is inference-based. A sentence with "you" as its subject can
+be an instruction, a consequence, or a prediction, and only the stated
+consequence separates them. The same is true of "it helps to", where
+"it" can name a component. Five phrases with no correct use went into
+`vocabulary/banned.tsv`: "you will be glad", "you'll be glad", "before
+you find out", "exactly what you want", and "may be what you want".
+None occurred in either repository's prose when they were added.

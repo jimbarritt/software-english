@@ -26,7 +26,7 @@ not exhaustive.
 - [5. Semantic rules](#5-semantic-rules)
   - [5.1 No anthropomorphism](#51-no-anthropomorphism-mixed)
   - [5.2 No location or motion verb for an abstract subject](#52-no-location-or-motion-verb-for-an-abstract-subject-deterministic)
-  - [5.3 No unstated commentary](#53-no-unstated-commentary-inference-based)
+  - [5.3 No unstated commentary](#53-no-unstated-commentary-mixed)
   - [5.4 No hedging where a plain statement is true](#54-no-hedging-where-a-plain-statement-is-true-inference-based)
   - [5.5 No metaphor or analogy](#55-no-metaphor-or-analogy-mixed)
   - [5.6 No self-qualifying "honest"](#56-no-self-qualifying-honest-mixed)
@@ -353,11 +353,66 @@ or a whole the subject is part of. §5.11 judges `belongs to` only
 where its object is a system said to own the subject (`the lock
 belongs to the process`).
 
-### 5.3 No unstated commentary (Inference-based)
+### 5.3 No unstated commentary (mixed)
 
 State facts. Do not add an editorial judgement, a guess at how someone
 might react, or a remark about the writing itself, unless explicitly
 asked for an opinion.
+
+A prediction of a reader's reaction is the common form of the second
+fault. The sentence predicts how a reader will react, what a reader
+will prefer, or what a reader will find out, and states no fact about
+its subject:
+
+> That may be exactly what you want.
+
+Advice with no stated consequence is the same fault:
+
+> It helps to keep a terminal open as you go.
+
+A fact stated only inside a prediction is the same fault too:
+
+> Choose the region carefully now, before you find out after the first
+> deploy.
+
+State the fact or the consequence directly:
+
+> Choose the region before the first deploy: a deploy cannot change it
+> later.
+> Keep a terminal open: steps 3 to 5 each run a command in it.
+
+Test: delete the prediction or the advice frame. If a fact about the
+subject remains, state it as a plain clause or as a consequence of the
+action. If none remains, delete the sentence.
+
+These are not this fault:
+
+- a sentence that states a consequence of an action: `if you skip this
+  step, the first deploy fails`;
+- an instruction (`open a terminal`), including a conditional
+  imperative in a How-to guide (`if you want a dry run, pass
+  --check`). §4.4 and §4.5 set the second person and the imperative
+  for an instruction;
+- in a Tutorial, a statement of what a learner sees after a step
+  (`the command prints three lines`), since that is an observable
+  result;
+- quoted material (§6.3).
+
+Deterministic-tier fixed list (in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv)):
+`you might, you will notice, you may find, you will be glad, you'll be glad, before you find out, exactly what you want, may be what you want`.
+Banned-word reports each phrase.
+
+Inference-based tier: `no-reader-reaction-prediction` covers a
+prediction or an advice frame not on the fixed list. `it helps to` and
+`you may want to` are not on the list. In each, `it` can name a
+component, or a consequence can follow in the same sentence, so a
+lookup would report a correct sentence. Whether a sentence states a
+consequence a reader can check needs judgement.
+
+The editorial judgement and the remark about the writing have no
+catalogue entry of their own. Their common fixed phrases are in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv).
 
 ### 5.4 No hedging where a plain statement is true (Inference-based)
 
