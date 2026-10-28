@@ -60,6 +60,8 @@ not exhaustive.
   - [7.18 No question or argument heading](#718-no-question-or-argument-heading-inference-based)
   - [7.19 No unstated presupposition](#719-no-unstated-presupposition-inference-based)
   - [7.20 No count that differs from its list](#720-no-count-that-differs-from-its-list-inference-based)
+  - [7.21 No contradiction between sections](#721-no-contradiction-between-sections-inference-based)
+  - [7.22 No precedent before its subject](#722-no-precedent-before-its-subject-inference-based)
 - [8. Register rules](#8-register-rules)
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
@@ -841,8 +843,68 @@ sentence.
 
 ### 7.1 Summary before detail (Inference-based)
 
-A document opens with a one-line summary before detail (borrowed from
-Rust's documentation convention).
+A document opens with a summary before any detail (borrowed from Rust's
+documentation convention). The summary is one sentence or one short
+paragraph. It states the document's main fact: the decision, the
+description of its subject, or the result. A reader who stops after the
+summary still has that fact.
+
+The summary is the first paragraph before the first section heading, or
+the first paragraph of a first section headed Summary, Abstract,
+Overview, or Introduction. A title, a status line, a metadata block, or
+a contents list before it is front matter, not detail.
+
+Two faults. The first is no summary: the document opens with detail.
+
+Fault: a Design document whose first section, `Context and scope`,
+describes the current order pipeline for three paragraphs. The design
+itself first appears in the fourth section.
+
+Fix: add a paragraph before the first section heading that states the
+decision:
+
+> The order router sends each order to one of three regional queues,
+> chosen by the delivery postcode.
+
+The second is a summary that names only the subject: an opening
+paragraph that states what the document covers, and no fact about it.
+
+Fault:
+
+> This document describes the retry policy for the order consumer.
+
+Fix: state the policy:
+
+> The order consumer retries each failed message three times with
+> exponential backoff, then writes it to the dead-letter topic.
+
+Test: read the summary alone. If a reader cannot state the document's
+main fact from it, the document has this fault. Report it at line 1.
+
+These are not this fault:
+
+- a document whose type template (§7.8,
+  [Appendix F](#appendix-f-document-type-templates)) puts another
+  section first, where the title or a required opening section states
+  the main fact: an ADR whose title names the decision, or an RFC whose
+  Abstract states it;
+- an entry in a Lab Notebook or a Portfolio Journal, whose template
+  fixes the order of each entry's parts;
+- a document of one paragraph, which is its own summary.
+
+Other rules have a nearby claim:
+
+- §7.6 and §8.2 each exempt the summary this rule requires: a count the
+  body expands in separate sections, and a fact stated once in the
+  summary and once in the body.
+- §7.7: an opening paragraph that narrates how the decision was reached
+  is not a summary. Report the narration under §7.7, and report this
+  rule at line 1 where no summary states the main fact.
+- §7.22 asks for the same order inside one section.
+
+A parser can find the text before the first heading, or a heading named
+Summary. Whether that text states the document's main fact needs
+judgement, so this stays inference-based.
 
 ### 7.2 Match structure to purpose (Inference-based)
 
@@ -1622,6 +1684,173 @@ unlike the other rules in this section. Splitting the list needs
 judgement: a comma can separate two items or set off a modifier inside
 one, as the example's two readings show, so a regular grammar cannot
 decide this rule on its own (§2), and it stays inference-based.
+
+### 7.21 No contradiction between sections (Inference-based)
+
+This rule applies to every document type. Its scope is the whole
+document, read end to end.
+
+A document states one version of each fact. Two faults.
+
+A contradiction: a later section (a decision record, a discussion
+point, an amendment, a changelog entry) states a fact that an earlier
+section contradicts. The two statements cannot both be true of the same
+thing, and a reader cannot tell which one is current.
+
+A stale status marker: a later entry states that a decision is agreed
+but not yet applied to the body (`agreed, not yet reflected above`).
+The marker states that the body is out of date, and the body stays out
+of date.
+
+Fault:
+
+> §3: Every queue has at least one consumer, so the router never checks
+> for an empty queue.
+>
+> §9, decision Q-4: Status: agreed, not yet reflected above. A queue can
+> have zero consumers; the router checks before it sends.
+
+§3's sentence and Q-4's decision cannot both be true. Report two
+findings: §3's sentence, at its own line, as contradicted by Q-4; and
+Q-4's status marker, at its own line, as stale.
+
+Fix: apply the decision to the body, and delete the marker:
+
+> §3: A queue can have zero consumers, so the router checks for an
+> empty queue before it sends.
+
+Q-4 can stay as a record of the decision once the body states the same
+fact.
+
+Test: for each fact a later section states, find the earlier sentence
+about the same thing. If the two cannot both be true, and the later
+section names no exception, report the earlier sentence and name the
+later section. Report a status marker at its own line.
+
+These are not this fault:
+
+- a later section that states an exception to an earlier rule and names
+  it as one (`The audit queue is an exception to §3: it has no
+  consumer.`);
+- an open question that states no decision, in a Design or an API
+  Design document (§7.9);
+- an alternative in a section headed Alternatives considered, stated as
+  rejected;
+- a history or changelog entry that names an earlier fact as replaced,
+  where the body states the current fact (`Version 2 replaced the
+  per-queue lock with one global lock`, where the body describes the
+  global lock);
+- a Lab Notebook entry that corrects an earlier entry, since its
+  template keeps the earlier entry unchanged and records the correction
+  beside it ([Appendix F](#appendix-f-document-type-templates));
+- two statements about different things, or about one thing under
+  different conditions (`A read takes a shared lock. A write takes an
+  exclusive lock.`);
+- quoted material (§6.3).
+
+Other rules have a nearby claim:
+
+- §7.20: a count that differs from its own list, inside one sentence.
+  Report it under §7.20 only.
+- §8.2: one fact restated with the same value. Where a restatement
+  states a different value (`Cold start takes 200 ms.` in the summary,
+  `Cold start takes 350 ms.` in the results), report it under this rule
+  only, since the fix keeps one value.
+- §7.7: where a status marker also narrates the discussion (`agreed at
+  the review on 3 March, not yet reflected above`), report it under
+  this rule only, since the fix deletes the marker. A fix that adds who
+  asked or what was discussed is a §7.7 finding.
+- §7.9: in a Reference document, a stale status marker is also planning
+  content. Report it under this rule only.
+
+Two statements that cannot both be true include a false fact, as a
+§7.20 mismatch does. This rule still runs at `warning` severity, unlike
+§7.20. The §7.20 fault is inside one sentence, and counting the list
+checks it. This fault spans sections. Telling a contradiction apart
+from a scoped rule, a named exception, or a recorded history needs a
+model of each statement's scope, and the false-positive risk keeps this
+rule at `warning`.
+
+A parser can find a status marker by its wording. Whether two
+statements in different sections contradict each other needs
+judgement, so this stays inference-based.
+
+### 7.22 No precedent before its subject (Inference-based)
+
+This rule applies to every document type.
+
+A section states its own subject's facts first. A section whose heading
+names one subject is this fault when two or more paragraphs or lists
+about a different component, system, or precedent precede the first
+fact about its own subject. A reader who opens the section for its
+subject reads about another thing first, and cannot tell which facts
+are the subject's until the subject appears.
+
+Fault, under the heading `Order consumer retry policy`:
+
+> The billing service retries a failed charge five times, with a fixed
+> 10-second delay. It writes each final failure to a dead-letter table,
+> and an operator replays the table each morning.
+>
+> The billing policy dates from 2023. During a payment provider outage
+> in March 2025, its fixed delay sent a burst of retries to the
+> provider.
+>
+> The order consumer retries each failed message three times, with
+> exponential backoff from one second, then writes it to the
+> dead-letter topic.
+
+Two paragraphs about the billing service precede the first fact about
+the order consumer. Fix: state the subject's facts first. Then put the
+part of the precedent the section needs after them, or cut it:
+
+> The order consumer retries each failed message three times, with
+> exponential backoff from one second, then writes it to the
+> dead-letter topic.
+>
+> The billing service retries with a fixed 10-second delay. During a
+> payment provider outage in March 2025, that delay sent a burst of
+> retries to the provider.
+
+Test: name the subject the heading names, and find the first sentence
+that states a fact about it. If two or more paragraphs or lists about
+another thing precede that sentence, report the section at its
+heading's line.
+
+These are not this fault:
+
+- one paragraph or less of context before the subject's facts, such as
+  a sentence that names the system the subject is part of;
+- a section whose heading names the other thing or the comparison
+  (`Prior art`, `Alternatives considered`, `Comparison with the billing
+  service`);
+- a section whose type template makes context its purpose, such as a
+  Design document's `Context and scope` or an ADR's `Context`
+  ([Appendix F](#appendix-f-document-type-templates));
+- a description of another component after the subject's own facts;
+- a section whose subject is the precedent.
+
+Other rules have a nearby claim:
+
+- §7.10: where the reader's task does not need the precedent at all,
+  report it under §7.10 only, since the fix cuts it. This rule's fix
+  keeps a precedent the task needs, after the subject's facts.
+- §7.1: the same order for the whole document. Where both match the
+  opening of a document, report each.
+- §5.5: where the precedent is a comparison that explains the subject
+  (`the order consumer retries the way the billing service does`),
+  report it under §5.5 only. This rule covers a literal description of
+  another thing.
+- §7.7: where the precedent is the history of how the decision was
+  reached (`the team first tried the billing service's policy`), report
+  it under §7.7 only.
+- §3.3: that rule covers one paragraph with more than one topic. This
+  rule covers paragraphs that each keep to one topic, in the wrong
+  order.
+
+A parser can find a section's heading and its paragraphs. Deciding
+which subject each paragraph describes needs judgement, so this stays
+inference-based.
 
 ## 8. Register rules
 
