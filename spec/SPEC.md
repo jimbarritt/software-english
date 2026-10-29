@@ -410,9 +410,66 @@ component, or a consequence can follow in the same sentence, so a
 lookup would report a correct sentence. Whether a sentence states a
 consequence a reader can check needs judgement.
 
-The editorial judgement and the remark about the writing have no
-catalogue entry of their own. Their common fixed phrases are in
-[`vocabulary/banned.tsv`](../vocabulary/banned.tsv).
+A navigational announcement is one form of the third fault, a remark
+about the writing. The sentence states where the document turns to a
+subject, or what a part of the document is for, and states no fact
+about the subject:
+
+> This is where the signing certificate comes in.
+> Here is where the retry limit matters.
+> That is what the next section is for.
+
+Delete the sentence, or state the fact the next part starts with:
+
+> The service signs each request with the certificate from step 2.
+
+Test: delete the sentence. If a reader loses no fact about the system,
+the sentence was a remark about the writing. If it named a subject the
+next part depends on, state that part's first fact about the subject in
+its place.
+
+These are not this fault:
+
+- a cross-reference that names where a fact is stated: `§4 lists the
+  retry limits`, `§4 describes each check`;
+- a fact with a link to its source: `the client stops after five
+  retries (§4)`;
+- an instruction to go to a part of the document, in a How-to guide or
+  a Tutorial: `go to step 4`;
+- a heading (§7.17 judges a heading that withholds its content);
+- quoted material (§6.3).
+
+Deterministic-tier fixed list (in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv)): the entries under
+its meta-commentary and text-shape headings, for example
+`as noted above, as mentioned, the short version, read it as, what follows, as we will see, see below, comes in, come in`.
+Banned-word reports each phrase.
+
+Inference-based tier: `no-remark-about-the-writing` covers a remark
+about the writing not on the fixed list. `this is where` and `here is
+where` are not on the list: `this is where the service writes its logs`
+names a directory, so a lookup would report a correct sentence. Whether
+a sentence states a fact about the system, or only about the document's
+own sequence, needs judgement.
+
+`no-remark-about-the-writing` has a nearby claim in other rules:
+
+- §5.10: `that is what the next section is for` has the cleft
+  signature, but its plain clause, `the next section is for that`,
+  still states no fact. Report it under this rule only, since the fix
+  deletes the sentence.
+- §7.17 covers headings only, and this rule covers body prose only, so
+  the two never judge one line.
+- §7.1: an opening paragraph that states only what the document covers
+  is a §7.1 finding. Report it under §7.1 only.
+- §7.6: a count signpost (`Three costs follow from that:`) is a §7.6
+  finding. Report it under §7.6 only.
+- §8.3: a clause about the document's layout, joined to a sentence that
+  states a fact, is a §8.3 finding. This rule covers a sentence that
+  states no fact at all.
+
+The editorial judgement has no catalogue entry of its own. Its common
+fixed phrases are in [`vocabulary/banned.tsv`](../vocabulary/banned.tsv).
 
 ### 5.4 No hedging where a plain statement is true (Inference-based)
 
@@ -680,6 +737,10 @@ These are not this fault:
 
 Other rules have a nearby claim:
 
+- §5.3: a cleft whose plain clause still states no fact about the
+  system, such as `that is what the next section is for`, is a remark
+  about the writing. Report it under §5.3's no-remark-about-the-writing
+  only, since the fix deletes the sentence.
 - §7.18 covers headings only, and this rule covers body prose only, so
   the two never judge one line.
 - §5.7: where an `X rather than Y` contrast argues for a name, report

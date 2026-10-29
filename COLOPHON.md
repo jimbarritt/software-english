@@ -305,3 +305,25 @@ consequence separates them. The same is true of "it helps to", where
 `vocabulary/banned.tsv`: "you will be glad", "you'll be glad", "before
 you find out", "exactly what you want", and "may be what you want".
 None occurred in either repository's prose when they were added.
+
+## Remark about the writing: a second catalogued fault inside §5.3
+
+§5.3's third fault, a remark about the writing, had fixed phrases in
+`vocabulary/banned.tsv` and no catalogue entry, so the inference tier
+had no rule id to judge a paraphrase against. A navigational
+announcement ("this is where the signing certificate comes in") was
+the false negative. `no-remark-about-the-writing` catalogues the third
+fault, with the navigational announcement as one named form. §5.3
+keeps its number.
+
+It is not a fourth shape of §5.10. A framing device wraps a fact, and
+its fix is the plain clause. A navigational announcement wraps none:
+its plain clause ("the next section is for that") still states no
+fact, so the fix deletes the sentence.
+
+"comes in" and "come in" went into `vocabulary/banned.tsv`. The
+anthropomorphism fixed list already reported "comes" in them, with a
+fix that names a mechanism. "this is where" and "here is where" did
+not, since "this is where the service writes its logs" names a
+directory. Neither phrase occurred in either repository's prose when
+they were added.

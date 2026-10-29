@@ -47,7 +47,7 @@ continue with the habits slide, which lists the same kinds of fault.
     <text x="210" y="317" font-size="21" font-weight="600" fill="#1f2a37">6 deterministic rules</text>
     <text x="210" y="347">a script checks them</text>
     <rect x="50" y="430" width="320" height="90" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
-    <text x="210" y="467" font-size="21" font-weight="600" fill="#1f2a37">34 inference rules</text>
+    <text x="210" y="467" font-size="21" font-weight="600" fill="#1f2a37">35 inference rules</text>
     <text x="210" y="497">a model judges them</text>
     <rect x="50" y="580" width="320" height="90" rx="10" fill="#fbfbf9" stroke="#0b6e4f" stroke-width="2"/>
     <text x="210" y="617" font-size="21" font-weight="600" fill="#1f2a37">15 document types</text>
@@ -304,7 +304,7 @@ comprehension.
 A rule is in the deterministic tier only when a lookup or a regular
 grammar checks it with no judgement about meaning.
 
-The rule catalogue has 40 rules today. 6 are deterministic.
+The rule catalogue has 41 rules today. 6 are deterministic.
 
 <!--
 The tier split assigns each rule to a script or to a model. The
