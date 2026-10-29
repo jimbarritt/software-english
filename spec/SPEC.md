@@ -168,11 +168,28 @@ A list item that labels with an em dash uses a colon instead:
 > Type — meaning
 > Type: meaning
 
-This rule is unconditional, with no exception for a use that reads
-correctly, the same precedent as a flat entry in
+This rule has no exception for a use that reads correctly, the same
+precedent as a flat entry in
 [`vocabulary/banned.tsv`](../vocabulary/banned.tsv). Quoted material
 (§6.3) is already exempt, for the case a fix would otherwise misquote
 someone else's exact words.
+
+A code span (§6.2) is exempt when its text reads as code. Code-like
+text has no space, or contains `::`, `->`, a flag, a function call, or
+a path. A code span whose text reads as a label or a value gets a
+warning finding instead of an error. A sample display name or a
+sample message is this case. Three signals keep a code span exempt
+even where its text does not read as code:
+
+- no space touches the dash itself (`Word—Word`), a title's or a
+  compound's own convention;
+- the text opens with "the", "a", or "an": a label or a value is a
+  bare phrase, not a clause;
+- the text contains an inner quote mark, a quotation inside a
+  quotation.
+
+These three signals cover a quoted fault example and a standard's
+title, both kept in a code span for the reason §6.3 gives.
 
 ### 3.6 No clipped sentence run (Inference-based)
 
@@ -945,6 +962,10 @@ pattern, never by a list:
 Prefer a code span for an identifier, command, or flag over relying on
 capitalisation alone.
 
+A code span's exemption from no-em-dash (§3.5) is narrower than this
+section's vocabulary exemption. A span that reads as natural language,
+not code, can still get a warning there.
+
 ### 6.3 Quoted material (Deterministic)
 
 A Markdown blockquote (a line starting with `>`) is not checked. It holds
@@ -953,7 +974,10 @@ Software English fault, such as this specification's own illustrations of banned
 anthropomorphic phrasing. Do not edit the wording inside a blockquote to
 satisfy a deterministic-tier rule; edit the surrounding prose instead, or
 use a code span (§6.2) for a short quoted fragment inline within a
-sentence.
+sentence. A table cell takes a code span the same way, since a
+blockquote cannot appear inside one. A quoted fragment kept in a code
+span this way stays within §3.5's article- and quote-mark signals. An
+em dash inside it stays exempt there too.
 
 ## 7. Document rules
 

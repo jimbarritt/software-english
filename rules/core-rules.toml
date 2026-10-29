@@ -32,8 +32,9 @@ id = "no-em-dash"
 tier = "deterministic"
 check = "character-ban"
 severity = "error"
+code_span_severity = "warning"
 character = "—"
-description = "Do not use an em dash (SPEC §3.5), in a sentence or in a list item. Unconditional: no exception for a use that reads correctly, the same precedent as a flat vocabulary/banned.tsv entry."
+description = "Do not use an em dash (SPEC §3.5), in a sentence or in a list item. No exception for a use that reads correctly, the same precedent as a flat vocabulary/banned.tsv entry. A code fence is exempt. A code span is exempt when it reads as code, has no space touching the dash, opens with an article (\"the\"/\"a\"/\"an\"), or carries an inner quote; any other code span with an em dash in it gets a finding at code_span_severity, not error."
 
 [[rules]]
 id = "sentence-length"
