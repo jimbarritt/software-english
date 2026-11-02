@@ -31,7 +31,7 @@ prose instead. Not yet built.
 
 Software English also defines document types, on top of its
 sentence-level rules. A type governs a document's required structure.
-A Design document, for example, may hold an open-questions section
+A Design document, for example, may have an open-questions section
 and a future-extension section. A Reference document may not.
 
 Fifteen types exist today:
@@ -41,7 +41,7 @@ Fifteen types exist today:
 - Lab Notebook, Portfolio Journal, Research Note, Evidence List
 
 Software English draws on and references canonical examples of these
-document types. `templates/` holds a local summary of each type's
+document types. `templates/` has a local summary of each type's
 structure.
 
 See [`spec/SPEC.md`](spec/SPEC.md) Appendix F for the full list, each
@@ -79,6 +79,17 @@ Early draft. Built alongside a Claude Code plugin
 ([claude-plugins](https://github.com/jimbarritt/claude-plugins)) that
 enforces it, but the spec is designed to stand on its own and to be
 usable by any tool.
+
+## Background reading
+
+Gergely Orosz's article
+["Becoming a Better Writer"](https://newsletter.pragmaticengineer.com/p/becoming-a-better-writer)
+gives evidence for a controlled language for engineering prose.
+Engineers write more words than code, and writing has a larger effect
+on a career as an engineer becomes more senior.
+[`docs/kb/becoming-a-better-writer.md`](docs/kb/becoming-a-better-writer.md)
+compares each of its tips with the rules in this specification, and
+lists the references on good writing that the article recommends.
 
 ## Licence
 
