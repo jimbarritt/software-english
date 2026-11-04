@@ -30,7 +30,7 @@ Google also states:
 Microsoft's style guide adds:
 
 - A top-level heading states the main point of its section and divides content into major subjects.
-- Add a second-level heading only when a top-level section holds two or more distinct sub-topics. If there are not at least two, skip the second-level heading.
+- Add a second-level heading only when a top-level section has two or more distinct sub-topics. If there are not at least two, skip the second-level heading.
 - Do not place two headings in a row with no text between them. That pattern signals a structure problem.
 - Keep headings short. Put the most important word first.
 - Use parallel sentence structure for all headings at the same level: for example, noun phrases for top-level headings, infinitive phrases ("To configure X") for task headings.
@@ -75,6 +75,13 @@ it is not a tutorial (it does not teach through a guided lesson) and not
 a how-to guide (it does not walk through steps toward one goal). Mixing
 those forms into a manual works against the distinction Diátaxis sets
 out.
+
+## Further reading
+
+Gergely Orosz's article "Becoming a Better Writer" gives editing and
+feedback advice for documentation that more than one person reads.
+[`docs/kb/becoming-a-better-writer.md`](../docs/kb/becoming-a-better-writer.md)
+compares its tips with the rules in this specification.
 
 ## Verify against the source
 

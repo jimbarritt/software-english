@@ -75,6 +75,13 @@ Source: RFC 2119.
   weighed before that behaviour is implemented.
 - **MAY**, **OPTIONAL**: the item is optional.
 
+## Further reading
+
+Gergely Orosz's article "Becoming a Better Writer" gives editing and
+feedback advice for proposals.
+[`docs/kb/becoming-a-better-writer.md`](../docs/kb/becoming-a-better-writer.md)
+compares its tips with the rules in this specification.
+
 ## Verify against the source
 
 Check the canonical sources directly for anything not covered here, or
