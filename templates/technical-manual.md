@@ -31,7 +31,7 @@ Microsoft's style guide adds:
 
 - A top-level heading states the main point of its section and divides content into major subjects.
 - Add a second-level heading only when a top-level section has two or more distinct sub-topics. If there are not at least two, skip the second-level heading.
-- Do not place two headings in a row with no text between them. That pattern signals a structure problem.
+- Do not place two headings in a row with no text between them. That pattern shows a fault in the structure.
 - Keep headings short. Put the most important word first.
 - Use parallel sentence structure for all headings at the same level: for example, noun phrases for top-level headings, infinitive phrases ("To configure X") for task headings.
 - Use sentence-style capitalisation (capitalise the first word, proper nouns, and the first word after a colon; nothing else).
@@ -47,7 +47,7 @@ Microsoft's guidance on scannable content states:
 - In a long document, add a table of contents and links to subheadings, so a reader can navigate directly to a section.
 - Place important keywords near the start of headings, table entries, and paragraphs.
 
-Google's style guide follows the same pattern: its own pages open with a page summary that states the main points before the full content follows.
+Google's style guide follows the same pattern: its pages open with a page summary that states the main points before the full content follows.
 
 ### Reference material
 
@@ -57,7 +57,7 @@ Google's style guide separates procedures (task-based, numbered steps) from refe
 - A procedure states where an action happens before what to do.
 - Reference and conceptual material does not follow the numbered-step form. It states facts about a system: components, parameters, behaviour.
 
-Neither source fetched for this file provides a single named structure for a full reference document (for example, a fixed sequence of sections such as "Overview / Components / Configuration / Errors"). Where a manual needs that level of structural specification, check the canonical sources directly, or apply a project-specific structure and record it separately.
+Neither source gives a single named structure for a full reference document (for example, a fixed sequence of sections such as "Overview / Components / Configuration / Errors"). Where a manual needs that level of structural specification, check the canonical sources directly, or apply a project-specific structure and record it separately.
 
 ## Document purpose (Diátaxis)
 
@@ -72,9 +72,8 @@ A technical manual that describes how a system works is reference and
 explanation content. It states facts about the system's parts and
 behaviour, and explains why the system is built that way. Per Diátaxis,
 it is not a tutorial (it does not teach through a guided lesson) and not
-a how-to guide (it does not walk through steps toward one goal). Mixing
-those forms into a manual works against the distinction Diátaxis sets
-out.
+a how-to guide (it does not give steps toward one goal). A manual that
+mixes those forms does not keep the distinction that Diátaxis states.
 
 ## Further reading
 
