@@ -356,6 +356,11 @@ narrower than the §5.1 condition, because each verb on this list also
 has a literal or an adjectival use (`a live install`, `the rest of the
 file`).
 
+The rule does not fail on `REST` written in capitals, the name of the
+transfer protocol (`The service exposes a REST API.`): that is a name,
+not the verb `rest`. Lowercase `rest`, `rests`, and `rested` still fail
+under the same condition as every other verb on this list.
+
 This rule exists because the fault is a default of fluent English, not a
 vocabulary gap: a writer actively avoiding it can still produce it
 without noticing. It cannot go in the flat banned-word list (§6) because,
