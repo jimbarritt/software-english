@@ -362,3 +362,29 @@ change to that plugin's code, only a release-pin bump.
 
 The rule is inference-based. A parser can find a comparative word, but
 whether its comparand is in its own sentence needs judgement.
+
+## Scope preamble: a new document rule at the end of §7
+
+A caption above a table stated what the table showed, and both tiers
+passed it. `no-remark-about-the-writing` (§5.3) judges a navigational
+announcement, and it excludes `§4 lists the retry limits` on purpose,
+since a reader can follow that reference to a fact. The caption had the
+same grammar, with the block below it as the subject. The count
+signpost in §7.6 needs a number word at the head of the sentence, and
+the caption had none. §7.1 judges only the document's opening
+paragraph.
+
+`no-scope-preamble` catalogues the fault as §7.23: a sentence whose
+subject is the document, the section, or the block it is in, and that
+states only what the block after it shows. It is the body-level form
+of §7.1's second fault. It is the last entry in §7, for the same
+reason §7.21 and §7.22 are: an insertion would renumber rules the
+catalogue and the Contents list cite by number.
+
+The rule is inference-based. A parser can find `this section lists`,
+but whether the block after it shows everything the sentence states
+needs judgement. No phrase went into `vocabulary/banned.tsv`: `the
+table lists only the regions that accept writes` states a fact the
+table does not show. The claude-plugins lint-file worklist already
+judges each paragraph and table as one unit, so the rule needed no
+change to that plugin's code, only a release-pin bump.

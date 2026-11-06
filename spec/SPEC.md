@@ -62,6 +62,7 @@ not exhaustive.
   - [7.20 No count that differs from its list](#720-no-count-that-differs-from-its-list-inference-based)
   - [7.21 No contradiction between sections](#721-no-contradiction-between-sections-inference-based)
   - [7.22 No precedent before its subject](#722-no-precedent-before-its-subject-inference-based)
+  - [7.23 No scope preamble](#723-no-scope-preamble-inference-based)
 - [8. Register rules](#8-register-rules)
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
@@ -489,6 +490,10 @@ own sequence, needs judgement.
 - §8.3: a clause about the document's layout, joined to a sentence that
   states a fact, is a §8.3 finding. This rule covers a sentence that
   states no fact at all.
+- §7.23: a sentence whose subject is the section or block it is in,
+  and that states only what that block contains (`This section lists
+  every value the installation requires.`), is a §7.23 finding. Report
+  it under §7.23 only.
 
 The editorial judgement has no catalogue entry of its own. Its common
 fixed phrases are in [`vocabulary/banned.tsv`](../vocabulary/banned.tsv).
@@ -1046,6 +1051,8 @@ Other rules have a nearby claim:
   is not a summary. Report the narration under §7.7, and report this
   rule at line 1 where no summary states the main fact.
 - §7.22 asks for the same order inside one section.
+- §7.23 covers the same subject-only sentence inside the body, at the
+  start of a section or above a block.
 
 A parser can find the text before the first heading, or a heading named
 Summary. Whether that text states the document's main fact needs
@@ -1209,7 +1216,10 @@ The phrases `two things` and `three things` are on the fixed list
 it, and a count signpost announces the items after it. Distinct from
 §7.20: a count signpost states a count the items directly after it
 already show, correctly; a count that differs from its own list states
-a wrong fact, and belongs under §7.20 only. Both triggers are findable
+a wrong fact, and belongs under §7.20 only. Distinct from §7.23: a
+sentence with the block as its subject that also states a count is a
+§7.23 finding; this rule covers a number word at the head of the
+sentence, with no stated subject. Both triggers are findable
 in the text. Whether a found instance states a fact beyond the count
 needs judgement, so this stays inference-based.
 
@@ -1996,6 +2006,79 @@ Other rules have a nearby claim:
 A parser can find a section's heading and its paragraphs. Deciding
 which subject each paragraph describes needs judgement, so this stays
 inference-based.
+
+### 7.23 No scope preamble (Inference-based)
+
+A scope preamble is a sentence whose subject is the document, the
+section, or the block it is in, and whose verb states what that block
+contains. Where the block after it shows the same content, the
+sentence adds no fact. A reader reads the block and has the content.
+
+Fault, directly above a list:
+
+> This section lists every value the installation requires, in the
+> order it requires them.
+
+Fault, directly above a table:
+
+> The table below shows each region and its default queue.
+
+Fix: delete the sentence and start with the block. Where the sentence
+states a fact the block does not show, keep that fact and cut the
+description:
+
+> The installer reads these values in order, and stops at the first
+> missing one.
+
+Test: delete the sentence. If a reader who reads the block loses no
+fact, the sentence was a scope preamble.
+
+Judge in two steps. First, find each sentence in body prose whose
+subject is the document, the section it is in, or the block directly
+after it (`this section`, `this page`, `this list`, `this table`, `the
+table below`, `the following list`), and whose verb states content
+(`lists`, `shows`, `describes`, `contains`, `covers`, `gives`,
+`names`). Then compare the sentence with the block directly after it,
+or with the rest of its section. Report a finding only where that
+block shows everything the sentence states.
+
+These are not this fault:
+
+- a cross-reference that names another part of the document: `§4
+  lists the retry limits` (§5.3 also excludes it);
+- a sentence that states a fact the block does not show, such as a
+  source, a unit, an order a mechanism reads, or a part of a larger
+  set: `The table lists only the regions that accept writes.`;
+- a sentence that states where a section's rule comes from: `This
+  section is Software English's own rule, not Diátaxis's wording.`;
+- an instruction about the section in a template;
+- a heading (§7.17 judges a heading);
+- quoted material (§6.3).
+
+Other rules have a nearby claim:
+
+- §7.1: an opening paragraph that states only what the document
+  covers is a §7.1 finding. Report it under §7.1 only. This rule
+  covers a sentence in the body, at the start of a section or above a
+  block.
+- §7.6: a sentence that starts with a number word and states only how
+  many items follow it is a count signpost. Report it under §7.6 only.
+  A sentence with the block as its subject that also states a count
+  (`This list names the three values the installer reads.`) is a
+  finding under this rule only.
+- §5.3: a navigational announcement states where the document turns
+  to a subject, or what a part of it is for (`That is what the next
+  section is for.`). Report it under §5.3 only. This rule covers a
+  plain statement of what the block contains.
+- §8.3: a clause about the document's layout joined to a sentence that
+  states a fact is a §8.3 finding. This rule covers a sentence that
+  states only the block's content.
+- §7.12: an entailed restatement repeats a fact the text before it
+  states. A scope preamble describes the block after it.
+
+A parser can find a sentence whose subject is `this section` or `the
+table below`. Whether the block after it shows everything the
+sentence states needs judgement, so this stays inference-based.
 
 ## 8. Register rules
 

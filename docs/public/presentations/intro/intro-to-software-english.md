@@ -304,7 +304,7 @@ comprehension.
 A rule is in the deterministic tier only when a lookup or a regular
 grammar checks it with no judgement about meaning.
 
-The rule catalogue has 42 rules today. 6 are deterministic.
+The rule catalogue has 43 rules today. 6 are deterministic.
 
 <!--
 The tier split assigns each rule to a script or to a model. The
