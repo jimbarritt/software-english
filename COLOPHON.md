@@ -388,3 +388,48 @@ table lists only the regions that accept writes` states a fact the
 table does not show. The claude-plugins lint-file worklist already
 judges each paragraph and table as one unit, so the rule needed no
 change to that plugin's code, only a release-pin bump.
+
+## Scope escalation: a mixed semantic rule at the end of §5
+
+A sentence in a PR description compared the problem with a smaller
+one and stated no fact of its own: `that breaks more than the nightly
+job`. Both tiers passed it. `no-remark-about-the-writing` (§5.3)
+judges a sentence about the document's own sequence, not the subject.
+`no-contrastive-framing` (§5.7) needs an unstated, unasked case; here
+the lesser case is stated, not withheld. `no-split-contrast-pair`
+(§8.4) needs the comparand in the sentence before; here it is in the
+same sentence as the rank. None matched.
+
+`scope-escalation` catalogues the fault as §5.12, a new entry at the
+end of §5, for the same reason §7.23 and §8.4 went at the end of their
+own sections: an insertion beside §5.1 would renumber rules the
+catalogue and the Contents list cite by number. The issue that raised
+it called the fault a sibling of §5.3's navigational announcement,
+aimed at the subject rather than at the document, which is why §5 and
+not §8 is its home.
+
+The tier split follows the precedent of §5.3, §5.5, and §5.6. Five
+fixed openers state an escalation and nothing else:
+`not just, more than just, this is not only, this is bigger than, it goes further than`.
+They went into `vocabulary/banned.tsv`, with two contracted forms
+added, `isn't just` and `this isn't only`: banned-word matching
+ignores case but not a contraction. `more than` on its own did not go
+on the list, since a sentence such as `the import takes more than 30
+seconds` states a measurement, and a flat lookup would report a
+correct sentence.
+
+Unlike most additions here, the fixed phrases already occurred in
+prose outside this repository. `claude-plugins/swe` has four real
+escalations on the fixed list, plus one false positive with the same
+wording, where the sense is `only` rather than an escalation; that
+false positive joins the accepted ones `carry` and `hold` already
+have. Each occurrence becomes a banned-word error once the release
+pin for `software-english` in `swe/software-english.json` changes to
+the tag this change ships in; fixing the four escalations and the one
+rewording is a follow-up in that repository, not part of this change.
+
+The rule is inference-based. A parser can find `more than` after a
+verb, but whether the noun phrase after it names a lesser case or a
+quantity needs judgement. The claude-plugins lint-file worklist
+already judges each sentence as a candidate, so the rule needed no
+change to that plugin's code, only a release-pin bump.

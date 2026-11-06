@@ -35,6 +35,7 @@ not exhaustive.
   - [5.9 No catch-all verb](#59-no-catch-all-verb-inference-based)
   - [5.10 No framing device](#510-no-framing-device-inference-based)
   - [5.11 No ownership or entitlement for a system](#511-no-ownership-or-entitlement-for-a-system-inference-based)
+  - [5.12 No scope escalation](#512-no-scope-escalation-mixed)
 - [6. Vocabulary rules](#6-vocabulary-rules-deterministic)
   - [6.1 One sense per word](#61-one-sense-per-word-deterministic)
   - [6.2 Literal tokens](#62-literal-tokens-deterministic)
@@ -499,6 +500,9 @@ own sequence, needs judgement.
   and that states only what that block contains (`This section lists
   every value the installation requires.`), is a §7.23 finding. Report
   it under §7.23 only.
+- §5.12: a sentence about the subject that states only its rank
+  against a lesser case (`That breaks more than the nightly job.`) is
+  a §5.12 finding. Report it under §5.12 only.
 
 The editorial judgement has no catalogue entry of its own. Its common
 fixed phrases are in [`vocabulary/banned.tsv`](../vocabulary/banned.tsv).
@@ -617,6 +621,9 @@ states a real, load-bearing limit in a reference document as plainly
 as any other fact. The fault is the sentence's shape, framed against an
 unstated contrast, not the presence of any one word. Recognising the
 shape needs judgement, so this stays inference-based.
+
+A sentence that states only that its subject exceeds a lesser case is
+a §5.12 finding; report it there only.
 
 ### 5.8 No undeclared state verb (Inference-based)
 
@@ -925,6 +932,64 @@ a system as the possessor: `belongs to` as classification, `own`
 meaning one each, and a term of art. A parser can find each member of
 the family. Whether the possessor is a person, and whether the cut
 loses a fact, needs judgement, so this stays inference-based.
+
+### 5.12 No scope escalation (mixed)
+
+A sentence states a fact about its subject. A scope escalation states
+only that the problem ranks against a lesser case: it names what the
+problem exceeds, not what the problem is, and states the substance
+only in the next sentence.
+
+> That breaks more than the nightly job.
+
+Delete the sentence and state the wider case directly:
+
+> That breaks every scheduled job, the nightly job included.
+
+Test: delete the sentence. If the next sentence states the wider case
+and a reader loses no fact, it was a scope escalation. If no sentence
+states the wider case, state it in the fault's place.
+
+These are not this fault:
+
+- a measurement, where `more than` takes a number or a quantity: `the
+  import takes more than 30 seconds`, `a verb that covers more than
+  one declared status`;
+- a comparison of two stated quantities: `the index uses more memory
+  than the cache`;
+- a sentence that states the wider case, with the lesser case as one
+  part of it: `the change breaks every scheduled job, the nightly job
+  included`;
+- quoted material (§6.3) or a literal token (§6.2).
+
+Deterministic-tier fixed list (in
+[`vocabulary/banned.tsv`](../vocabulary/banned.tsv)):
+`not just, isn't just, more than just, this is not only, this isn't only, this is bigger than, it goes further than`.
+Banned-word reports each phrase.
+
+Inference-based tier: `scope-escalation` covers the general `<verb>
+more than <noun phrase>` shape not on the fixed list, and the same
+shape with `beyond` or `further than`. `more than` is not a banned-word
+entry: `takes more than 30 seconds` states a measurement, so a lookup
+would report a correct sentence. Whether the noun phrase after it names
+a lesser case or a quantity, and whether the sentence states a fact
+apart from the comparison, needs judgement.
+
+`scope-escalation` has a nearby claim in other rules:
+
+- §5.3: a sentence about the document's own sequence or parts is a
+  §5.3 finding. This rule covers a sentence about the subject that
+  states only its rank against a lesser case.
+- §5.7: an unstated, unasked case is a §5.7 finding. This rule covers
+  a case that is stated, ranked against the subject, with no fact
+  stated apart from the rank.
+- §8.4: where the comparand is only in the sentence before, report it
+  under §8.4 only. A scope escalation names its comparand in its own
+  sentence, and states the substance only in the sentence after.
+- §7.10: where the lesser case is not something a reader's task
+  needs, and the sentence states a fact as well, report it under
+  §7.10 only. Where the sentence states only the comparison, report
+  it under this rule only.
 
 ## 6. Vocabulary rules (Deterministic)
 
