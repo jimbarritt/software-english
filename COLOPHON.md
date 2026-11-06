@@ -30,12 +30,13 @@ a direct read of the file harder to follow than the same change in TOML.
 ## Vocabulary format: TSV, not CSV
 
 The vocabulary files ([`vocabulary/*.tsv`](vocabulary/)) are
-tab-separated, not comma-separated. Every sense and fix column holds
-ordinary English prose, and a comma appears in that prose constantly
-(`name the action: read, write, upload, fetch, call`). A comma-separated
-format would need every such field quoted, and any quote character
-inside the field escaped. A tab does not appear in ordinary English
-prose, so a plain split on tab needs no quoting or escaping. The linter
+tab-separated, not comma-separated. Every sense and fix column
+contains ordinary English prose, and a comma appears in that prose
+constantly (`name the action: read, write, upload, fetch, call`). A
+comma-separated format would need every such field quoted, and any
+quote character inside the field escaped. A tab does not appear in
+ordinary English prose, so a plain split on tab needs no quoting or
+escaping. The linter
 parses each row with a single `line.split("\t")` call: no CSV-parsing
 library, no quoting logic.
 
@@ -302,16 +303,17 @@ The rule is inference-based. A sentence with "you" as its subject can
 be an instruction, a consequence, or a prediction, and only the stated
 consequence separates them. The same is true of "it helps to", where
 "it" can name a component. Five phrases with no correct use went into
-`vocabulary/banned.tsv`: "you will be glad", "you'll be glad", "before
-you find out", "exactly what you want", and "may be what you want".
-None occurred in either repository's prose when they were added.
+`vocabulary/banned.tsv`: `you will be glad`, `you'll be glad`,
+`before you find out`, `exactly what you want`, and
+`may be what you want`. None occurred in either repository's prose
+when they were added.
 
 ## Remark about the writing: a second catalogued fault inside §5.3
 
 §5.3's third fault, a remark about the writing, had fixed phrases in
 `vocabulary/banned.tsv` and no catalogue entry, so the inference tier
 had no rule id to judge a paraphrase against. A navigational
-announcement ("this is where the signing certificate comes in") was
+announcement (`this is where the signing certificate comes in`) was
 the false negative. `no-remark-about-the-writing` catalogues the third
 fault, with the navigational announcement as one named form. §5.3
 keeps its number.
@@ -321,9 +323,42 @@ its fix is the plain clause. A navigational announcement wraps none:
 its plain clause ("the next section is for that") still states no
 fact, so the fix deletes the sentence.
 
-"comes in" and "come in" went into `vocabulary/banned.tsv`. The
-anthropomorphism fixed list already reported "comes" in them, with a
+`comes in` and `come in` went into `vocabulary/banned.tsv`. The
+anthropomorphism fixed list already reported `comes` in them, with a
 fix that names a mechanism. "this is where" and "here is where" did
 not, since "this is where the service writes its logs" names a
 directory. Neither phrase occurred in either repository's prose when
 they were added.
+
+## Split contrast pair: a fourth catalogued fault beside §8's siblings
+
+A full inference pass recorded a document clean while one list item
+still read as model-generated. The shape was a run of three short
+sentences: the first named A and B, the second stated a property of A
+alone, and the third stated B's property in comparative form, with
+its comparand only in the sentence before.
+Each sentence states a fact alone, so a unit-by-unit judgement passed
+all three.
+
+None of the three rules the report named covers the shape.
+`no-clipped-sentence-run` (§3.6) needs a pronoun chain with a changing
+referent, and its own "not this fault" list excludes a run of named
+subjects and a list item, both true here. `no-contrastive-framing`
+(§5.7) needs an unstated, unasked case; both sides of this comparison
+are stated. `no-entailed-restatement` (§7.12) needs a clause that
+follows from the fact before it; the middle sentence here is not
+entailed by the first, so cutting it would lose a fact.
+
+`no-split-contrast-pair` catalogues the shape as §8.4, a new entry at
+the end of §8 for the same reason §7.21 and §7.22 went at the end of
+§7: a rule inserted beside §8.1 would renumber rules the catalogue and
+the Contents list cite by number.
+
+The fault does not depend on sentence length or on a pronoun, so §3.6
+and §8.4 do not overlap: §3.6 excludes a list item on purpose, and
+§8.4 includes one on purpose. The `claude-plugins` lint-file worklist
+already judges each list item as one unit, so the rule needed no
+change to that plugin's code, only a release-pin bump.
+
+The rule is inference-based. A parser can find a comparative word, but
+whether its comparand is in its own sentence needs judgement.

@@ -66,6 +66,7 @@ not exhaustive.
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
   - [8.3 No distributive tail](#83-no-distributive-tail-inference-based)
+  - [8.4 No split contrast pair](#84-no-split-contrast-pair-inference-based)
 - [Appendices](#appendices)
   - [Appendix A. Machine-readable rule catalogue](#appendix-a-machine-readable-rule-catalogue)
   - [Appendix B. Enforcement and fact preservation](#appendix-b-enforcement-and-fact-preservation)
@@ -227,6 +228,10 @@ These are not this fault:
 - a list item (§3.4), which is short by design;
 - a numbered sequence of steps in a document of the Tutorial or
   How-to type (§7.8).
+
+A run of short sentences with named subjects that splits a comparison
+across its sentences is a §8.4 finding, in a paragraph or in a list
+item.
 
 The 20-word limit (§3.2) is a ceiling, not a target, and pushes
 writing toward this shape: do not meet the limit by splitting one
@@ -2167,6 +2172,75 @@ it, report it under §7.6 only.
 A parser can find `, and each` or `, and both` after a count. Telling
 a property of the layout from a property of the subject matter needs
 judgement, so this stays inference-based.
+
+### 8.4 No split contrast pair (Inference-based)
+
+A comparison between two items states both sides, and the relation
+between them, in one sentence. A split contrast pair is a run of three
+consecutive sentences, in one paragraph or one list item, that states
+a comparison without naming it. The first sentence names two items.
+The second states a property of the first thing alone. The third
+states a property of the second thing with a comparative or a
+contrast word, and its comparand is the property the second sentence
+states:
+
+> The index is separate from the cache and the job rebuilds it
+> overnight. The cache stores recent results. The index will be
+> larger and will be built from the full table.
+
+Each sentence states a plausible fact alone, so a judgement of one
+sentence at a time finds no fault. The fault is the cadence of the
+three together. The second sentence exists to set up the comparison in
+the third. "Larger" names no comparand in its own sentence: the cache
+and its recent results are in the sentence before, so a reader must
+remember them to read the third sentence.
+
+State the first thing's property where the text first names it. State
+the comparison in one sentence that names both sides:
+
+> The index is separate from the cache, which stores recent results.
+> The job rebuilds the index overnight from the full table, so the
+> index is larger than the cache.
+
+Scope: one paragraph or one list item, judged as one unit. A list item
+is in scope. The fault is a comparison split across sentences, not the
+length of the sentences, so §3.6's exclusion of a list item does not
+apply.
+
+Test: read the third sentence alone. If its comparative or its
+contrast word names no comparand, and the comparand is only in the
+sentence before, the run is this fault.
+
+These are not this fault:
+
+- a comparison stated in one sentence that names both sides ("the
+  index is larger than the cache");
+- two sentences in the same shape that each state a complete fact
+  alone, with no comparative and no contrast word ("A read takes a
+  shared lock. A write takes an exclusive lock.");
+- a third sentence that names its own comparand ("than the cache");
+- a table, or a list where each item states the property of one
+  member;
+- quoted material (§6.3) or a literal token (§6.2).
+
+Distinct from §3.6: that rule covers one fact split into pieces joined
+by a chain of pronouns, and excludes a list item. This rule covers a
+comparison split across sentences with named subjects, and includes a
+list item. Where one run has both faults, report each. Distinct from
+§5.7: that rule covers an unstated, unasked case. Here the text states
+both sides, and the fault is the split. Where the third sentence
+states what the second thing does not do, report it under §5.7 only.
+Distinct from §7.12: the second sentence does not follow from the
+first, so cutting it loses a fact; keep it, merged into the one
+sentence that states the comparison. Distinct from
+§8.1: a cadence device restates a fact the sentence before it states.
+Each sentence here states a different fact. Distinct from §7.10: where
+the task at hand does not need the first thing at all, report it under
+§7.10 only, since the fix cuts it.
+
+A parser can find a comparative word. Whether its comparand is in its
+own sentence, and whether the sentence before exists only to give it
+one, needs judgement, so this stays inference-based.
 
 ## Appendices
 
