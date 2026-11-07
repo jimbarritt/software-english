@@ -433,3 +433,44 @@ verb, but whether the noun phrase after it names a lesser case or a
 quantity needs judgement. The claude-plugins lint-file worklist
 already judges each sentence as a candidate, so the rule needed no
 change to that plugin's code, only a release-pin bump.
+
+## Review comment: a new type and a structural rule at the end of §7
+
+A PR review comment took four rewrites before it read cleanly. The
+deterministic tier passed every version, including the first: the
+rules there score single words and sentence length, and the comment
+had no banned word and no long sentence. What was wrong was
+structural. The comment opened with evidence, dense and
+diff-first, and stated its claim three paragraphs later.
+
+No existing rule matched. `summary-before-detail` (§7.1) requires the
+document's main fact first, but not which fact, so a comment that
+opens with a true, on-topic sentence passes even where that sentence
+is not the problem. `no-abstract-stand-in-for-artefact` (§7.15) names
+artefacts, not structure: a comment can name every file it touches
+and still bury its claim. `templates/pull-request.md` already named
+each alternative rejected, in prose, with no rule behind it.
+
+`problem-alternative-steps` catalogues the fault as §7.24, at the end
+of §7, for the reason §7.14, §7.22, and §7.23 are there: an insertion
+beside §7.1 would renumber rules the catalogue and the Contents list
+cite by number. A review comment is not a PR Description: a PR
+description states a change already made, and a review comment names
+one not yet made, so the two needed separate types (SPEC Appendix F)
+before the rule could be scoped correctly. Only the rule's first
+check, the problem sentence, applies to a PR Description too: the
+other two presuppose a change not yet built, which a PR description
+is not.
+
+The new type needed a local reference, `templates/review-comment.md`,
+built the same way `templates/pull-request.md` is: a canonical-source
+list, the type's own structure, and the one rule that is Software
+English's own addition. README.md's type count and the intro deck's
+rule count were updated with it.
+
+The rule is inference-based: a parser can find the first paragraph of
+a comment, but whether it states the problem, whether an alternative
+is named, and whether a step can be acted on, each needs judgement.
+The claude-plugins lint-file worklist already judges each paragraph
+as a candidate, so the rule needed no change to that plugin's code,
+only the usual release-pin bump.

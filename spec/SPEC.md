@@ -64,6 +64,7 @@ not exhaustive.
   - [7.21 No contradiction between sections](#721-no-contradiction-between-sections-inference-based)
   - [7.22 No precedent before its subject](#722-no-precedent-before-its-subject-inference-based)
   - [7.23 No scope preamble](#723-no-scope-preamble-inference-based)
+  - [7.24 Problem, alternative, and steps in a review comment](#724-problem-alternative-and-steps-in-a-review-comment-inference-based)
 - [8. Register rules](#8-register-rules)
   - [8.1 No cadence device](#81-no-cadence-device-inference-based)
   - [8.2 No mechanical repetition](#82-no-mechanical-repetition-inference-based)
@@ -2150,6 +2151,91 @@ A parser can find a sentence whose subject is `this section` or `the
 table below`. Whether the block after it shows everything the
 sentence states needs judgement, so this stays inference-based.
 
+### 7.24 Problem, alternative, and steps in a review comment (Inference-based)
+
+This rule is conditional on document type. It applies in full to a
+document whose type under §7.8 is Review Comment, listed in
+[Appendix F](#appendix-f-document-type-templates). On a PR
+Description it applies in part: see the PR Description clause below.
+
+A review comment is a request, to the author of a change under
+review, to change it. Three checks apply, in order.
+
+First, the problem: the first paragraph opens with one plain
+sentence that states the problem with the change under review. The
+sentence names the artefact concerned (§7.15) and what is wrong with
+it. Evidence, such as a quoted diff hunk, a log line, or a benchmark
+figure, follows that sentence. It does not replace it.
+
+Fault: a comment that opens with three quoted diff hunks and a stack
+trace, and states its claim only in the fourth paragraph.
+
+Fix: `This change fixes a local-development problem by changing
+production code behind a config flag.`
+
+Second, the alternative: the comment names the approach it proposes
+instead of the one under review.
+
+Fault: `There must be a better way to do this.`
+
+Fix: `Remove the flag; set the port in
+docker-compose.override.yml instead.` A request to remove the change
+outright, with no replacement, is itself an alternative, and states
+it.
+
+Third, concrete steps: each step names an artefact, a file, a
+function, a flag, or a command, and the action on it, so the author
+can act on it with no further question.
+
+Fault: `Refactor this to be cleaner.` Fault: `Consider moving it.`
+
+Fix: `Move the port default from config/prod.yaml to
+docker-compose.override.yml.`
+
+Test: read the first paragraph alone. If it does not state the
+problem, the comment has the first fault. Read the rest. If it
+proposes no approach, or names no artefact and no action a next step
+can start from, the comment has the second or third fault. Report a
+finding at the first paragraph for the first fault, and at the
+paragraph concerned for the second or third.
+
+These are not this fault:
+
+- an approval, with no requested change;
+- a question asked to understand the code, not to request a change;
+- a nit given as a one-line suggestion block: the block is the step;
+- a reply in an existing thread whose first comment already states
+  the problem;
+- a comment of one sentence that states the problem and the fix
+  together: `Use the receipt id here, not the order id.` states the
+  problem and gives the step in one clause.
+
+**PR Description clause.** On a document whose type is PR
+Description, the Problem section, or, in a description with no
+headings, the first paragraph, opens with one sentence that states
+the problem before any evidence. The alternative and concrete-steps
+checks above do not apply to a PR Description: the change is already
+built, so there is no step left to give, and
+[`templates/pull-request.md`](../templates/pull-request.md) already
+names each alternative rejected, in the Change section.
+
+Other rules have a nearby claim:
+
+- §7.1: on a review comment, the summary §7.1 requires is this
+  rule's problem sentence. Report a missing or a late problem
+  sentence under this rule only.
+- §7.15: a step that names no artefact is a finding under this rule.
+  Report §7.15 on its own only for an abstract noun outside the three
+  checks above.
+- §7.7: a comment that narrates an earlier review round, instead of
+  stating the problem with the current version, is a §7.7 finding.
+- §7.14: a step that points to a later pull request or an issue id,
+  in place of stating the step itself, is a §7.14 finding.
+
+A parser can find the first paragraph of a comment. Whether it states
+the problem, whether an alternative is named, and whether a step can
+be acted on, each needs judgement, so this stays inference-based.
+
 ## 8. Register rules
 
 Register is the rhythm, emphasis, and formatting of a text, apart from
@@ -2476,6 +2562,7 @@ relying on a detail the local reference omits.
 | Design | [IEEE Std 1016-2009](https://ieeexplore.ieee.org/document/5167255/) (software design descriptions); Ubl, ["Design Docs at Google"](https://www.industrialempathy.com/posts/design-docs-at-google/) (2020) | [`templates/design.md`](../templates/design.md) |
 | API Design | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) and [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP); [Apache Avro](https://avro.apache.org/docs/current/specification/) and [JSON Schema](https://json-schema.org/specification) (schema notation); [CloudEvents 1.0.2](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md) (event envelope) | [`templates/api-design.md`](../templates/api-design.md) |
 | PR Description | Google Engineering Practices, ["Writing good CL descriptions"](https://google.github.io/eng-practices/review/developer/cl-descriptions.html); Linux kernel, ["Submitting patches"](https://www.kernel.org/doc/html/latest/process/submitting-patches.html#describe-your-changes) (describe your changes) | [`templates/pull-request.md`](../templates/pull-request.md) |
+| Review Comment | Google Engineering Practices, ["How to write code review comments"](https://google.github.io/eng-practices/review/reviewer/comments.html); [Conventional Comments](https://conventionalcomments.org/) | [`templates/review-comment.md`](../templates/review-comment.md) |
 | Specification | [W3C QA Framework: Specification Guidelines](https://www.w3.org/TR/qaframe-spec/); RFC 2119 keywords (above) | [`templates/specification.md`](../templates/specification.md) |
 | Technical Manual | [Google developer documentation style guide](https://developers.google.com/style); [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/); [Diátaxis](https://diataxis.fr/) | [`templates/technical-manual.md`](../templates/technical-manual.md) |
 | Tutorial | [Diátaxis](https://diataxis.fr/tutorials/) | [`templates/tutorial.md`](../templates/tutorial.md) |
@@ -2526,9 +2613,19 @@ scope is the problem statement and the change statement. One rule
 applies to a PR description and to no other type: §7.16 requires
 each check it lists to state its result.
 
-Lab Notebook, Portfolio Journal, Research Note, and PR Description
-are each a convergent convention: independent sources describe the
-same practice, with local variation, rather than one body defining a
-single formal standard. Evidence List is one joint standard, set by
-Cochrane and GRADE together. Each local reference states this
-distinction for its own type.
+Review Comment is the neighbour of PR Description with the opposite
+decision state: it names a change not yet made, where a PR
+description states one already made. §7.24 applies to it in full
+(a problem sentence, a named alternative, and concrete steps), and
+to a PR Description for the problem sentence only: a PR description
+has no step left to state, and its own template already names each
+alternative rejected. §7.14 and §7.15 apply to a Review Comment as
+to every type. §7.16 does not apply to it: it is not a PR
+Description.
+
+Lab Notebook, Portfolio Journal, Research Note, PR Description, and
+Review Comment are each a convergent convention: independent sources
+describe the same practice, with local variation, rather than one
+body defining a single formal standard. Evidence List is one joint
+standard, set by Cochrane and GRADE together. Each local reference
+states this distinction for its own type.

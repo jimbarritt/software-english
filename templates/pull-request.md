@@ -49,11 +49,12 @@ A PR description has these parts, in this order:
    log or a list of changes shows the first line only.
 2. **Summary.** One or two sentences that state what the change does
    (SPEC §7.1).
-3. **Problem.** What was wrong or missing before the change. Name
-   the file, the field, the record, or the request concerned (SPEC
-   §7.15). State the problem here even where an issue also states
-   it: a tracker id stops resolving once the tracker is migrated
-   (SPEC §7.14).
+3. **Problem.** What was wrong or missing before the change. Open
+   with one sentence that states the problem, before any evidence
+   (SPEC §7.24). Name the file, the field, the record, or the
+   request concerned (SPEC §7.15). State the problem here even where
+   an issue also states it: a tracker id stops resolving once the
+   tracker is migrated (SPEC §7.14).
 4. **Change.** What the change does, at the level a reviewer checks
    against the diff. State the facts the diff does not show: why the
    change takes this approach, each alternative rejected and the
@@ -70,13 +71,15 @@ A PR description has these parts, in this order:
 A short change may state the Problem and the Change in one paragraph
 each, with no headings.
 
-## Software English addition: two rules for this type
+## Software English addition: three rules for this type
 
 This section is Software English's own rule, not the wording of
-either guide. Two rules govern this type's content. §7.16 applies to
-a PR description and to no other type. §7.15 applies to every type,
-and on a PR description it covers the problem statement and the
-change statement.
+either guide. Three rules govern this type's content. §7.16 applies
+to a PR description and to no other type. §7.15 applies to every
+type, and on a PR description it covers the problem statement and
+the change statement. §7.24 applies to a type whose content names a
+change not yet made, in full; on a PR description it covers only the
+problem statement's opening sentence.
 
 - **No abstract stand-in for an artefact ([SPEC §7.15](../spec/SPEC.md)).**
   The problem statement and the change statement name the artefact
@@ -91,6 +94,15 @@ change statement.
   `` `make test` `` reads as evidence and states none. A Not
   verified section is correct content, and the rule does not apply
   to it.
+- **Problem, alternative, and steps ([SPEC §7.24](../spec/SPEC.md)).**
+  On a PR description, the Problem section, or the first paragraph
+  where there are no headings, opens with one sentence that states
+  the problem, before any evidence. The rule's other two checks, a
+  named alternative and concrete steps, do not apply here: the
+  change is already built, and this type's own Change section
+  already names each alternative rejected, and the reason. See
+  [`templates/review-comment.md`](review-comment.md), where both
+  checks apply in full.
 
 ## Software English addition: read the whole description before presenting it
 
@@ -130,6 +142,7 @@ result.
 | ADR | One decision, its context, and its consequences | Taken |
 | Design | The strategy for one system, its decisions, and what stays open | Taken, with named gaps |
 | PR Description | One change, the problem it solves, and the evidence that it works | Made, with its checks stated |
+| Review Comment | A problem with a change under review, its alternative, and concrete steps | Requested, not yet made |
 | Reference | What the built system is | Built |
 
 An ADR records one decision and its reason, and stays in the
@@ -139,6 +152,10 @@ the checks that show it works. A PR description may link to the ADR
 or the design document the change implements, and does not restate
 it. A commit message is not this type, and SPEC §7.16 does not apply
 to it.
+
+A review comment names a change not yet made, to the same change a
+PR description accompanies. See
+[`templates/review-comment.md`](review-comment.md).
 
 ## Verify against the source
 
