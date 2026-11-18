@@ -474,3 +474,27 @@ is named, and whether a step can be acted on, each needs judgement.
 The claude-plugins lint-file worklist already judges each paragraph
 as a candidate, so the rule needed no change to that plugin's code,
 only the usual release-pin bump.
+
+## No missing word: a grammar rule at the end of §4
+
+A sentence with a missing word passed both tiers. The sentence was
+`Two workers that write the queue lose messages`: the verb `write`
+takes `to` before its destination, and the sentence had none. The
+deterministic tier scores the words a sentence contains and its
+length, so it reports no fault for a word the sentence omits. No
+inference rule covered
+grammatical completeness, so an inference pass that judged every unit
+reported nothing either.
+
+`no-missing-word` catalogues the fault as §4.6, at the end of §4, so
+that no rule the catalogue and the Contents list cite by number
+changes its number. §4 contains the rules on the grammar of one
+sentence: tense, voice, verb forms, person, and mood. A missing word
+is a fault in the grammar of one sentence, so the rule is in §4.
+
+The rule is inference-based. A parser can find a verb with no object,
+but whether the verb needs a preposition in that sense, or whether a
+format allows the fragment, needs judgement. The claude-plugins
+lint-file worklist already judges each sentence as a candidate, so
+the rule needed no change to that plugin's code, only a release-pin
+bump. The intro deck's rule count was updated with it.

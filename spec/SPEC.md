@@ -23,6 +23,7 @@ not exhaustive.
   - [4.3 Verb forms](#43-verb-forms-inference-based)
   - [4.4 Person](#44-person-inference-based)
   - [4.5 Mood](#45-mood-inference-based)
+  - [4.6 No missing word](#46-no-missing-word-inference-based)
 - [5. Semantic rules](#5-semantic-rules)
   - [5.1 No anthropomorphism](#51-no-anthropomorphism-mixed)
   - [5.2 No location or motion verb for an abstract subject](#52-no-location-or-motion-verb-for-an-abstract-subject-deterministic)
@@ -281,6 +282,44 @@ see [Appendix C](#appendix-c-configuration).
 
 Imperative for instructions. Configurable: see
 [Appendix C](#appendix-c-configuration).
+
+### 4.6 No missing word (Inference-based)
+
+A sentence is grammatically complete. It does not omit a word that its
+grammar needs: a preposition that its verb takes, an article, an
+auxiliary, or a verb. A missing word can change the meaning of the
+sentence.
+
+> Two workers that write the queue lose messages.
+
+The verb `write` takes `to` before its destination. Add the word:
+
+> Two workers that write to the queue lose messages.
+
+Test: read the sentence aloud as written. If a word must be added
+before the sentence is grammatical, it is this fault.
+
+These are not this fault:
+
+- a verb that takes a direct object in this sense: `the job writes
+  the log`, where the log is the thing written;
+- a fragment that a format allows: a heading, a list item, a table
+  cell, a label, or a caption;
+- an elision that standard grammar allows: `the API returns a token,
+  the CLI an error`;
+- quoted material (§6.3) or a literal token (§6.2).
+
+Inference-based tier: `no-missing-word`. A parser can find a verb with
+no object, but whether the verb needs a preposition in that sense, or
+whether a format allows the fragment, needs judgement.
+
+`no-missing-word` has a nearby claim in other rules:
+
+- §3.6: a run of sentences that each drop their subject, written for
+  rhythm, is a §3.6 finding. This rule covers one sentence that lacks
+  a word its grammar needs.
+- §4.3: a gerund as the subject or the object of a sentence is a §4.3
+  finding, even where the sentence is grammatical.
 
 ## 5. Semantic rules
 
